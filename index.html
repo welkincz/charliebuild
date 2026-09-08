@@ -54,7 +54,7 @@
   }
 
   .page {
-    max-width: 60rem;
+    max-width: 54rem;
     margin: 0 auto;
     padding: 5rem 1.75rem 6rem;
     display: grid;
@@ -106,13 +106,12 @@
     align-items: baseline;
     gap: 0.25rem 1.5rem;
     text-decoration: none;
-    padding-left: 1.125rem;
   }
 
   .entry::before {
     content: "";
     position: absolute;
-    left: 0;
+    left: -0.9rem;
     top: 0.42em;
     width: 2px;
     height: 1.05em;
@@ -191,14 +190,15 @@
 
   @media (min-width: 62rem) {
     .page {
-      grid-template-columns: 17rem 1fr;
-      gap: 0 6rem;
+      grid-template-columns: 15rem 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 0 5rem;
       padding-top: 8.5rem;
       padding-bottom: 8rem;
     }
-    .identity { grid-row: 1; }
-    .index    { grid-row: 1; padding-top: 0.1rem; }
-    .readout-wrap { margin-top: 3.5rem; }
+    .identity     { grid-column: 1; grid-row: 1; }
+    .readout-wrap { grid-column: 1; grid-row: 2; margin-top: 3.5rem; align-self: start; }
+    .index        { grid-column: 2; grid-row: 1 / span 2; padding-top: 0.1rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -220,16 +220,6 @@
     </p>
 
     <p class="elsewhere"><a href="https://github.com/welkincz">github.com/welkincz</a></p>
-
-    <div class="readout-wrap" id="readout" hidden>
-      <dl class="readout">
-        <dt>edge</dt>      <dd data-v="colo">—</dd>
-        <dt>protocol</dt>  <dd data-v="http">—</dd>
-        <dt>tls</dt>       <dd data-v="tls">—</dd>
-        <dt>ttfb</dt>      <dd data-v="ttfb">—</dd>
-      </dl>
-      <p class="readout-note">Measured as this page reached you.</p>
-    </div>
   </div>
 
   <div class="index">
@@ -252,6 +242,16 @@
       </p>
     </a>
 
+  </div>
+
+  <div class="readout-wrap" id="readout" hidden>
+    <dl class="readout">
+      <dt>edge</dt>      <dd data-v="colo">&#8212;</dd>
+      <dt>protocol</dt>  <dd data-v="http">&#8212;</dd>
+      <dt>tls</dt>       <dd data-v="tls">&#8212;</dd>
+      <dt>ttfb</dt>      <dd data-v="ttfb">&#8212;</dd>
+    </dl>
+    <p class="readout-note">Measured as this page reached you.</p>
   </div>
 
 </main>
