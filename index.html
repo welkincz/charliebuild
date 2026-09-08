@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charlie Build</title>
+<meta name="description" content="Things I build, learn, and experiment with.">
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --fg: #1c1b19;
+    --muted: #6f6a63;
+    --rule: #e3ded6;
+    --accent: #0f5c52;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14140f;
+      --fg: #ece7dd;
+      --muted: #8f8a80;
+      --rule: #2c2b26;
+      --accent: #6ec4b3;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 18vh 1.5rem 6rem;
+  }
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+  }
+  .tagline {
+    margin: 0.5rem 0 3rem;
+    color: var(--muted);
+  }
+  h2 {
+    margin: 2.5rem 0 0.75rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li {
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .soon { color: var(--muted); font-size: 0.85rem; }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Charlie Build</h1>
+  <p class="tagline">Things I build, learn, and experiment with.</p>
+
+  <h2>Projects</h2>
+  <ul>
+    <li>
+      <a href="https://welkincz.github.io/ns-trip/">Nova Scotia trip handbook</a>
+      <span class="soon">static site</span>
+    </li>
+  </ul>
+
+  <h2>Experiments</h2>
+  <ul>
+    <li><span>Nothing published yet</span><span class="soon">soon</span></li>
+  </ul>
+
+  <h2>Tools</h2>
+  <ul>
+    <li><span>Nothing published yet</span><span class="soon">soon</span></li>
+  </ul>
+
+  <footer>
+    <a href="https://github.com/welkincz">github.com/welkincz</a>
+  </footer>
+</main>
+</body>
+</html>
