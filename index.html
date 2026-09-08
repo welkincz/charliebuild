@@ -15,6 +15,7 @@
     --rule:   #E1E4E0;
     --signal: #8A6A1C;
     --focus:  #2F5FA8;
+    --field:  rgba(27, 34, 43, 0.085);
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -25,6 +26,7 @@
       --rule:   #262C34;
       --signal: #C79B3E;
       --focus:  #7FA8E0;
+      --field:  rgba(221, 225, 229, 0.10);
     }
   }
 
@@ -53,7 +55,20 @@
     border-radius: 2px;
   }
 
+  /* ---------- contour field ---------- */
+
+  #field {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
   .page {
+    position: relative;
+    z-index: 1;
     max-width: 54rem;
     margin: 0 auto;
     padding: 5rem 1.75rem 6rem;
@@ -81,6 +96,11 @@
 
   .elsewhere {
     margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+    justify-items: start;
     font-size: 0.9375rem;
   }
   .elsewhere a {
@@ -120,20 +140,21 @@
     transform-origin: 50% 50%;
     transition: transform 140ms cubic-bezier(.2,.7,.3,1);
   }
-  .entry:hover::before,
-  .entry:focus-visible::before { transform: scaleY(1); }
+  a.entry:hover::before,
+  a.entry:focus-visible::before { transform: scaleY(1); }
 
   .entry-name {
     font-size: 1.0625rem;
     font-weight: 560;
     letter-spacing: -0.008em;
   }
-  .entry:hover .entry-name {
+  a.entry:hover .entry-name {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
     text-decoration-color: var(--faint);
   }
+  .entry--quiet .entry-name { color: var(--muted); }
 
   .entry-kind {
     font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
@@ -209,6 +230,8 @@
 </head>
 <body>
 
+<canvas id="field" aria-hidden="true"></canvas>
+
 <main class="page">
 
   <div class="identity">
@@ -219,7 +242,10 @@
       here is something I built in order to understand how it works.
     </p>
 
-    <p class="elsewhere"><a href="https://github.com/welkincz">github.com/welkincz</a></p>
+    <ul class="elsewhere">
+      <li><a href="https://github.com/welkincz">github.com/welkincz</a></li>
+      <li><a href="https://www.linkedin.com/in/chaozheng-charlie-guo/">linkedin</a></li>
+    </ul>
   </div>
 
   <div class="index">
@@ -233,12 +259,23 @@
       </p>
     </a>
 
+    <div class="entry entry--quiet">
+      <span class="entry-name">Orbit</span>
+      <span class="entry-kind">private</span>
+      <p class="entry-note">
+        A local-first graph of the people I work with, built so the context
+        of a relationship is there before the conversation starts. Closed
+        while I work out whether the idea holds.
+      </p>
+    </div>
+
     <a class="entry" href="https://github.com/welkincz/charliebuild">
       <span class="entry-name">charliebuild.com</span>
       <span class="entry-kind">source</span>
       <p class="entry-note">
         This page. One file in a Git repo, published to Cloudflare's edge
-        on every push. The readout is live, not decoration.
+        on every push. The readout is live, and so is the contour field
+        behind it &#8212; both hand-written, no libraries.
       </p>
     </a>
 
@@ -257,6 +294,7 @@
 </main>
 
 <script>
+/* ---- live readout ------------------------------------------------ */
 (function () {
   var el = document.getElementById('readout');
   if (!el) return;
@@ -323,6 +361,151 @@
       }
     })
     .catch(function () { /* no readout rather than a broken one */ });
+})();
+
+/* ---- contour field ----------------------------------------------- */
+/* Marching squares over a drifting scalar field. No library.          */
+(function () {
+  var cv = document.getElementById('field');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  if (!ctx) return;
+
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var LEVELS = [-1.5, -0.9, -0.3, 0.3, 0.9, 1.5];
+
+  var W, H, cols, rows, cw, ch, g, stroke;
+  var t = 0, px = 0, py = 0, tx = 0, ty = 0, last = 0, raf = 0;
+
+  function readStroke() {
+    stroke = getComputedStyle(document.documentElement)
+               .getPropertyValue('--field').trim() || 'rgba(0,0,0,.08)';
+  }
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width  = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var step = W < 700 ? 26 : 20;
+    cols = Math.max(4, Math.ceil(W / step) + 1);
+    rows = Math.max(4, Math.ceil(H / step) + 1);
+    cw = W / (cols - 1);
+    ch = H / (rows - 1);
+    g = new Float32Array(cols * rows);
+    readStroke();
+  }
+
+  /* Layered trigonometric field. Cheap, smooth, and non-repeating
+     enough at this timescale that the eye never locks onto a period. */
+  function sample(x, y, time) {
+    return Math.sin(x * 1.9 + time) * Math.cos(y * 1.5 - time * 0.62)
+         + 0.75 * Math.sin((x + y) * 1.15 - time * 0.43)
+         + 0.55 * Math.cos(x * 2.7 - y * 2.1 + time * 0.28)
+         + 0.35 * Math.sin(y * 3.4 + time * 0.17);
+  }
+
+  function compute(time) {
+    for (var j = 0; j < rows; j++) {
+      var v = (j / (rows - 1)) * 2.4 - 1.2 + py * 0.16;
+      for (var i = 0; i < cols; i++) {
+        var u = (i / (cols - 1)) * 3.2 - 1.6 + px * 0.16;
+        g[j * cols + i] = sample(u, v, time);
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = stroke;
+    ctx.beginPath();
+
+    for (var L = 0; L < LEVELS.length; L++) {
+      var lv = LEVELS[L];
+      for (var j = 0; j < rows - 1; j++) {
+        for (var i = 0; i < cols - 1; i++) {
+          var a = g[j * cols + i],
+              b = g[j * cols + i + 1],
+              c = g[(j + 1) * cols + i + 1],
+              d = g[(j + 1) * cols + i];
+
+          var idx = (a > lv ? 8 : 0) | (b > lv ? 4 : 0) |
+                    (c > lv ? 2 : 0) | (d > lv ? 1 : 0);
+          if (idx === 0 || idx === 15) continue;
+
+          var x0 = i * cw, y0 = j * ch;
+          // edge crossing points, linearly interpolated
+          var T = [x0 + cw * ((lv - a) / (b - a)), y0];
+          var R = [x0 + cw, y0 + ch * ((lv - b) / (c - b))];
+          var B = [x0 + cw * ((lv - d) / (c - d)), y0 + ch];
+          var Lf = [x0, y0 + ch * ((lv - a) / (d - a))];
+
+          switch (idx) {
+            case 1: case 14: seg(Lf, B); break;
+            case 2: case 13: seg(B, R);  break;
+            case 3: case 12: seg(Lf, R); break;
+            case 4: case 11: seg(T, R);  break;
+            case 6: case 9:  seg(T, B);  break;
+            case 7: case 8:  seg(Lf, T); break;
+            case 5:  seg(Lf, T); seg(B, R); break;
+            case 10: seg(Lf, B); seg(T, R); break;
+          }
+        }
+      }
+    }
+    ctx.stroke();
+  }
+
+  function seg(p, q) {
+    ctx.moveTo(p[0], p[1]);
+    ctx.lineTo(q[0], q[1]);
+  }
+
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    if (now - last < 42) return;      // ~24fps is plenty for this speed
+    last = now;
+    px += (tx - px) * 0.045;          // pointer parallax, heavily damped
+    py += (ty - py) * 0.045;
+    t += 0.0042;
+    compute(t);
+    draw();
+  }
+
+  function start() { if (!raf) { last = 0; raf = requestAnimationFrame(frame); } }
+  function stop()  { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+  resize();
+
+  if (still) {
+    compute(0);
+    draw();
+  } else {
+    start();
+    document.addEventListener('visibilitychange', function () {
+      document.hidden ? stop() : start();
+    });
+    window.addEventListener('pointermove', function (e) {
+      tx = (e.clientX / window.innerWidth) * 2 - 1;
+      ty = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+  }
+
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () { resize(); if (still) { compute(t); draw(); } }, 150);
+  }, { passive: true });
+
+  if (window.matchMedia) {
+    var scheme = window.matchMedia('(prefers-color-scheme: dark)');
+    var onScheme = function () { readStroke(); if (still) draw(); };
+    scheme.addEventListener ? scheme.addEventListener('change', onScheme)
+                            : scheme.addListener(onScheme);
+  }
 })();
 </script>
 
