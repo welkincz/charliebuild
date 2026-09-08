@@ -153,11 +153,13 @@
 
   /* Orbit: satellites keep a very slow revolution. The page is named after
      the motion, so it earns being the one thing that moves unprompted. */
-  .glyph-orbit .sats {
+  .glyph-orbit .sat {
     transform-box: view-box;
     transform-origin: 9px 9px;
-    animation: revolve 22s linear infinite;
+    animation: revolve linear infinite;
   }
+  .glyph-orbit .sat-outer { animation-duration: 26s; }
+  .glyph-orbit .sat-inner { animation-duration: 15s; }  /* inner orbit is faster */
   @keyframes revolve { to { transform: rotate(360deg); } }
 
   /* Route: the coastline draws itself when you reach for it. */
@@ -271,7 +273,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .glyph, .glyph * { transition: none; }
-    .glyph-orbit .sats { animation: none; }
+    .glyph-orbit .sat { animation: none; }
     a.entry:hover .glyph-edge .arc { animation: none; }
     a.entry:hover .glyph-route .path,
     a.entry:focus-visible .glyph-route .path { stroke-dashoffset: 0; }
@@ -303,13 +305,11 @@
 
     <a class="entry" href="https://orbit.charliebuild.com/">
       <svg class="glyph glyph-orbit" viewBox="0 0 18 18" aria-hidden="true">
-        <ellipse cx="9" cy="9" rx="7.4" ry="3.1" transform="rotate(-28 9 9)"/>
-        <ellipse cx="9" cy="9" rx="7.4" ry="3.1" transform="rotate(46 9 9)"/>
+        <circle cx="9" cy="9" r="6.9"/>
+        <circle cx="9" cy="9" r="3.4"/>
         <circle class="dot" cx="9" cy="9" r="1.5"/>
-        <g class="sats">
-          <circle class="dot" cx="15.5" cy="5.9" r="1.05"/>
-          <circle class="dot" cx="3.6" cy="11.4" r="1.05"/>
-        </g>
+        <g class="sat sat-outer"><circle class="dot" cx="15.9" cy="9" r="1.05"/></g>
+        <g class="sat sat-inner"><circle class="dot" cx="12.4" cy="9" r="0.95"/></g>
       </svg>
       <span class="entry-name">Orbit</span>
       <span class="entry-kind">project</span>
