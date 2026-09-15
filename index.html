@@ -3,59 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Charlie Build</title>
-<meta name="description" content="Things I build while learning to ship software.">
+<title>Charlie Build — Charlie Guo</title>
+<meta name="description" content="Small, inspectable software built by Charlie Guo to understand the systems underneath.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3.5' fill='%231B222B'/%3E%3Crect x='5' y='3.5' width='5' height='9' rx='1' fill='%23C79B3E'/%3E%3C/svg%3E">
 <style>
   :root {
-    --paper:  #F6F7F5;
-    --ink:    #1B222B;
-    --muted:  #5A6371;
-    --faint:  #656F7C;
-    --rule:   #E1E4E0;
+    --paper: #F6F7F5;
+    --ink: #1B222B;
+    --muted: #586371;
+    --faint: #626D7A;
+    --rule: #D9DDD8;
     --signal: #8A6A1C;
-    --focus:  #2F5FA8;
-    --field:  rgba(27, 34, 43, 0.085);
+    --focus: #2F5FA8;
+    --field: rgba(27, 34, 43, 0.082);
+    color-scheme: light dark;
   }
+
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper:  #14181D;
-      --ink:    #DDE1E5;
-      --muted:  #98A2AE;
-      --faint:  #7E8894;
-      --rule:   #262C34;
-      --signal: #C79B3E;
-      --focus:  #7FA8E0;
-      --field:  rgba(221, 225, 229, 0.10);
+      --paper: #14181D;
+      --ink: #E2E5E8;
+      --muted: #A2ABB5;
+      --faint: #848E99;
+      --rule: #303740;
+      --signal: #D0A64C;
+      --focus: #82ADE7;
+      --field: rgba(226, 229, 232, 0.095);
     }
   }
 
   * { box-sizing: border-box; }
 
-  html { -webkit-text-size-adjust: 100%; }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
 
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  ::selection { background: var(--signal); color: var(--paper); }
+  ::selection {
+    background: var(--signal);
+    color: var(--paper);
+  }
 
   a { color: inherit; }
+  button { font: inherit; }
 
   :focus-visible {
     outline: 2px solid var(--focus);
-    outline-offset: 3px;
-    border-radius: 2px;
+    outline-offset: 4px;
   }
 
-  /* ---------- contour field ---------- */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   #field {
     position: fixed;
@@ -66,79 +84,291 @@
     pointer-events: none;
   }
 
-  .page {
+  .shell {
     position: relative;
     z-index: 1;
-    max-width: 54rem;
+    width: min(100%, 92rem);
+    min-height: 100svh;
     margin: 0 auto;
-    padding: 5rem 1.75rem 6rem;
+    padding: clamp(1.4rem, 3vw, 2.8rem) clamp(1.25rem, 4vw, 4.5rem) 4rem;
+  }
+
+  .site-head {
     display: grid;
-    gap: 3.5rem;
+    grid-template-columns: minmax(16rem, 1fr) auto auto;
+    align-items: start;
+    gap: 2rem clamp(2rem, 5vw, 5rem);
+    padding-bottom: 1.15rem;
+    border-bottom: 1px solid var(--rule);
   }
 
-  /* ---------- identity ---------- */
+  .person-name,
+  .intro,
+  .site-links,
+  .edge-readout,
+  .edge-note { margin: 0; }
 
-  .mark {
-    margin: 0 0 1.25rem;
-    font-size: 0.9375rem;
-    font-weight: 620;
-    letter-spacing: -0.006em;
+  .person-name {
+    font-size: 0.9rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
   }
 
-  .bio {
+  .intro {
+    max-width: 40ch;
+    margin-top: 0.28rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .site-links {
+    display: flex;
+    gap: 1.1rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.82rem;
+  }
+
+  .site-links a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .site-links a:hover { border-bottom-color: var(--ink); }
+  .edge-panel[hidden] { display: none; }
+
+  .edge-readout {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.12rem 0.75rem;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.66rem;
+    line-height: 1.45;
+  }
+
+  .edge-readout dt { color: var(--faint); }
+
+  .edge-readout dd {
     margin: 0;
-    max-width: 30ch;
-    font-size: 0.9375rem;
-    line-height: 1.7;
+    color: var(--signal);
+    opacity: 0;
+    transition: opacity 260ms ease;
+  }
+
+  .edge-readout dd.in { opacity: 1; }
+
+  .edge-note {
+    margin-top: 0.35rem;
+    color: var(--faint);
+    font-size: 0.66rem;
+  }
+
+  /* ---------- interactive identity ---------- */
+
+  .hero {
+    min-height: clamp(35rem, 72svh, 54rem);
+    display: grid;
+    align-content: center;
+    padding: clamp(4.5rem, 9vw, 8.5rem) 0 clamp(4rem, 8vw, 7rem);
+  }
+
+  .wordmark {
+    width: 100%;
+    display: grid;
+    justify-items: start;
+    gap: 0.02em;
+    font-size: clamp(5.4rem, 12.3vw, 11.4rem);
+    font-weight: 720;
+    line-height: 0.76;
+    letter-spacing: -0.082em;
+  }
+
+  .word {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .word-build { margin-left: clamp(1.75rem, 13vw, 11rem); }
+
+  .letter {
+    --spread: 0em;
+    --tilt: 0deg;
+    --asset-height: 1.02em;
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    min-width: 0.4em;
+    height: 0.86em;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0.05em;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 0.82;
+    letter-spacing: inherit;
+    cursor: crosshair;
+    transition: padding-inline 460ms cubic-bezier(.22, 1, .36, 1), color 180ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .letter:disabled {
+    color: inherit;
+    cursor: default;
+    opacity: 1;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .letter.ready:hover,
+  .letter.ready:focus-visible { color: var(--signal); }
+
+  .letter.active { padding-inline: var(--spread); }
+
+  .char {
+    grid-area: 1 / 1;
+    display: block;
+    transition: opacity 110ms ease, transform 240ms ease;
+  }
+
+  .specimen {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: auto;
+    height: var(--asset-height);
+    max-width: 1.34em;
+    object-fit: contain;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: 50% 58%;
+    filter: drop-shadow(0 0.04em 0.09em rgba(18, 24, 29, 0.18));
+  }
+
+  .letter.active .char {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+
+  .letter.active .specimen {
+    animation: specimen-enter 500ms cubic-bezier(.2, .85, .22, 1.15) both;
+  }
+
+  .letter.leaving .char {
+    animation: character-return 390ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .letter.leaving .specimen {
+    animation: specimen-exit 390ms cubic-bezier(.45, 0, .2, 1) both;
+  }
+
+  @keyframes specimen-enter {
+    0% { opacity: 0; transform: translate(-50%, -43%) rotate(calc(var(--tilt) - 8deg)) scale(0.28); }
+    64% { opacity: 1; transform: translate(-50%, -51%) rotate(calc(var(--tilt) + 1.5deg)) scale(1.045); }
+    100% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--tilt)) scale(1); }
+  }
+
+  @keyframes specimen-exit {
+    0% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--tilt)) scale(1); }
+    24% { opacity: 1; transform: translate(-50%, -51%) rotate(calc(var(--tilt) + 2deg)) scale(1.04); }
+    100% { opacity: 0; transform: translate(-50%, -45%) rotate(calc(var(--tilt) - 7deg)) scale(0.34); }
+  }
+
+  @keyframes character-return {
+    0%, 42% { opacity: 0; transform: scale(0.88); }
+    72% { opacity: 1; transform: scale(1.035); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .letter-guide {
+    min-height: 3.1rem;
+    margin: clamp(2.7rem, 5vw, 4.5rem) 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.45fr) minmax(15rem, 1fr);
+    gap: 1rem 2.5rem;
+    align-items: baseline;
+    font-size: 0.82rem;
+  }
+
+  .interest-name {
+    color: var(--ink);
+    font-weight: 620;
+  }
+
+  .interest-detail {
+    max-width: 58ch;
     color: var(--muted);
     text-wrap: pretty;
   }
 
-  .elsewhere {
-    margin: 1.75rem 0 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 0.4rem;
-    justify-items: start;
-    font-size: 0.9375rem;
+  @media (prefers-color-scheme: dark) {
+    .specimen {
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.56))
+              drop-shadow(0 0.05em 0.12em rgba(0, 0, 0, 0.52));
+    }
   }
-  .elsewhere a {
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1px;
-  }
-  .elsewhere a:hover { border-bottom-color: var(--ink); }
 
-  /* ---------- index ---------- */
+  /* ---------- work index ---------- */
 
-  .index {
+  .projects {
     display: grid;
-    gap: 2.5rem;
-    align-content: start;
-    max-width: 34rem;
+    grid-template-columns: minmax(13rem, 0.42fr) minmax(0, 1fr);
+    gap: 2.5rem clamp(3rem, 8vw, 8rem);
+    padding: clamp(3rem, 6vw, 5.5rem) 0 1rem;
+    border-top: 1px solid var(--rule);
   }
+
+  .projects-heading {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(1.75rem, 3vw, 2.8rem);
+    font-weight: 620;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .projects-note {
+    max-width: 28ch;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .project-list { border-bottom: 1px solid var(--rule); }
 
   .entry {
     position: relative;
     display: grid;
-    grid-template-columns: 1.25rem 1fr auto;
-    align-items: baseline;
-    gap: 0.25rem 0.85rem;
+    grid-template-columns: 1.35rem minmax(10rem, 0.72fr) minmax(16rem, 1.3fr) auto;
+    gap: 0.8rem 1.25rem;
+    align-items: start;
+    padding: 1.45rem 0 1.55rem;
+    border-top: 1px solid var(--rule);
     text-decoration: none;
   }
 
-  /* Each glyph is a diagram of the thing it sits next to, not an icon set. */
+  .entry:first-child { border-top: 0; }
+
   .glyph {
-    grid-column: 1;
     width: 1.25rem;
     height: 1.25rem;
-    align-self: start;
-    margin-top: 0.28em;
+    margin-top: 0.08rem;
     overflow: visible;
     color: var(--faint);
-    transition: color 200ms ease;
+    transition: color 180ms ease;
   }
+
   .glyph * {
     fill: none;
     stroke: currentColor;
@@ -147,136 +377,155 @@
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
   }
-  .glyph .dot { fill: currentColor; stroke: none; }
-  a.entry:hover .glyph,
-  a.entry:focus-visible .glyph { color: var(--signal); }
 
-  /* Orbit: satellites keep a very slow revolution. The page is named after
-     the motion, so it earns being the one thing that moves unprompted. */
+  .glyph .dot { fill: currentColor; stroke: none; }
+
+  .entry:hover .glyph,
+  .entry:focus-visible .glyph { color: var(--signal); }
+
   .glyph-orbit .sat {
     transform-box: view-box;
     transform-origin: 9px 9px;
-    animation: revolve linear infinite;
+    animation: revolve 24s linear infinite;
   }
-  .glyph-orbit .sat { animation-duration: 24s; }
+
   @keyframes revolve { to { transform: rotate(360deg); } }
 
-  /* Route: the coastline draws itself when you reach for it. */
   .glyph-route .path {
     stroke-dasharray: 30;
     stroke-dashoffset: 0;
-    transition: stroke-dashoffset 520ms cubic-bezier(.3,.7,.2,1);
-  }
-  a.entry:hover .glyph-route .path,
-  a.entry:focus-visible .glyph-route .path {
-    stroke-dashoffset: 60;
+    transition: stroke-dashoffset 520ms cubic-bezier(.3, .7, .2, 1);
   }
 
-  /* Edge: one outward pulse, the way a request leaves a datacentre. */
+  .entry:hover .glyph-route .path,
+  .entry:focus-visible .glyph-route .path { stroke-dashoffset: 60; }
+
   .glyph-edge .arc {
     transform-box: view-box;
     transform-origin: 4px 9px;
     opacity: 0.9;
   }
-  a.entry:hover .glyph-edge .arc,
-  a.entry:focus-visible .glyph-edge .arc {
-    animation: pulse 900ms cubic-bezier(.25,.8,.3,1);
-  }
-  a.entry:hover .glyph-edge .arc:nth-of-type(2) { animation-delay: 90ms; }
-  a.entry:hover .glyph-edge .arc:nth-of-type(3) { animation-delay: 180ms; }
+
+  .entry:hover .glyph-edge .arc,
+  .entry:focus-visible .glyph-edge .arc { animation: pulse 900ms cubic-bezier(.25, .8, .3, 1); }
+
+  .entry:hover .glyph-edge .arc:nth-of-type(2) { animation-delay: 90ms; }
+  .entry:hover .glyph-edge .arc:nth-of-type(3) { animation-delay: 180ms; }
+
   @keyframes pulse {
-    0%   { opacity: 0.9; transform: scale(1); }
-    45%  { opacity: 1;   transform: scale(1.16); }
-    100% { opacity: 0.9; transform: scale(1); }
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    45% { opacity: 1; transform: scale(1.16); }
   }
 
   .entry-name {
-    grid-column: 2;
-    font-size: 1.0625rem;
-    font-weight: 560;
-    letter-spacing: -0.008em;
-  }
-  a.entry:hover .entry-name {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    text-decoration-color: var(--faint);
-  }
-
-  .entry-kind {
-    grid-column: 3;
-    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.6875rem;
-    color: var(--faint);
-    letter-spacing: 0.01em;
+    font-size: 1.05rem;
+    font-weight: 620;
+    letter-spacing: -0.018em;
   }
 
   .entry-note {
-    grid-column: 2 / -1;
-    margin: 0.15rem 0 0;
-    max-width: 56ch;
-    font-size: 0.9375rem;
-    line-height: 1.65;
+    margin: 0;
+    max-width: 58ch;
     color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.65;
     text-wrap: pretty;
   }
 
-  /* ---------- live readout ---------- */
-
-  .readout-wrap {
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--rule);
-  }
-  .readout-wrap[hidden] { display: none; }
-
-  .readout {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 5.25rem auto;
-    gap: 0.3rem 0;
-    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.6875rem;
-    line-height: 1.5;
-  }
-  .readout dt { color: var(--faint); }
-  .readout dd {
-    margin: 0;
-    color: var(--signal);
-    opacity: 0;
-    transition: opacity 260ms ease;
-  }
-  .readout dd.in { opacity: 1; }
-
-  .readout-note {
-    margin: 0.9rem 0 0;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 0.75rem;
-    line-height: 1.5;
+  .entry-kind {
     color: var(--faint);
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.66rem;
+    line-height: 1.8;
   }
 
-  /* ---------- wide ---------- */
+  .entry:hover .entry-name,
+  .entry:focus-visible .entry-name {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--faint);
+  }
 
-  @media (min-width: 62rem) {
-    .page {
-      grid-template-columns: 15rem 1fr;
-      grid-template-rows: auto 1fr;
-      gap: 0 5rem;
-      padding-top: 8.5rem;
-      padding-bottom: 8rem;
+  .site-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: clamp(4rem, 8vw, 7rem);
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    color: var(--faint);
+    font-size: 0.72rem;
+  }
+
+  .site-foot p { margin: 0; }
+
+  @media (max-width: 58rem) {
+    .site-head { grid-template-columns: 1fr auto; }
+    .edge-panel { grid-column: 1 / -1; justify-self: start; }
+    .hero { min-height: clamp(31rem, 68svh, 43rem); }
+    .projects { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-heading { max-width: 16ch; }
+    .projects-note { max-width: 42ch; }
+  }
+
+  @media (max-width: 42rem) {
+    .shell { padding-inline: clamp(1rem, 5vw, 1.5rem); }
+    .site-head { grid-template-columns: 1fr; gap: 1rem; }
+    .site-links { justify-self: start; }
+    .edge-panel { grid-column: auto; }
+    .hero { min-height: 34rem; padding: 4.5rem 0 4rem; }
+
+    .wordmark {
+      font-size: clamp(3rem, 19vw, 7rem);
+      letter-spacing: -0.09em;
     }
-    .identity     { grid-column: 1; grid-row: 1; }
-    .readout-wrap { grid-column: 1; grid-row: 2; margin-top: 3.5rem; align-self: start; }
-    .index        { grid-column: 2; grid-row: 1 / span 2; padding-top: 0.1rem; }
+
+    .word-build { margin-left: 10vw; }
+
+    .letter-guide {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+      margin-top: 3.2rem;
+    }
+
+    .entry {
+      grid-template-columns: 1.35rem 1fr auto;
+      gap: 0.45rem 0.9rem;
+    }
+
+    .entry-note { grid-column: 2 / -1; max-width: 48ch; }
+
+    .site-foot {
+      flex-direction: column;
+      gap: 0.35rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .glyph, .glyph * { transition: none; }
-    .glyph-orbit .sat { animation: none; }
-    a.entry:hover .glyph-edge .arc { animation: none; }
-    a.entry:hover .glyph-route .path,
-    a.entry:focus-visible .glyph-route .path { stroke-dashoffset: 0; }
-    .readout dd { transition: none; }
+    html { scroll-behavior: auto; }
+
+    .letter,
+    .char,
+    .edge-readout dd,
+    .glyph,
+    .glyph * { transition: none; }
+
+    .letter.active .specimen {
+      animation: none;
+      opacity: 1;
+      transform: translate(-50%, -50%) rotate(var(--tilt)) scale(1);
+    }
+
+    .letter.leaving .specimen,
+    .letter.leaving .char,
+    .glyph-orbit .sat,
+    .entry:hover .glyph-edge .arc { animation: none; }
+
+    .letter.leaving .specimen { opacity: 0; }
+
+    .entry:hover .glyph-route .path,
+    .entry:focus-visible .glyph-route .path { stroke-dashoffset: 0; }
   }
 </style>
 </head>
@@ -284,268 +533,520 @@
 
 <canvas id="field" aria-hidden="true"></canvas>
 
-<main class="page">
+<main class="shell">
+  <header class="site-head">
+    <div>
+      <p class="person-name">Charlie Guo</p>
+      <p class="intro">
+        Data engineer in Toronto. I build small, inspectable software to
+        understand the systems underneath.
+      </p>
+    </div>
 
-  <div class="identity">
-    <h1 class="mark">Charlie Build</h1>
-
-    <p class="bio">
-      Data engineer in Toronto, learning to ship software. Everything
-      here is something I built in order to understand how it works.
-    </p>
-
-    <ul class="elsewhere">
-      <li><a href="https://github.com/welkincz">github.com/welkincz</a></li>
-      <li><a href="https://www.linkedin.com/in/chaozheng-charlie-guo/">linkedin</a></li>
+    <ul class="site-links" aria-label="Elsewhere">
+      <li><a href="https://github.com/welkincz">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/chaozheng-charlie-guo/">LinkedIn</a></li>
     </ul>
-  </div>
 
-  <div class="index">
+    <aside class="edge-panel" id="readout" aria-label="Live delivery details" hidden>
+      <dl class="edge-readout">
+        <dt>edge</dt>      <dd data-v="colo">—</dd>
+        <dt>protocol</dt>  <dd data-v="http">—</dd>
+        <dt>tls</dt>       <dd data-v="tls">—</dd>
+        <dt>ttfb</dt>      <dd data-v="ttfb">—</dd>
+      </dl>
+      <p class="edge-note">Measured as this page reached you.</p>
+    </aside>
+  </header>
 
-    <a class="entry" href="https://orbit.charliebuild.com/">
-      <svg class="glyph glyph-orbit" viewBox="0 0 18 18" aria-hidden="true">
-        <circle cx="9" cy="9" r="6.4"/>
-        <circle class="dot" cx="9" cy="9" r="1.9"/>
-        <g class="sat"><circle class="dot" cx="15.4" cy="9" r="1.5"/></g>
-      </svg>
-      <span class="entry-name">Orbit</span>
-      <span class="entry-kind">project</span>
-      <p class="entry-note">
-        A local-first graph of the people you work with, so the context of a
-        relationship is already there when the conversation starts. What is
-        published runs on fictional seed data; a real vault stays on the disk
-        it was written on.
-      </p>
-    </a>
+  <section class="hero" aria-labelledby="page-title">
+    <h1 id="page-title" class="visually-hidden">Charlie Build</h1>
 
-    <a class="entry" href="https://trip.charliebuild.com/">
-      <svg class="glyph glyph-route" viewBox="0 0 18 18" aria-hidden="true">
-        <path class="path" d="M2.6 14.2c2.6.2 3-3.1 5.1-4.2 2.2-1.1 1.6-4 2.9-5 1.2-.9 3.2-.6 4.6-1.3"/>
-        <circle class="dot" cx="2.6" cy="14.2" r="1.3"/>
-        <circle class="dot" cx="15.2" cy="3.7" r="1.3"/>
-      </svg>
-      <span class="entry-name">Nova Scotia handbook</span>
-      <span class="entry-kind">project</span>
-      <p class="entry-note">
-        Five days on Cape Breton as one HTML file. No build step and no
-        dependencies, so it still opens on a phone with no signal.
-      </p>
-    </a>
+    <div class="wordmark" role="group" aria-label="Charlie Build, an interactive title">
+      <span class="word word-charlie">
+        <button class="letter" type="button" disabled aria-label="C, inspired by Rick and Morty" aria-describedby="letter-guide" data-interest="Rick and Morty" data-detail="A volatile dimensional portal turns the C into a tiny experiment." style="--spread:.15em;--tilt:-3deg;--asset-height:1.03em">
+          <span class="char" aria-hidden="true">C</span>
+          <img class="specimen" src="assets/letters/00-c-portal.webp" alt="" aria-hidden="true" width="640" height="632" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="h, inspired by Game of Thrones" aria-describedby="letter-guide" data-interest="Game of Thrones" data-detail="A fortress balances frost and dragon fire inside the h." style="--spread:.07em;--tilt:1deg;--asset-height:1.11em">
+          <span class="char" aria-hidden="true">h</span>
+          <img class="specimen" src="assets/letters/01-h-fortress.webp" alt="" aria-hidden="true" width="632" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="a, inspired by Zelda" aria-describedby="letter-guide" data-interest="Zelda" data-detail="A moss-covered shrine keeps an open doorway at the centre of the a." style="--spread:.14em;--tilt:2deg;--asset-height:1.04em">
+          <span class="char" aria-hidden="true">a</span>
+          <img class="specimen" src="assets/letters/02-a-shrine.webp" alt="" aria-hidden="true" width="619" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="r, inspired by Balatro" aria-describedby="letter-guide" data-interest="Balatro" data-detail="Misregistered cards and a poker chip assemble themselves into the r." style="--spread:.08em;--tilt:-2deg;--asset-height:1.04em">
+          <span class="char" aria-hidden="true">r</span>
+          <img class="specimen" src="assets/letters/03-r-cards.webp" alt="" aria-hidden="true" width="607" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="l, inspired by Python" aria-describedby="letter-guide" data-interest="Python" data-detail="A patient blue-and-gold python holds the long stroke of the l." style="--spread:.02em;--tilt:1deg;--asset-height:1.12em">
+          <span class="char" aria-hidden="true">l</span>
+          <img class="specimen" src="assets/letters/04-l-python.webp" alt="" aria-hidden="true" width="630" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="i, inspired by SQL" aria-describedby="letter-guide" data-interest="SQL" data-detail="Four relational rows and a brass key form the first i." style="--spread:.025em;--tilt:-1deg;--asset-height:1.08em">
+          <span class="char" aria-hidden="true">i</span>
+          <img class="specimen" src="assets/letters/05-i-sql.webp" alt="" aria-hidden="true" width="636" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="e, inspired by Rick and Morty" aria-describedby="letter-guide" data-interest="Rick and Morty" data-detail="A hand-built scanner bends dimensional energy into the e." style="--spread:.13em;--tilt:3deg;--asset-height:1.03em">
+          <span class="char" aria-hidden="true">e</span>
+          <img class="specimen" src="assets/letters/06-e-scanner.webp" alt="" aria-hidden="true" width="621" height="640" decoding="async">
+        </button>
+      </span>
 
-    <a class="entry" href="https://github.com/welkincz/charliebuild">
-      <svg class="glyph glyph-edge" viewBox="0 0 18 18" aria-hidden="true">
-        <circle class="dot" cx="4" cy="9" r="1.6"/>
-        <path class="arc" d="M8 4.6a5.6 5.6 0 0 1 0 8.8"/>
-        <path class="arc" d="M11.2 2.6a9.2 9.2 0 0 1 0 12.8"/>
-        <path class="arc" d="M14.4 .8a12.6 12.6 0 0 1 0 16.4"/>
-      </svg>
-      <span class="entry-name">charliebuild.com</span>
-      <span class="entry-kind">source</span>
-      <p class="entry-note">
-        This page. One file in a Git repo, published to Cloudflare's edge
-        on every push. The readout is live, and so is the contour field
-        behind it &#8212; both hand-written, no libraries.
-      </p>
-    </a>
+      <span class="word word-build">
+        <button class="letter" type="button" disabled aria-label="B, inspired by Balatro" aria-describedby="letter-guide" data-interest="Balatro" data-detail="Worn cards and chip crescents give the B its two bowls." style="--spread:.14em;--tilt:-2deg;--asset-height:1.04em">
+          <span class="char" aria-hidden="true">B</span>
+          <img class="specimen" src="assets/letters/07-b-cards.webp" alt="" aria-hidden="true" width="635" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="u, inspired by Zelda" aria-describedby="letter-guide" data-interest="Zelda" data-detail="Two old stone uprights cradle a blue relic inside the u." style="--spread:.14em;--tilt:1deg;--asset-height:1.03em">
+          <span class="char" aria-hidden="true">u</span>
+          <img class="specimen" src="assets/letters/08-u-relic.webp" alt="" aria-hidden="true" width="625" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="i, inspired by Python" aria-describedby="letter-guide" data-interest="Python" data-detail="Indented paper blocks stack beneath a curled python to make the second i." style="--spread:.025em;--tilt:2deg;--asset-height:1.08em">
+          <span class="char" aria-hidden="true">i</span>
+          <img class="specimen" src="assets/letters/09-i-python.webp" alt="" aria-hidden="true" width="613" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="l, inspired by Game of Thrones" aria-describedby="letter-guide" data-interest="Game of Thrones" data-detail="A frost-etched, ember-lit sword stands in for the second l." style="--spread:.025em;--tilt:-1deg;--asset-height:1.12em">
+          <span class="char" aria-hidden="true">l</span>
+          <img class="specimen" src="assets/letters/10-l-sword.webp" alt="" aria-hidden="true" width="602" height="640" decoding="async">
+        </button>
+        <button class="letter" type="button" disabled aria-label="d, inspired by SQL" aria-describedby="letter-guide" data-interest="SQL" data-detail="A frosted join ring locks into a blue key column to make the d." style="--spread:.13em;--tilt:2deg;--asset-height:1.03em">
+          <span class="char" aria-hidden="true">d</span>
+          <img class="specimen" src="assets/letters/11-d-sql.webp" alt="" aria-hidden="true" width="621" height="640" decoding="async">
+        </button>
+      </span>
+    </div>
 
-  </div>
+    <p class="letter-guide" id="letter-guide" aria-live="polite">
+      <span class="interest-name" id="interest-name">Twelve letters, six obsessions.</span>
+      <span class="interest-detail" id="interest-detail">Hover, focus, or tap a letter to see what it is made from.</span>
+    </p>
+  </section>
 
-  <div class="readout-wrap" id="readout" hidden>
-    <dl class="readout">
-      <dt>edge</dt>      <dd data-v="colo">&#8212;</dd>
-      <dt>protocol</dt>  <dd data-v="http">&#8212;</dd>
-      <dt>tls</dt>       <dd data-v="tls">&#8212;</dd>
-      <dt>ttfb</dt>      <dd data-v="ttfb">&#8212;</dd>
-    </dl>
-    <p class="readout-note">Measured as this page reached you.</p>
-  </div>
+  <section class="projects" aria-labelledby="projects-heading">
+    <div>
+      <h2 class="projects-heading" id="projects-heading">Built to understand.</h2>
+      <p class="projects-note">Each project is small enough to inspect and complete enough to use.</p>
+    </div>
 
+    <div class="project-list">
+      <a class="entry" href="https://orbit.charliebuild.com/">
+        <svg class="glyph glyph-orbit" viewBox="0 0 18 18" aria-hidden="true">
+          <circle cx="9" cy="9" r="6.4"/>
+          <circle class="dot" cx="9" cy="9" r="1.9"/>
+          <g class="sat"><circle class="dot" cx="15.4" cy="9" r="1.5"/></g>
+        </svg>
+        <span class="entry-name">Orbit</span>
+        <p class="entry-note">
+          A local-first graph of the people you work with, so the context of a
+          relationship is already there when the conversation starts. The public
+          version uses fictional seed data; a real vault stays on its own disk.
+        </p>
+        <span class="entry-kind">project</span>
+      </a>
+
+      <a class="entry" href="https://trip.charliebuild.com/">
+        <svg class="glyph glyph-route" viewBox="0 0 18 18" aria-hidden="true">
+          <path class="path" d="M2.6 14.2c2.6.2 3-3.1 5.1-4.2 2.2-1.1 1.6-4 2.9-5 1.2-.9 3.2-.6 4.6-1.3"/>
+          <circle class="dot" cx="2.6" cy="14.2" r="1.3"/>
+          <circle class="dot" cx="15.2" cy="3.7" r="1.3"/>
+        </svg>
+        <span class="entry-name">Nova Scotia handbook</span>
+        <p class="entry-note">
+          Five days on Cape Breton as one HTML file. No build step and no
+          dependencies, so it still opens on a phone with no signal.
+        </p>
+        <span class="entry-kind">project</span>
+      </a>
+
+      <a class="entry" href="https://github.com/welkincz/charliebuild">
+        <svg class="glyph glyph-edge" viewBox="0 0 18 18" aria-hidden="true">
+          <circle class="dot" cx="4" cy="9" r="1.6"/>
+          <path class="arc" d="M8 4.6a5.6 5.6 0 0 1 0 8.8"/>
+          <path class="arc" d="M11.2 2.6a9.2 9.2 0 0 1 0 12.8"/>
+          <path class="arc" d="M14.4 .8a12.6 12.6 0 0 1 0 16.4"/>
+        </svg>
+        <span class="entry-name">charliebuild.com</span>
+        <p class="entry-note">
+          This page. One repository, no framework, and a Cloudflare edge deploy
+          on every push. The delivery readout and contour field are hand-written.
+        </p>
+        <span class="entry-kind">source</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <p>Made in Toronto, one understandable piece at a time.</p>
+    <p>Text works first. The surprises are optional.</p>
+  </footer>
 </main>
 
 <script>
+/* ---- interactive title ------------------------------------------ */
+(function () {
+  var letters = Array.prototype.slice.call(document.querySelectorAll('.letter'));
+  var name = document.getElementById('interest-name');
+  var detail = document.getElementById('interest-detail');
+  var idleName = 'Twelve letters, six obsessions.';
+  var idleDetail = 'Hover, focus, or tap a letter to see what it is made from.';
+  var active = null;
+  var pinned = null;
+  var exitTimers = new WeakMap();
+
+  function setCaption(letter) {
+    if (!name || !detail) return;
+    if (!letter) {
+      name.textContent = idleName;
+      detail.textContent = idleDetail;
+      return;
+    }
+    name.textContent = letter.dataset.interest;
+    detail.textContent = letter.dataset.detail;
+  }
+
+  function reveal(letter) {
+    if (!letter || !letter.classList.contains('ready')) return;
+    if (active && active !== letter) conceal(active, true, false);
+    letters.forEach(function (item) {
+      if (item === letter || !item.classList.contains('leaving')) return;
+      clearTimeout(exitTimers.get(item));
+      item.classList.remove('leaving');
+    });
+    clearTimeout(exitTimers.get(letter));
+    letter.classList.remove('leaving');
+    letter.classList.add('active');
+    active = letter;
+    setCaption(letter);
+  }
+
+  function conceal(letter, immediate, restorePinned) {
+    if (!letter || !letter.classList.contains('active')) return;
+    letter.classList.remove('active');
+    if (active === letter) active = null;
+
+    clearTimeout(exitTimers.get(letter));
+    if (!immediate) {
+      letter.classList.remove('leaving');
+      void letter.offsetWidth;
+      letter.classList.add('leaving');
+      exitTimers.set(letter, setTimeout(function () {
+        letter.classList.remove('leaving');
+      }, 410));
+    } else {
+      letter.classList.remove('leaving');
+    }
+
+    var focused = document.activeElement;
+    var fallback = restorePinned !== false && pinned && pinned !== letter
+      ? pinned
+      : restorePinned !== false && focused && focused !== letter && focused.classList.contains('letter')
+        ? focused
+        : null;
+
+    if (fallback) reveal(fallback);
+    else if (!active) setCaption(null);
+  }
+
+  function syncPressed() {
+    letters.forEach(function (item) {
+      item.setAttribute('aria-pressed', String(item === pinned));
+    });
+  }
+
+  function setPinned(letter) {
+    if (!letter || !letter.classList.contains('ready')) return;
+    pinned = pinned === letter ? null : letter;
+    syncPressed();
+
+    if (pinned) reveal(pinned);
+    else conceal(letter, false, false);
+  }
+
+  function clearSelection() {
+    pinned = null;
+    syncPressed();
+    if (active) conceal(active, false, false);
+    else setCaption(null);
+  }
+
+  letters.forEach(function (letter) {
+    var image = letter.querySelector('.specimen');
+
+    function markReady() {
+      if (image.naturalWidth <= 0) return;
+      letter.disabled = false;
+      letter.classList.add('ready');
+      if (pinned === letter || document.activeElement === letter || (!pinned && letter.matches(':hover'))) {
+        reveal(letter);
+      }
+    }
+
+    function markUnavailable() {
+      clearTimeout(exitTimers.get(letter));
+      letter.disabled = true;
+      letter.classList.remove('ready', 'active', 'leaving');
+      if (pinned === letter) pinned = null;
+      if (active === letter) active = null;
+      syncPressed();
+      if (pinned) reveal(pinned);
+      else if (!active) setCaption(null);
+    }
+
+    letter.disabled = true;
+    letter.setAttribute('aria-pressed', 'false');
+    if (image.complete) {
+      if (image.naturalWidth > 0) markReady();
+      else markUnavailable();
+    } else {
+      image.addEventListener('load', markReady, { once: true });
+      image.addEventListener('error', markUnavailable, { once: true });
+    }
+
+    letter.addEventListener('pointerenter', function (event) {
+      if (event.pointerType === 'mouse' && !pinned) reveal(letter);
+    });
+
+    letter.addEventListener('pointerleave', function (event) {
+      if (event.pointerType !== 'mouse' || pinned === letter || document.activeElement === letter) return;
+      conceal(letter, false);
+    });
+
+    letter.addEventListener('focus', function () { reveal(letter); });
+
+    letter.addEventListener('blur', function () {
+      if (pinned === letter) return;
+      conceal(letter, false);
+    });
+
+    letter.addEventListener('click', function () { setPinned(letter); });
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape' || (!pinned && !active)) return;
+    event.preventDefault();
+    clearSelection();
+  });
+
+  document.addEventListener('pointerdown', function (event) {
+    if (!pinned || event.target.closest('.letter')) return;
+    clearSelection();
+  });
+})();
+
 /* ---- live readout ------------------------------------------------ */
 (function () {
   var el = document.getElementById('readout');
   if (!el) return;
 
   var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var slot = function (k) { return el.querySelector('[data-v="' + k + '"]'); };
+  var slot = function (key) { return el.querySelector('[data-v="' + key + '"]'); };
 
   function ttfb() {
     try {
-      var n = performance.getEntriesByType('navigation')[0];
-      if (!n) return null;
-      var ms = Math.round(n.responseStart - n.requestStart);
-      return (ms >= 0 && ms < 60000) ? ms : null;
-    } catch (e) { return null; }
+      var navigation = performance.getEntriesByType('navigation')[0];
+      if (!navigation) return null;
+      var milliseconds = Math.round(navigation.responseStart - navigation.requestStart);
+      return (milliseconds >= 0 && milliseconds < 60000) ? milliseconds : null;
+    } catch (error) {
+      return null;
+    }
   }
 
-  function show(node, i) {
+  function show(node, order) {
     if (!node) return;
-    if (still) { node.classList.add('in'); return; }
-    setTimeout(function () { node.classList.add('in'); }, i * 90);
+    if (still) {
+      node.classList.add('in');
+      return;
+    }
+    setTimeout(function () { node.classList.add('in'); }, order * 90);
   }
 
-  function countTo(node, ms, order) {
+  function countTo(node, milliseconds, order) {
     if (!node) return;
-    if (still) { node.textContent = ms + ' ms'; show(node, order); return; }
-    var start = null, dur = 420;
+    if (still) {
+      node.textContent = milliseconds + ' ms';
+      show(node, order);
+      return;
+    }
+
+    var start = null;
+    var duration = 420;
     show(node, order);
-    requestAnimationFrame(function step(t) {
-      if (start === null) start = t;
-      var p = Math.min(1, (t - start) / dur);
-      var eased = 1 - Math.pow(1 - p, 3);
-      node.textContent = Math.round(ms * eased) + ' ms';
-      if (p < 1) requestAnimationFrame(step);
+
+    requestAnimationFrame(function step(time) {
+      if (start === null) start = time;
+      var progress = Math.min(1, (time - start) / duration);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      node.textContent = Math.round(milliseconds * eased) + ' ms';
+      if (progress < 1) requestAnimationFrame(step);
     });
   }
 
   fetch('/cdn-cgi/trace', { cache: 'no-store' })
-    .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+    .then(function (response) { return response.ok ? response.text() : Promise.reject(); })
     .then(function (text) {
-      var t = {};
+      var trace = {};
       text.trim().split('\n').forEach(function (line) {
-        var i = line.indexOf('=');
-        if (i > 0) t[line.slice(0, i)] = line.slice(i + 1);
+        var split = line.indexOf('=');
+        if (split > 0) trace[line.slice(0, split)] = line.slice(split + 1);
       });
-      if (!t.colo) return Promise.reject();
+      if (!trace.colo) return Promise.reject();
 
       el.hidden = false;
-
-      slot('colo').textContent = t.colo;
-      slot('http').textContent = (t.http || '').replace('http/', 'HTTP/') || '—';
-      slot('tls').textContent  = (t.tls || '').replace('TLSv', 'TLS ') || '—';
+      slot('colo').textContent = trace.colo;
+      slot('http').textContent = (trace.http || '').replace('http/', 'HTTP/') || '—';
+      slot('tls').textContent = (trace.tls || '').replace('TLSv', 'TLS ') || '—';
 
       show(slot('colo'), 0);
       show(slot('http'), 1);
-      show(slot('tls'),  2);
+      show(slot('tls'), 2);
 
-      var ms = ttfb();
-      if (ms === null) {
-        var dts = el.querySelectorAll('dt');
-        if (dts[3]) dts[3].remove();
+      var milliseconds = ttfb();
+      if (milliseconds === null) {
+        var terms = el.querySelectorAll('dt');
+        if (terms[3]) terms[3].remove();
         slot('ttfb').remove();
       } else {
-        countTo(slot('ttfb'), ms, 3);
+        countTo(slot('ttfb'), milliseconds, 3);
       }
     })
-    .catch(function () { /* no readout rather than a broken one */ });
+    .catch(function () { /* Hide unavailable edge data instead of showing an error. */ });
 })();
 
 /* ---- contour field ----------------------------------------------- */
-/* Marching squares over a drifting scalar field. No library.          */
+/* Marching squares over a drifting scalar field. No library. */
 (function () {
-  var cv = document.getElementById('field');
-  if (!cv || !cv.getContext) return;
-  var ctx = cv.getContext('2d');
-  if (!ctx) return;
+  var canvas = document.getElementById('field');
+  if (!canvas || !canvas.getContext) return;
+  var context = canvas.getContext('2d');
+  if (!context) return;
 
-  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var LEVELS = [-1.5, -0.9, -0.3, 0.3, 0.9, 1.5];
-
-  var W, H, cols, rows, cw, ch, g, stroke;
-  var t = 0, px = 0, py = 0, tx = 0, ty = 0, last = 0, raf = 0;
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var still = motionQuery.matches;
+  var levels = [-1.5, -0.9, -0.3, 0.3, 0.9, 1.5];
+  var width, height, columns, rows, cellWidth, cellHeight, grid, stroke;
+  var time = 0;
+  var pointerX = 0;
+  var pointerY = 0;
+  var targetX = 0;
+  var targetY = 0;
+  var last = 0;
+  var frameRequest = 0;
 
   function readStroke() {
     stroke = getComputedStyle(document.documentElement)
-               .getPropertyValue('--field').trim() || 'rgba(0,0,0,.08)';
+      .getPropertyValue('--field').trim() || 'rgba(0,0,0,.08)';
   }
 
   function resize() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = cv.clientWidth; H = cv.clientHeight;
-    cv.width  = Math.round(W * dpr);
-    cv.height = Math.round(H * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var density = Math.min(window.devicePixelRatio || 1, 2);
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    canvas.width = Math.round(width * density);
+    canvas.height = Math.round(height * density);
+    context.setTransform(density, 0, 0, density, 0, 0);
 
-    var step = W < 700 ? 26 : 20;
-    cols = Math.max(4, Math.ceil(W / step) + 1);
-    rows = Math.max(4, Math.ceil(H / step) + 1);
-    cw = W / (cols - 1);
-    ch = H / (rows - 1);
-    g = new Float32Array(cols * rows);
+    var step = width < 700 ? 26 : 20;
+    columns = Math.max(4, Math.ceil(width / step) + 1);
+    rows = Math.max(4, Math.ceil(height / step) + 1);
+    cellWidth = width / (columns - 1);
+    cellHeight = height / (rows - 1);
+    grid = new Float32Array(columns * rows);
     readStroke();
   }
 
-  /* Layered trigonometric field. Cheap, smooth, and non-repeating
-     enough at this timescale that the eye never locks onto a period. */
-  function sample(x, y, time) {
-    return Math.sin(x * 1.9 + time) * Math.cos(y * 1.5 - time * 0.62)
-         + 0.75 * Math.sin((x + y) * 1.15 - time * 0.43)
-         + 0.55 * Math.cos(x * 2.7 - y * 2.1 + time * 0.28)
-         + 0.35 * Math.sin(y * 3.4 + time * 0.17);
+  function sample(x, y, moment) {
+    return Math.sin(x * 1.9 + moment) * Math.cos(y * 1.5 - moment * 0.62)
+      + 0.75 * Math.sin((x + y) * 1.15 - moment * 0.43)
+      + 0.55 * Math.cos(x * 2.7 - y * 2.1 + moment * 0.28)
+      + 0.35 * Math.sin(y * 3.4 + moment * 0.17);
   }
 
-  function compute(time) {
-    for (var j = 0; j < rows; j++) {
-      var v = (j / (rows - 1)) * 2.4 - 1.2 + py * 0.16;
-      for (var i = 0; i < cols; i++) {
-        var u = (i / (cols - 1)) * 3.2 - 1.6 + px * 0.16;
-        g[j * cols + i] = sample(u, v, time);
+  function compute(moment) {
+    for (var row = 0; row < rows; row++) {
+      var vertical = (row / (rows - 1)) * 2.4 - 1.2 + pointerY * 0.16;
+      for (var column = 0; column < columns; column++) {
+        var horizontal = (column / (columns - 1)) * 3.2 - 1.6 + pointerX * 0.16;
+        grid[row * columns + column] = sample(horizontal, vertical, moment);
       }
     }
   }
 
+  function segment(first, second) {
+    context.moveTo(first[0], first[1]);
+    context.lineTo(second[0], second[1]);
+  }
+
   function draw() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = stroke;
-    ctx.beginPath();
+    context.clearRect(0, 0, width, height);
+    context.lineWidth = 1;
+    context.strokeStyle = stroke;
+    context.beginPath();
 
-    for (var L = 0; L < LEVELS.length; L++) {
-      var lv = LEVELS[L];
-      for (var j = 0; j < rows - 1; j++) {
-        for (var i = 0; i < cols - 1; i++) {
-          var a = g[j * cols + i],
-              b = g[j * cols + i + 1],
-              c = g[(j + 1) * cols + i + 1],
-              d = g[(j + 1) * cols + i];
+    for (var levelIndex = 0; levelIndex < levels.length; levelIndex++) {
+      var level = levels[levelIndex];
+      for (var row = 0; row < rows - 1; row++) {
+        for (var column = 0; column < columns - 1; column++) {
+          var topLeft = grid[row * columns + column];
+          var topRight = grid[row * columns + column + 1];
+          var bottomRight = grid[(row + 1) * columns + column + 1];
+          var bottomLeft = grid[(row + 1) * columns + column];
+          var index = (topLeft > level ? 8 : 0)
+            | (topRight > level ? 4 : 0)
+            | (bottomRight > level ? 2 : 0)
+            | (bottomLeft > level ? 1 : 0);
 
-          var idx = (a > lv ? 8 : 0) | (b > lv ? 4 : 0) |
-                    (c > lv ? 2 : 0) | (d > lv ? 1 : 0);
-          if (idx === 0 || idx === 15) continue;
+          if (index === 0 || index === 15) continue;
 
-          var x0 = i * cw, y0 = j * ch;
-          // edge crossing points, linearly interpolated
-          var T = [x0 + cw * ((lv - a) / (b - a)), y0];
-          var R = [x0 + cw, y0 + ch * ((lv - b) / (c - b))];
-          var B = [x0 + cw * ((lv - d) / (c - d)), y0 + ch];
-          var Lf = [x0, y0 + ch * ((lv - a) / (d - a))];
+          var x = column * cellWidth;
+          var y = row * cellHeight;
+          var top = [x + cellWidth * ((level - topLeft) / (topRight - topLeft)), y];
+          var right = [x + cellWidth, y + cellHeight * ((level - topRight) / (bottomRight - topRight))];
+          var bottom = [x + cellWidth * ((level - bottomLeft) / (bottomRight - bottomLeft)), y + cellHeight];
+          var left = [x, y + cellHeight * ((level - topLeft) / (bottomLeft - topLeft))];
 
-          switch (idx) {
-            case 1: case 14: seg(Lf, B); break;
-            case 2: case 13: seg(B, R);  break;
-            case 3: case 12: seg(Lf, R); break;
-            case 4: case 11: seg(T, R);  break;
-            case 6: case 9:  seg(T, B);  break;
-            case 7: case 8:  seg(Lf, T); break;
-            case 5:  seg(Lf, T); seg(B, R); break;
-            case 10: seg(Lf, B); seg(T, R); break;
+          switch (index) {
+            case 1: case 14: segment(left, bottom); break;
+            case 2: case 13: segment(bottom, right); break;
+            case 3: case 12: segment(left, right); break;
+            case 4: case 11: segment(top, right); break;
+            case 6: case 9: segment(top, bottom); break;
+            case 7: case 8: segment(left, top); break;
+            case 5: segment(left, top); segment(bottom, right); break;
+            case 10: segment(left, bottom); segment(top, right); break;
           }
         }
       }
     }
-    ctx.stroke();
-  }
-
-  function seg(p, q) {
-    ctx.moveTo(p[0], p[1]);
-    ctx.lineTo(q[0], q[1]);
+    context.stroke();
   }
 
   function frame(now) {
-    raf = requestAnimationFrame(frame);
-    if (now - last < 42) return;      // ~24fps is plenty for this speed
+    frameRequest = requestAnimationFrame(frame);
+    if (now - last < 42) return;
     last = now;
-    px += (tx - px) * 0.045;          // pointer parallax, heavily damped
-    py += (ty - py) * 0.045;
-    t += 0.0042;
-    compute(t);
+    pointerX += (targetX - pointerX) * 0.045;
+    pointerY += (targetY - pointerY) * 0.045;
+    time += 0.0042;
+    compute(time);
     draw();
   }
 
-  function start() { if (!raf) { last = 0; raf = requestAnimationFrame(frame); } }
-  function stop()  { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+  function start() {
+    if (!frameRequest) {
+      last = 0;
+      frameRequest = requestAnimationFrame(frame);
+    }
+  }
+
+  function stop() {
+    if (frameRequest) {
+      cancelAnimationFrame(frameRequest);
+      frameRequest = 0;
+    }
+  }
 
   resize();
 
@@ -554,27 +1055,52 @@
     draw();
   } else {
     start();
-    document.addEventListener('visibilitychange', function () {
-      document.hidden ? stop() : start();
-    });
-    window.addEventListener('pointermove', function (e) {
-      tx = (e.clientX / window.innerWidth) * 2 - 1;
-      ty = (e.clientY / window.innerHeight) * 2 - 1;
-    }, { passive: true });
   }
 
-  var rt;
-  window.addEventListener('resize', function () {
-    clearTimeout(rt);
-    rt = setTimeout(function () { resize(); if (still) { compute(t); draw(); } }, 150);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden || still) stop();
+    else start();
+  });
+
+  window.addEventListener('pointermove', function (event) {
+    if (still) return;
+    targetX = (event.clientX / window.innerWidth) * 2 - 1;
+    targetY = (event.clientY / window.innerHeight) * 2 - 1;
   }, { passive: true });
 
-  if (window.matchMedia) {
-    var scheme = window.matchMedia('(prefers-color-scheme: dark)');
-    var onScheme = function () { readStroke(); if (still) draw(); };
-    scheme.addEventListener ? scheme.addEventListener('change', onScheme)
-                            : scheme.addListener(onScheme);
+  function onMotionChange(event) {
+    still = event.matches;
+    if (still) {
+      stop();
+      compute(time);
+      draw();
+    } else if (!document.hidden) {
+      start();
+    }
   }
+
+  if (motionQuery.addEventListener) motionQuery.addEventListener('change', onMotionChange);
+  else motionQuery.addListener(onMotionChange);
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      resize();
+      if (still) {
+        compute(time);
+        draw();
+      }
+    }, 150);
+  }, { passive: true });
+
+  var scheme = window.matchMedia('(prefers-color-scheme: dark)');
+  var onScheme = function () {
+    readStroke();
+    if (still) draw();
+  };
+  if (scheme.addEventListener) scheme.addEventListener('change', onScheme);
+  else scheme.addListener(onScheme);
 })();
 </script>
 
