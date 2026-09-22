@@ -6,8 +6,11 @@
   <meta name="theme-color" content="#fbf8fa">
   <meta name="description" content="NaNail 美甲作品展示。扫码加微信预约，by appointment only.">
   <title>NaNail — 美甲预约</title>
+  <link rel="canonical" href="https://nanail.charliebuild.com/">
+  <link rel="icon" href="data:,">
   <link rel="preload" href="./assets/work-4.webp" as="image">
   <link rel="preload" href="./assets/wechat-qr.png" as="image">
+  <link rel="preload" href="./assets/instagram-qr.png" as="image">
   <style>
     :root {
       color-scheme: light;
@@ -143,9 +146,14 @@
     .scene::after {
       content: "";
       position: absolute;
-      inset: 33% 0 0;
-      background: linear-gradient(0deg, rgba(22, 16, 23, .54), rgba(22, 16, 23, 0));
+      inset: 58% 0 0;
+      background: linear-gradient(0deg, rgba(22, 16, 23, .62), rgba(22, 16, 23, 0));
       pointer-events: none;
+    }
+
+    .scene[data-copy-zone="top-right"]::after {
+      inset: 0 0 48%;
+      background: linear-gradient(180deg, rgba(22, 16, 23, .56), rgba(22, 16, 23, .28) 45%, rgba(22, 16, 23, 0));
     }
 
     .scene-copy {
@@ -158,10 +166,24 @@
       text-shadow: 0 2px 18px rgba(25, 10, 20, .28);
     }
 
+    .scene[data-copy-zone="top-right"] .scene-copy {
+      top: clamp(76px, 9.5svh, 116px);
+      right: clamp(24px, 5vw, 70px);
+      bottom: auto;
+      left: auto;
+      width: min(47%, 390px);
+      text-align: right;
+    }
+
+    .scene[data-copy-zone="bottom-left"] .scene-copy {
+      right: auto;
+      width: min(64%, 610px);
+    }
+
     .scene-copy h1 {
-      max-width: 18ch;
+      max-width: 14ch;
       margin: 0;
-      font-size: clamp(2.55rem, 5.6vw, 5.25rem);
+      font-size: clamp(2.35rem, 5vw, 4.8rem);
       font-weight: 700;
       letter-spacing: -.065em;
       line-height: 1.17;
@@ -212,10 +234,10 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
-      gap: clamp(18px, 4vw, 55px);
+      gap: clamp(18px, 3vw, 42px);
       min-width: 0;
       overflow: hidden;
-      padding: clamp(21px, 3vw, 44px) clamp(30px, 6vw, 82px);
+      padding: clamp(21px, 3vw, 40px) clamp(28px, 5vw, 68px);
       background: var(--porcelain);
       border-top: 1px solid #efe5ec;
     }
@@ -231,7 +253,7 @@
       animation: pearl-shift 24s ease-in-out infinite alternate;
     }
 
-    .booking-copy, .qr-link { position: relative; z-index: 1; }
+    .booking-copy, .booking-actions { position: relative; z-index: 1; }
 
     .booking-label {
       display: inline-flex;
@@ -253,7 +275,7 @@
 
     .booking h2 {
       margin: 0;
-      font-size: clamp(2.1rem, 4.8vw, 4.5rem);
+      font-size: clamp(2rem, 4.15vw, 3.75rem);
       font-weight: 750;
       letter-spacing: -.065em;
       line-height: 1.16;
@@ -268,43 +290,115 @@
       line-height: 1.45;
     }
 
-    .social {
+    .mascot-moment {
       display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: .3em .55em;
-      margin: clamp(13px, 2svh, 24px) 0 0;
-      color: var(--muted);
-      font-size: clamp(.85rem, 1.5vw, 1.15rem);
-      font-weight: 600;
+      align-items: center;
+      gap: clamp(5px, 1vw, 12px);
+      margin-top: clamp(10px, 1.8svh, 20px);
+      min-height: clamp(78px, 10svh, 108px);
     }
 
-    .social a {
-      color: #71547d;
-      text-decoration-thickness: 1px;
-      text-underline-offset: .18em;
-      overflow-wrap: anywhere;
-    }
-
-    .qr-link {
+    .booking-mascot {
       display: block;
-      width: min(31vw, 27svh, 290px);
-      min-width: 195px;
+      width: clamp(78px, 11vw, 118px);
+      height: auto;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 10px 16px rgba(84, 42, 75, .14));
+      transform-origin: 50% 92%;
+      animation: mascot-float 3.1s ease-in-out infinite;
+    }
+
+    .mascot-bubble {
+      position: relative;
+      display: grid;
+      min-width: 10.5em;
+      padding: .62em .9em;
+      color: #604563;
+      background: rgba(255, 255, 255, .88);
+      border: 1px solid rgba(103, 73, 105, .12);
+      border-radius: 999px;
+      box-shadow: 0 9px 28px rgba(75, 43, 73, .09);
+      font-size: clamp(.8rem, 1.45vw, 1.05rem);
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .mascot-bubble::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      width: 14px;
+      height: 14px;
+      background: rgba(255, 255, 255, .92);
+      border-bottom: 1px solid rgba(103, 73, 105, .12);
+      border-left: 1px solid rgba(103, 73, 105, .12);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .mascot-bubble span {
+      grid-area: 1 / 1;
+      opacity: 0;
+      animation: bubble-beat 6s steps(1, end) infinite;
+    }
+
+    .mascot-bubble span:nth-child(2) { animation-delay: 3s; }
+
+    .booking-actions {
+      display: grid;
+      grid-template-columns: minmax(184px, 1.2fr) minmax(150px, .9fr);
+      align-items: end;
+      gap: clamp(10px, 1.5vw, 16px);
+      width: min(45vw, 376px);
+    }
+
+    .qr-card {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .qr-hit {
+      display: block;
+      width: 100%;
       aspect-ratio: 1;
-      padding: 0;
+      padding: 7px;
       background: #fff;
       box-shadow: 0 13px 45px rgba(55, 31, 57, .13);
       border: 1px solid rgba(67, 46, 71, .07);
-      border-radius: 12px;
+      border-radius: 16px;
     }
 
-    .qr-link img {
+    .qr-hit img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 10px;
       image-rendering: auto;
+    }
+
+    .qr-card figcaption {
+      display: grid;
+      gap: 1px;
+      color: #66536a;
+      font-size: clamp(.72rem, 1.2vw, .92rem);
+      line-height: 1.25;
+    }
+
+    .qr-card figcaption strong {
+      color: var(--ink);
+      font-size: 1.08em;
+      font-weight: 750;
+    }
+
+    .qr-card--instagram figcaption span {
+      font-size: .82em;
+      overflow-wrap: anywhere;
     }
 
     @keyframes photo-drift {
@@ -328,6 +422,17 @@
       to { transform: scale(1.1) translate3d(1.2%, -.6%, 0); }
     }
 
+    @keyframes mascot-float {
+      0%, 100% { transform: translateY(1px) rotate(-1.4deg); }
+      48% { transform: translateY(-5px) rotate(1.4deg); }
+      56% { transform: translateY(-4px) rotate(2.3deg); }
+    }
+
+    @keyframes bubble-beat {
+      0%, 48% { opacity: 1; transform: translateY(0); }
+      50%, 100% { opacity: 0; transform: translateY(3px); }
+    }
+
     @media (orientation: landscape) {
       .screen {
         grid-template-columns: minmax(0, 61fr) minmax(370px, 39fr);
@@ -344,7 +449,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        gap: clamp(24px, 4svh, 55px);
+        gap: clamp(18px, 2.7svh, 30px);
         padding: clamp(30px, 4vw, 68px);
         border-top: 0;
         border-left: 1px solid #efe5ec;
@@ -356,31 +461,57 @@
       }
 
       .booking-step { font-size: clamp(1rem, 1.65vw, 1.45rem); }
-      .qr-link { width: min(28vw, 36svh, 340px); min-width: 210px; }
+      .booking-actions {
+        grid-template-columns: minmax(184px, 1.22fr) minmax(144px, .9fr);
+        width: 100%;
+      }
+      .booking-mascot { width: clamp(88px, 11svh, 112px); }
       .scene-copy h1 { font-size: clamp(2.75rem, 4.25vw, 4.75rem); }
     }
 
     @media (max-width: 680px) and (orientation: portrait) {
-      .screen { grid-template-rows: 66px minmax(0, 1fr) min(36svh, 350px); }
+      .screen { grid-template-rows: 66px minmax(0, 1fr) min(46svh, 390px); }
       .masthead { padding: 0 20px; }
       .brand { font-size: 2rem; }
       .identity { font-size: .82rem; }
-      .booking { gap: 14px; padding: 18px 20px; }
+      .booking { gap: 8px; padding: 9px 12px; }
       .booking h2 { font-size: clamp(1.55rem, 6vw, 2.2rem); white-space: normal; }
       .booking-label { font-size: .82rem; }
       .booking-step { font-size: .82rem; }
-      .social { font-size: .72rem; }
-      .qr-link { width: min(34vw, 25svh); min-width: 130px; }
+      .mascot-moment { min-height: 58px; margin-top: 6px; }
+      .booking-mascot { display: none; }
+      .mascot-bubble { min-width: 0; font-size: .68rem; }
+      .mascot-bubble::before { display: none; }
+      .booking-actions {
+        grid-template-columns: 146px;
+        gap: 5px;
+        width: 146px;
+      }
+      .qr-hit { padding: 3px; border-radius: 11px; }
+      .qr-card { gap: 2px; }
+      .qr-card figcaption { font-size: .58rem; }
       .scene-copy h1 { font-size: clamp(2.25rem, 8vw, 3.5rem); }
+      .scene-copy p { display: none; }
+      .scene[data-copy-zone="top-right"] .scene-copy {
+        top: 64px;
+        width: 58%;
+      }
     }
 
     @media (max-height: 620px) and (orientation: landscape) {
-      .booking { gap: 14px; padding: 22px; }
-      .booking-label { margin-bottom: 5px; }
-      .booking h2 { font-size: 2rem; }
-      .booking-step { margin-top: 7px; }
-      .social { margin-top: 7px; }
-      .qr-link { width: min(23vw, 38svh); min-width: 150px; }
+      .booking { gap: 10px; padding: 12px 16px; }
+      .booking-label { margin-bottom: 4px; font-size: .72rem; }
+      .booking h2 { font-size: 1.65rem; line-height: 1.06; }
+      .booking-step { margin-top: 5px; font-size: .72rem; }
+      .mascot-moment { display: none; }
+      .booking-actions {
+        grid-template-columns: 150px 145px;
+        gap: 8px;
+        width: 100%;
+      }
+      .qr-hit { padding: 3px; }
+      .qr-card { gap: 3px; }
+      .qr-card figcaption { font-size: .62rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -389,7 +520,11 @@
       .scene.is-active::before,
       .scene.is-active .scene-copy h1,
       .scene.is-active .scene-copy p,
-      .booking::before { animation: none; }
+      .booking::before,
+      .booking-mascot,
+      .mascot-bubble span { animation: none; }
+      .mascot-bubble span:first-child { opacity: 1; }
+      .mascot-bubble span:nth-child(2) { opacity: 0; }
     }
   </style>
 </head>
@@ -401,19 +536,19 @@
     </header>
 
     <section class="showcase" aria-label="NaNail 美甲作品展示">
-      <div class="scene is-active" style="--photo-position:center 51%" aria-hidden="false">
+      <div class="scene is-active" data-copy-zone="top-right" style="--photo-position:center 57%" aria-hidden="false">
         <img src="./assets/work-4.webp" alt="粉色清透珠光美甲，双手展示作品" width="1800" height="2392" fetchpriority="high">
-        <div class="scene-copy"><h1>温柔，也会发光。</h1><p>NaNail · 你的下一款美甲</p></div>
+        <div class="scene-copy"><h1>温柔，<br>也会发光。</h1><p>NaNail · 你的下一款美甲</p></div>
       </div>
-      <div class="scene" style="--photo-position:center 51%" aria-hidden="true">
+      <div class="scene" data-copy-zone="top-right" style="--photo-position:center 58%" aria-hidden="true">
         <img src="./assets/work-3.webp" alt="粉色和金色细节美甲，双手展示作品" width="1800" height="2146" loading="eager">
-        <div class="scene-copy"><h1>一点闪，刚刚好。</h1><p>细节，值得多看一眼</p></div>
+        <div class="scene-copy"><h1>一点闪，<br>刚刚好。</h1><p>细节，值得多看一眼</p></div>
       </div>
-      <div class="scene" style="--photo-position:center 53%" aria-hidden="true">
+      <div class="scene" data-copy-zone="bottom-left" style="--photo-position:center 50%" aria-hidden="true">
         <img src="./assets/work-1.webp" alt="粉色、蓝色与绿色的趣味图案美甲，双手展示作品" width="1800" height="1450" loading="eager">
         <div class="scene-copy"><h1>今天，想可爱一点。</h1><p>每一款，都有自己的心情</p></div>
       </div>
-      <div class="scene" style="--photo-position:center 50%" aria-hidden="true">
+      <div class="scene" data-copy-zone="bottom-left" style="--photo-position:center 50%" aria-hidden="true">
         <img src="./assets/work-2.webp" alt="银色细闪法式美甲，双手展示作品" width="1800" height="1547" loading="eager">
         <div class="scene-copy"><h1>低调，偏要闪一下。</h1><p>透亮底色 × 细闪法式</p></div>
       </div>
@@ -422,14 +557,28 @@
 
     <aside class="booking" aria-label="预约方式">
       <div class="booking-copy">
-        <p class="booking-label">By appointment only · 仅限预约</p>
+        <p class="booking-label">By appointment only · 预约制</p>
         <h2>扫码预约<br>你的下一款。</h2>
         <p class="booking-step">加微信 · 发喜欢的款式 · 问档期</p>
-        <p class="social">更多作品 <a href="https://www.instagram.com/nanail_studio_a/" target="_blank" rel="noopener noreferrer" aria-label="在 Instagram 查看 NaNail 更多作品">@NANAIL_STUDIO_A</a></p>
+        <div class="mascot-moment" role="note" aria-label="NaNail 小精灵提示：看到心动款，截屏发给我">
+          <img class="booking-mascot" src="./assets/booking-mascot.png" alt="挥手并指向二维码的粉色指甲油小精灵" width="720" height="720">
+          <p class="mascot-bubble" aria-hidden="true"><span>看到心动款？</span><span>截屏发我 💅</span></p>
+        </div>
       </div>
-      <a class="qr-link" href="https://u.wechat.com/EGsJYhcb66OQFjbxUDEHfE8?s=2" target="_blank" rel="noopener noreferrer" aria-label="打开 NaNail 的微信二维码，扫码或点击预约">
-        <img src="./assets/wechat-qr.png" alt="NaNail 微信二维码" width="464" height="464" fetchpriority="high">
-      </a>
+      <div class="booking-actions" aria-label="预约和作品二维码">
+        <figure class="qr-card qr-card--wechat">
+          <a class="qr-hit" href="https://u.wechat.com/EGsJYhcb66OQFjbxUDEHfE8?s=2" target="_blank" rel="noopener noreferrer" aria-label="打开 NaNail 的微信二维码，扫码或点击预约">
+            <img src="./assets/wechat-qr.png" alt="NaNail 微信二维码" width="464" height="464" fetchpriority="high">
+          </a>
+          <figcaption><strong>微信预约</strong><span>扫码加微信</span></figcaption>
+        </figure>
+        <figure class="qr-card qr-card--instagram">
+          <a class="qr-hit" href="https://www.instagram.com/nanail_studio_a/" target="_blank" rel="noopener noreferrer" aria-label="打开 NaNail 的 Instagram 作品主页">
+            <img src="./assets/instagram-qr.png" alt="NaNail Instagram 二维码" width="520" height="520" loading="eager">
+          </a>
+          <figcaption><strong>Instagram 作品</strong><span>@nanail_studio_a</span></figcaption>
+        </figure>
+      </div>
     </aside>
   </main>
 
