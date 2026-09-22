@@ -6,7 +6,7 @@
 
 **Architecture:** Keep the display as one dependency-free HTML page. Store both QR images and the generated mascot in `nanail/display/assets`; use scene-level CSS variables for photo crop and copy-safe placement; use CSS-only motion for reliable offline-friendly looping. Route the new Cloudflare custom hostname to the existing display while retaining the old path.
 
-**Tech Stack:** Static HTML/CSS/JavaScript, Node.js smoke tests, GPT image generation, Cloudflare Pages.
+**Tech Stack:** Static HTML/CSS/JavaScript, Node.js smoke tests, GPT image generation, Cloudflare Workers Static Assets.
 
 **Spec:** `docs/superpowers/specs/2026-09-22-nanail-display-v2.md`
 
@@ -89,7 +89,7 @@
 - Consumes: existing GitHub-to-Cloudflare Pages deployment.
 - Produces: `https://nanail.charliebuild.com/` serving the display.
 
-- [ ] Add the custom hostname using the authenticated Cloudflare workflow.
-- [ ] Route the hostname root to the display without changing the main `charliebuild.com` home page.
-- [ ] Commit and push the verified V2 changes.
-- [ ] Wait for deployment and verify HTTP, HTML, asset hashes, QR scans, and canonical URL in production.
+- [x] Add the custom hostname using the authenticated Cloudflare workflow.
+- [x] Route the hostname root to the display without changing the main `charliebuild.com` home page.
+- [x] Commit and push the verified V2 changes.
+- [x] Wait for deployment and verify HTTP, HTML, asset hashes, QR scans, and canonical URL in production.

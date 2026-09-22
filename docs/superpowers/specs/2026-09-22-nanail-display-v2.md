@@ -13,7 +13,7 @@ Turn the existing iPad storefront loop into a more complete appointment ad at `h
 - Use a generated raster mascot asset and CSS motion that loops smoothly and respects `prefers-reduced-motion`.
 - Preserve the existing single-page, dependency-free implementation and continuous iPad loop.
 - Support iPad portrait and landscape, plus a narrow phone fallback.
-- Publish through the existing Git-backed Cloudflare Pages site and make `nanail.charliebuild.com` the canonical public URL.
+- Publish through Cloudflare Workers Static Assets and make `nanail.charliebuild.com` the canonical public URL without changing the root portfolio Worker.
 - Keep the previous `/nanail/display/` path usable as a fallback.
 
 ## Verification
