@@ -586,7 +586,6 @@
     (() => {
       const scenes = [...document.querySelectorAll('.scene')];
       const dots = [...document.querySelectorAll('.scene-counter i')];
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       let current = 0;
       let timer;
 
@@ -602,12 +601,11 @@
 
       function schedule() {
         clearInterval(timer);
-        if (!reducedMotion.matches && !document.hidden) {
+        if (!document.hidden) {
           timer = setInterval(advance, 7500);
         }
       }
 
-      reducedMotion.addEventListener?.('change', schedule);
       document.addEventListener('visibilitychange', schedule);
       schedule();
     })();
