@@ -18,3 +18,9 @@ Asset concepts and generation constraints are recorded in
 The title interaction is informed by
 [`bobobo521/boknows-text-image-template`](https://github.com/bobobo521/boknows-text-image-template)
 (MIT) and was reimplemented for this site.
+
+## NaNail storefront display
+
+The separate iPad display lives at `/nanail/display/`. See
+[`docs/nanail-display.md`](docs/nanail-display.md) for source assets,
+operation, and on-site checks.
