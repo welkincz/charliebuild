@@ -62,8 +62,12 @@ The shop has no fixed wifi and runs off a phone hotspot, so
   refresh picks up new content whenever the hotspot is up.
 - Images are served cache-first, so hotspot data is only spent when the cache
   version changes.
-- **After changing anything in `display/`, bump `VERSION` in `sw.js`.** Otherwise
-  the iPad keeps showing cached copies of the old assets.
+- **After changing any file under `display/assets/`, bump `VERSION` in `sw.js`.**
+  Those are served cache-first, so without a bump the iPad keeps showing the old
+  images even though the filenames are the same.
+- Text-only edits to `index.html` do **not** need a version bump. The page is
+  fetched network-first, so one refresh picks them up — and skipping the bump
+  avoids re-downloading every image over the hotspot for a copy change.
 
 With a version bump, one manual refresh on the iPad is enough: the page reloads,
 the new service worker installs, takes over, and triggers a single automatic
