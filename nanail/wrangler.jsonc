@@ -1,10 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "nanail",
-  "compatibility_date": "2026-09-22",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-15",
   "assets": {
-    "directory": "./display"
+    "directory": "./display",
+    // 有 main 之后，命中静态资源的请求仍然由资源层直接返回，不会走 Worker；
+    // 只有 /ig 和 /scans 这类没有对应文件的路径才会进到脚本里。
+    "binding": "ASSETS"
   },
+  // 扫码计数用。没绑这个 binding 时 /ig 照常跳转，只是不计数。
+  "kv_namespaces": [
+    { "binding": "SCANS", "id": "69805cff11db48deb1b7ee13f94dd22f" }
+  ],
   "routes": [
     {
       "pattern": "nanail.charliebuild.com",

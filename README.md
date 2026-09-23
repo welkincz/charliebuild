@@ -21,6 +21,8 @@ The title interaction is informed by
 
 ## NaNail storefront display
 
-The separate iPad display lives at `/nanail/display/`. See
+The separate iPad display lives at `nanail.charliebuild.com`, deployed as its
+own Worker with `wrangler deploy --config nanail/wrangler.jsonc`. Pushing to
+`main` does not update it. See
 [`docs/nanail-display.md`](docs/nanail-display.md) for source assets,
 operation, and on-site checks.
