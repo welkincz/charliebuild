@@ -32,6 +32,12 @@
       font-family: "Avenir Next", Avenir, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow: hidden;
+      /* 门口这块屏不需要任何触摸交互：禁掉双击缩放、长按弹出「存储图像」和文字选中，
+         避免一次误触把版面搞乱之后没人发现。 */
+      touch-action: manipulation;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     a { color: inherit; }
@@ -43,12 +49,16 @@
 
     .screen {
       display: grid;
-      grid-template-rows: clamp(68px, 7.7svh, 104px) minmax(0, 1fr) clamp(310px, 34svh, 420px);
-      width: 100%;
-      height: 100svh;
+      grid-template-rows: clamp(60px, 6.4svh, 88px) minmax(0, 1fr) auto;
+      /* 比视口大 8px 并往回收 4px，给下面的防烧屏位移留出余量，
+         这样无论怎么飘都不会在边缘露出底色。 */
+      width: calc(100% + 8px);
+      height: calc(100svh + 8px);
+      margin: -4px;
       min-height: 0;
       overflow: hidden;
       isolation: isolate;
+      animation: pixel-shift 900s linear infinite;
     }
 
     .masthead {
@@ -118,6 +128,7 @@
     }
 
     .scene.is-active { opacity: 1; z-index: 1; }
+    .scene.is-leaving { z-index: 0; }
 
     .scene img {
       display: block;
@@ -128,7 +139,10 @@
       transform: scale(1.01);
     }
 
-    .scene.is-active img { animation: photo-drift 8.5s linear both; }
+    /* is-leaving 和 is-active 用完全相同的 animation 声明，浏览器不会重启动画，
+       旧图因此能在 1050ms 淡出期间继续缓慢推近，而不是瞬间弹回原始比例。 */
+    .scene.is-active img,
+    .scene.is-leaving img { animation: photo-drift 6.6s linear both; }
 
     .scene::before {
       content: "";
@@ -231,13 +245,17 @@
 
     .booking {
       position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: clamp(18px, 3vw, 42px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: clamp(14px, 1.9svh, 24px);
       min-width: 0;
       overflow: hidden;
-      padding: clamp(21px, 3vw, 40px) clamp(28px, 5vw, 68px);
+      padding: clamp(18px, 2.2svh, 28px) clamp(28px, 5vw, 68px);
+      /* 竖屏挂在门上时，二维码说明文字离底边只剩二十几 pt，
+         带主屏幕指示条的 iPad 会正好压在上面。 */
+      padding-bottom: calc(clamp(18px, 2.2svh, 28px) + env(safe-area-inset-bottom, 0px));
       background: var(--porcelain);
       border-top: 1px solid #efe5ec;
     }
@@ -247,7 +265,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      background: url("./assets/pearl-ribbon-atmosphere.png") center / cover no-repeat;
+      background: url("./assets/pearl-ribbon-atmosphere.webp") center / cover no-repeat;
       opacity: .27;
       pointer-events: none;
       animation: pearl-shift 24s ease-in-out infinite alternate;
@@ -259,7 +277,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5em;
-      margin: 0 0 clamp(9px, 1.7svh, 18px);
+      margin: 0 0 clamp(6px, 1.2svh, 14px);
       color: #654968;
       font-size: clamp(1rem, 1.8vw, 1.35rem);
       font-weight: 700;
@@ -275,42 +293,59 @@
 
     .booking h2 {
       margin: 0;
-      font-size: clamp(2rem, 4.15vw, 3.75rem);
+      font-size: clamp(1.9rem, 4.4vw, 3.4rem);
       font-weight: 750;
       letter-spacing: -.065em;
       line-height: 1.16;
-      white-space: nowrap;
+      text-wrap: balance;
     }
 
     .booking-step {
-      margin: .65em 0 0;
+      margin: .55em 0 0;
       color: #58485c;
       font-size: clamp(1rem, 2vw, 1.58rem);
       font-weight: 600;
       line-height: 1.45;
     }
 
+    /* 营业时间 / 价格区间的位置已经留好，内容确认后把下面 HTML 里的注释打开即可。 */
+    .booking-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35em 1.1em;
+      margin: .5em 0 0;
+      color: #58485c;
+      font-size: clamp(.95rem, 1.9vw, 1.45rem);
+      font-weight: 700;
+    }
+
+    .booking-facts span { white-space: nowrap; }
+
     .booking-actions {
-      display: grid;
-      grid-template-columns: minmax(184px, 1.2fr) minmax(150px, .9fr);
-      align-items: end;
-      gap: clamp(10px, 1.5vw, 16px);
-      width: min(45vw, 376px);
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(16px, 3vw, 36px);
+      width: 100%;
     }
 
     .qr-card {
       display: grid;
-      gap: 8px;
+      gap: clamp(5px, .8svh, 9px);
       min-width: 0;
       margin: 0;
-      text-align: center;
+      text-align: left;
     }
+
+    /* 门店场景下扫码距离基本由码的物理尺寸决定（经验值：可扫距离 ≈ 10 × 码宽）。
+       iPad 是 132pt/英寸，所以 295pt ≈ 5.7cm、205pt ≈ 3.9cm。 */
+    .qr-card--wechat { width: clamp(190px, 36vw, 300px); }
+    .qr-card--instagram { width: clamp(132px, 25vw, 208px); }
 
     .qr-hit {
       display: block;
       width: 100%;
       aspect-ratio: 1;
-      padding: 7px;
+      padding: 10px;
       background: #fff;
       box-shadow: 0 13px 45px rgba(55, 31, 57, .13);
       border: 1px solid rgba(67, 46, 71, .07);
@@ -330,19 +365,24 @@
       display: grid;
       gap: 1px;
       color: #66536a;
-      font-size: clamp(.72rem, 1.2vw, .92rem);
-      line-height: 1.25;
+      font-size: clamp(.85rem, 2.1vw, 1.3rem);
+      line-height: 1.22;
+      white-space: nowrap;
     }
 
     .qr-card figcaption strong {
       color: var(--ink);
-      font-size: 1.08em;
+      font-size: 1.25em;
       font-weight: 750;
     }
 
+    /* 账号名是「路过 → 记下来 → 回家搜」这条路径的唯一载体，
+       比二维码本身更常被用到，所以按 1 米外能读清来定字号。 */
     .qr-card--instagram figcaption span {
-      font-size: .82em;
-      overflow-wrap: anywhere;
+      color: var(--ink);
+      font-size: clamp(1rem, 2.9vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -.01em;
     }
 
     @keyframes photo-drift {
@@ -366,6 +406,16 @@
       to { transform: scale(1.1) translate3d(1.2%, -.6%, 0); }
     }
 
+    /* 防烧屏：15 分钟走完一圈、总位移 4px，肉眼察觉不到，
+       但足以让顶栏和预约区的静止像素不长期压在同一个位置上。 */
+    @keyframes pixel-shift {
+      0% { transform: translate3d(0, 0, 0); }
+      25% { transform: translate3d(4px, 2px, 0); }
+      50% { transform: translate3d(1px, 4px, 0); }
+      75% { transform: translate3d(-3px, 2px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
     @media (orientation: landscape) {
       .screen {
         grid-template-columns: minmax(0, 61fr) minmax(370px, 39fr);
@@ -378,46 +428,46 @@
       .booking {
         grid-column: 2;
         grid-row: 1 / 3;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: clamp(18px, 2.7svh, 30px);
-        padding: clamp(30px, 4vw, 68px);
+        gap: clamp(16px, 2.4svh, 28px);
+        padding: clamp(26px, 3.4vw, 56px);
+        padding-right: calc(clamp(26px, 3.4vw, 56px) + env(safe-area-inset-right, 0px));
+        padding-bottom: calc(clamp(26px, 3.4vw, 56px) + env(safe-area-inset-bottom, 0px));
         border-top: 0;
         border-left: 1px solid #efe5ec;
       }
 
-      .booking h2 {
-        font-size: clamp(2.15rem, 3.25vw, 4.25rem);
-        white-space: normal;
+      .booking h2 { font-size: clamp(2rem, 3.1vw, 4rem); }
+      .booking-step { font-size: clamp(1rem, 1.65vw, 1.45rem); }
+
+      .booking-actions {
+        flex-direction: column;
+        gap: clamp(14px, 2.2svh, 26px);
       }
 
-      .booking-step { font-size: clamp(1rem, 1.65vw, 1.45rem); }
-      .booking-actions {
-        grid-template-columns: minmax(184px, 1.22fr) minmax(144px, .9fr);
-        width: 100%;
-      }
+      .qr-card--wechat { width: clamp(180px, 23vw, 300px); }
+      .qr-card--instagram { width: clamp(126px, 16vw, 200px); }
+      .qr-card figcaption { font-size: clamp(.85rem, 1.35vw, 1.2rem); }
+      .qr-card--instagram figcaption span { font-size: clamp(1rem, 1.85vw, 1.6rem); }
+
       .scene-copy h1 { font-size: clamp(2.75rem, 4.25vw, 4.75rem); }
     }
 
     @media (max-width: 680px) and (orientation: portrait) {
-      .screen { grid-template-rows: 66px minmax(0, 1fr) min(46svh, 390px); }
+      .screen { grid-template-rows: 60px minmax(0, 1fr) auto; }
       .masthead { padding: 0 20px; }
       .brand { font-size: 2rem; }
       .identity { font-size: .82rem; }
-      .booking { gap: 8px; padding: 9px 12px; }
-      .booking h2 { font-size: clamp(1.55rem, 6vw, 2.2rem); white-space: normal; }
-      .booking-label { font-size: .82rem; }
+      .booking { gap: 10px; padding: 12px 16px; }
+      .booking h2 { font-size: clamp(1.55rem, 6vw, 2.2rem); }
+      .booking-label { font-size: .82rem; margin-bottom: 4px; }
       .booking-step { font-size: .82rem; }
-      .booking-actions {
-        grid-template-columns: 146px;
-        gap: 5px;
-        width: 146px;
-      }
-      .qr-hit { padding: 3px; border-radius: 11px; }
-      .qr-card { gap: 2px; }
-      .qr-card figcaption { font-size: .58rem; }
+      .booking-facts { font-size: .82rem; }
+      .booking-actions { gap: 12px; }
+      .qr-card--wechat { width: 46vw; }
+      .qr-card--instagram { width: 32vw; }
+      .qr-hit { padding: 5px; border-radius: 11px; }
+      .qr-card figcaption { font-size: .68rem; }
+      .qr-card--instagram figcaption span { font-size: .86rem; }
       .scene-copy h1 { font-size: clamp(2.25rem, 8vw, 3.5rem); }
       .scene-copy p { display: none; }
       .scene[data-copy-zone="top-right"] .scene-copy {
@@ -431,23 +481,24 @@
       .booking-label { margin-bottom: 4px; font-size: .72rem; }
       .booking h2 { font-size: 1.65rem; line-height: 1.06; }
       .booking-step { margin-top: 5px; font-size: .72rem; }
-      .booking-actions {
-        grid-template-columns: 150px 145px;
-        gap: 8px;
-        width: 100%;
-      }
-      .qr-hit { padding: 3px; }
-      .qr-card { gap: 3px; }
+      .booking-facts { font-size: .72rem; }
+      .booking-actions { flex-direction: row; gap: 10px; }
+      .qr-card--wechat { width: 150px; }
+      .qr-card--instagram { width: 120px; }
+      .qr-hit { padding: 4px; }
       .qr-card figcaption { font-size: .62rem; }
+      .qr-card--instagram figcaption span { font-size: .74rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .scene, .scene-counter i { transition: none; }
       .scene.is-active img,
+      .scene.is-leaving img,
       .scene.is-active::before,
       .scene.is-active .scene-copy h1,
       .scene.is-active .scene-copy p,
       .booking::before { animation: none; }
+      /* pixel-shift 刻意不在这里关掉：它是护屏措施，15 分钟 4px 也不构成「动效」。 */
     }
   </style>
 </head>
@@ -463,6 +514,10 @@
         <img src="./assets/work-4.webp" alt="粉色清透珠光美甲，双手展示作品" width="1800" height="2392" fetchpriority="high">
         <div class="scene-copy"><h1>温柔，<br>也会发光。</h1><p>NaNail · 你的下一款美甲</p></div>
       </div>
+      <div class="scene" data-copy-zone="bottom-left" style="--photo-position:58% 42%" aria-hidden="true">
+        <img src="./assets/work-6.webp" alt="奶白珠光猫眼美甲，手持香薰蜡烛" width="1500" height="2000" loading="eager">
+        <div class="scene-copy"><h1>怎么拍，都好看。</h1><p>奶白珠光 · 日常最百搭</p></div>
+      </div>
       <div class="scene" data-copy-zone="top-right" style="--photo-position:center 58%" aria-hidden="true">
         <img src="./assets/work-3.webp" alt="粉色和金色细节美甲，双手展示作品" width="1800" height="2146" loading="eager">
         <div class="scene-copy"><h1>一点闪，<br>刚刚好。</h1><p>细节，值得多看一眼</p></div>
@@ -471,18 +526,26 @@
         <img src="./assets/work-1.webp" alt="粉色、蓝色与绿色的趣味图案美甲，双手展示作品" width="1800" height="1450" loading="eager">
         <div class="scene-copy"><h1>今天，想可爱一点。</h1><p>每一款，都有自己的心情</p></div>
       </div>
+      <div class="scene" data-copy-zone="top-right" style="--photo-position:center 58%" aria-hidden="true">
+        <img src="./assets/work-5.webp" alt="薄荷绿珠光渐变美甲，指尖有手绘小蝴蝶结" width="1279" height="1664" loading="eager">
+        <div class="scene-copy"><h1>小蝴蝶结，<br>藏在指尖。</h1><p>薄荷珠光 × 手绘细节</p></div>
+      </div>
       <div class="scene" data-copy-zone="bottom-left" style="--photo-position:center 50%" aria-hidden="true">
         <img src="./assets/work-2.webp" alt="银色细闪法式美甲，双手展示作品" width="1800" height="1547" loading="eager">
         <div class="scene-copy"><h1>低调，偏要闪一下。</h1><p>透亮底色 × 细闪法式</p></div>
       </div>
-      <div class="scene-counter" aria-hidden="true"><i class="is-active"></i><i></i><i></i><i></i></div>
+      <div class="scene-counter" aria-hidden="true"></div>
     </section>
 
     <aside class="booking" aria-label="预约方式">
       <div class="booking-copy">
         <p class="booking-label">By appointment only · 预约制</p>
-        <h2>扫码预约<br>你的下一款。</h2>
+        <h2>扫码预约你的下一款。</h2>
         <p class="booking-step">加微信 · 发喜欢的款式 · 问档期</p>
+        <!-- 营业时间和价格区间确认后，把下面这行的注释去掉并填上真实内容。
+             价格只写有把握的起步价，改价或做活动时记得同步，过期的数字比没有数字更伤。
+        <p class="booking-facts"><span>营业时间 10:00–19:00</span><span>单色 $00 起</span><span>建议提前 1–2 周</span></p>
+        -->
       </div>
       <div class="booking-actions" aria-label="预约和作品二维码">
         <figure class="qr-card qr-card--wechat">
@@ -492,10 +555,10 @@
           <figcaption><strong>微信预约</strong><span>扫码加微信</span></figcaption>
         </figure>
         <figure class="qr-card qr-card--instagram">
-          <a class="qr-hit" href="https://www.instagram.com/nanail_studio_a/" target="_blank" rel="noopener noreferrer" aria-label="打开 NaNail 的 Instagram 作品主页">
-            <img src="./assets/instagram-qr.png" alt="NaNail Instagram 二维码" width="520" height="520" loading="eager">
+          <a class="qr-hit" href="https://nanail.charliebuild.com/ig" target="_blank" rel="noopener noreferrer" aria-label="打开 NaNail 的 Instagram 作品主页">
+            <img src="./assets/instagram-qr.png" alt="NaNail Instagram 二维码" width="1036" height="1036" loading="eager">
           </a>
-          <figcaption><strong>Instagram 作品</strong><span>@nanail_studio_a</span></figcaption>
+          <figcaption><strong>Instagram</strong><span>@nanail_studio_a</span></figcaption>
         </figure>
       </div>
     </aside>
@@ -503,15 +566,31 @@
 
   <script>
     (() => {
+      const HOLD = 5500;
+      const FADE = 1100;
+
       const scenes = [...document.querySelectorAll('.scene')];
-      const dots = [...document.querySelectorAll('.scene-counter i')];
+      const counter = document.querySelector('.scene-counter');
+
+      // 圆点按实际张数生成，以后加减作品照片时不会和 HTML 里写死的数量对不上。
+      const dots = scenes.map((scene, index) => {
+        const dot = document.createElement('i');
+        if (index === 0) dot.className = 'is-active';
+        counter.appendChild(dot);
+        return dot;
+      });
+
       let current = 0;
       let timer;
 
       function advance() {
-        scenes[current].classList.remove('is-active');
-        scenes[current].setAttribute('aria-hidden', 'true');
+        const leaving = scenes[current];
+        leaving.classList.remove('is-active');
+        leaving.classList.add('is-leaving');
+        leaving.setAttribute('aria-hidden', 'true');
         dots[current].classList.remove('is-active');
+        setTimeout(() => leaving.classList.remove('is-leaving'), FADE);
+
         current = (current + 1) % scenes.length;
         scenes[current].classList.add('is-active');
         scenes[current].setAttribute('aria-hidden', 'false');
@@ -521,12 +600,28 @@
       function schedule() {
         clearInterval(timer);
         if (!document.hidden) {
-          timer = setInterval(advance, 7500);
+          timer = setInterval(advance, HOLD);
         }
       }
 
       document.addEventListener('visibilitychange', schedule);
       schedule();
+
+      // 店里靠手机热点，断网时这块屏不能变成一张报错页。
+      if (typeof navigator !== 'undefined' && navigator.serviceWorker) {
+        const hadController = !!navigator.serviceWorker.controller;
+        let reloading = false;
+
+        navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).catch(() => {});
+
+        // 首次安装不刷新；只有「内容更新了、新 sw 接管了」才自动刷一次，
+        // 这样她在 iPad 上手动刷新一次就能看到新照片，不用刷两次。
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!hadController || reloading) return;
+          reloading = true;
+          location.reload();
+        });
+      }
     })();
   </script>
 </body>
