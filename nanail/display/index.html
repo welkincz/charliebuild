@@ -290,62 +290,6 @@
       line-height: 1.45;
     }
 
-    .mascot-moment {
-      display: flex;
-      align-items: center;
-      gap: clamp(5px, 1vw, 12px);
-      margin-top: clamp(10px, 1.8svh, 20px);
-      min-height: clamp(78px, 10svh, 108px);
-    }
-
-    .booking-mascot {
-      display: block;
-      width: clamp(78px, 11vw, 118px);
-      height: auto;
-      flex: 0 0 auto;
-      filter: drop-shadow(0 10px 16px rgba(84, 42, 75, .14));
-      transform-origin: 50% 92%;
-      animation: mascot-float 3.1s ease-in-out infinite;
-    }
-
-    .mascot-bubble {
-      position: relative;
-      display: grid;
-      min-width: 10.5em;
-      padding: .62em .9em;
-      color: #604563;
-      background: rgba(255, 255, 255, .88);
-      border: 1px solid rgba(103, 73, 105, .12);
-      border-radius: 999px;
-      box-shadow: 0 9px 28px rgba(75, 43, 73, .09);
-      font-size: clamp(.8rem, 1.45vw, 1.05rem);
-      font-weight: 700;
-      line-height: 1.25;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .mascot-bubble::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: -8px;
-      width: 14px;
-      height: 14px;
-      background: rgba(255, 255, 255, .92);
-      border-bottom: 1px solid rgba(103, 73, 105, .12);
-      border-left: 1px solid rgba(103, 73, 105, .12);
-      transform: translateY(-50%) rotate(45deg);
-    }
-
-    .mascot-bubble span {
-      grid-area: 1 / 1;
-      opacity: 0;
-      animation: bubble-beat 6s steps(1, end) infinite;
-    }
-
-    .mascot-bubble span:nth-child(2) { animation-delay: 3s; }
-
     .booking-actions {
       display: grid;
       grid-template-columns: minmax(184px, 1.2fr) minmax(150px, .9fr);
@@ -422,17 +366,6 @@
       to { transform: scale(1.1) translate3d(1.2%, -.6%, 0); }
     }
 
-    @keyframes mascot-float {
-      0%, 100% { transform: translateY(1px) rotate(-1.4deg); }
-      48% { transform: translateY(-5px) rotate(1.4deg); }
-      56% { transform: translateY(-4px) rotate(2.3deg); }
-    }
-
-    @keyframes bubble-beat {
-      0%, 48% { opacity: 1; transform: translateY(0); }
-      50%, 100% { opacity: 0; transform: translateY(3px); }
-    }
-
     @media (orientation: landscape) {
       .screen {
         grid-template-columns: minmax(0, 61fr) minmax(370px, 39fr);
@@ -465,7 +398,6 @@
         grid-template-columns: minmax(184px, 1.22fr) minmax(144px, .9fr);
         width: 100%;
       }
-      .booking-mascot { width: clamp(88px, 11svh, 112px); }
       .scene-copy h1 { font-size: clamp(2.75rem, 4.25vw, 4.75rem); }
     }
 
@@ -478,10 +410,6 @@
       .booking h2 { font-size: clamp(1.55rem, 6vw, 2.2rem); white-space: normal; }
       .booking-label { font-size: .82rem; }
       .booking-step { font-size: .82rem; }
-      .mascot-moment { min-height: 58px; margin-top: 6px; }
-      .booking-mascot { display: none; }
-      .mascot-bubble { min-width: 0; font-size: .68rem; }
-      .mascot-bubble::before { display: none; }
       .booking-actions {
         grid-template-columns: 146px;
         gap: 5px;
@@ -503,7 +431,6 @@
       .booking-label { margin-bottom: 4px; font-size: .72rem; }
       .booking h2 { font-size: 1.65rem; line-height: 1.06; }
       .booking-step { margin-top: 5px; font-size: .72rem; }
-      .mascot-moment { display: none; }
       .booking-actions {
         grid-template-columns: 150px 145px;
         gap: 8px;
@@ -520,11 +447,7 @@
       .scene.is-active::before,
       .scene.is-active .scene-copy h1,
       .scene.is-active .scene-copy p,
-      .booking::before,
-      .booking-mascot,
-      .mascot-bubble span { animation: none; }
-      .mascot-bubble span:first-child { opacity: 1; }
-      .mascot-bubble span:nth-child(2) { opacity: 0; }
+      .booking::before { animation: none; }
     }
   </style>
 </head>
@@ -560,10 +483,6 @@
         <p class="booking-label">By appointment only · 预约制</p>
         <h2>扫码预约<br>你的下一款。</h2>
         <p class="booking-step">加微信 · 发喜欢的款式 · 问档期</p>
-        <div class="mascot-moment" role="note" aria-label="NaNail 小精灵提示：看到心动款，截屏发给我">
-          <img class="booking-mascot" src="./assets/booking-mascot.png" alt="挥手并指向二维码的粉色指甲油小精灵" width="720" height="720">
-          <p class="mascot-bubble" aria-hidden="true"><span>看到心动款？</span><span>截屏发我 💅</span></p>
-        </div>
       </div>
       <div class="booking-actions" aria-label="预约和作品二维码">
         <figure class="qr-card qr-card--wechat">

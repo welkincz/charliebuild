@@ -24,17 +24,19 @@ assert.match(html, /alt="NaNail Instagram 二维码"/, 'Instagram QR has useful 
 assert.match(html, /assets\/wechat-qr\.png/, 'WeChat QR asset is rendered');
 assert.match(html, /alt="NaNail 微信二维码"/, 'WeChat QR has useful alt text');
 
-assert.match(html, /class="booking-mascot"/, 'booking section contains the generated mascot');
-assert.match(html, /assets\/booking-mascot\.png/, 'booking mascot uses the generated raster asset');
+assert.doesNotMatch(
+  html,
+  /mascot|dog-(?:cameo|figure)|booking-mascot\.png/i,
+  'booking section has no mascot or figure content',
+);
+assert.equal(
+  existsSync(resolve(repoRoot, 'nanail/display/assets/booking-mascot.png')),
+  false,
+  'retired booking figure asset is removed',
+);
 
 const sceneSafeZones = html.match(/<div class="scene[^"]*" data-copy-zone="[^"]+"/g) ?? [];
 assert.equal(sceneSafeZones.length, 4, 'every work scene declares an image-specific copy-safe zone');
-
-assert.match(
-  html,
-  /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*\.booking-mascot/,
-  'reduced-motion rules include the booking mascot',
-);
 
 for (const match of html.matchAll(/(?:src|href)="\.\/(assets\/[^"?#]+)"/g)) {
   const assetPath = resolve(dirname(pagePath), match[1]);

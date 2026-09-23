@@ -16,11 +16,6 @@ reduced-motion setting.
   appointment links. There is no automatic social-media feed or CMS.
 - The displayed WeChat and Instagram QRs were derived from the supplied account
   images. Recheck them whenever either account or appointment method changes.
-- The booking mascot is `nanail/display/assets/booking-mascot.png`. It was
-  generated with the built-in GPT image tool using the uploaded avatar only as
-  a pastel nail-studio mood reference. The prompt requested an original pink
-  nail-polish character pointing toward the QR codes, with a transparent
-  background, no text, and no resemblance to a known character.
 - The current page states no price or promotion. Add an offer only with exact
   price, eligibility, and end date, and remove it when it expires.
 
