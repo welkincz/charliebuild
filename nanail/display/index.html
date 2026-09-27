@@ -160,14 +160,14 @@
     .scene::after {
       content: "";
       position: absolute;
-      inset: 58% 0 0;
-      background: linear-gradient(0deg, rgba(22, 16, 23, .62), rgba(22, 16, 23, 0));
+      inset: 54% 0 0;
+      background: linear-gradient(0deg, rgba(22, 16, 23, .7), rgba(22, 16, 23, .18) 64%, rgba(22, 16, 23, 0));
       pointer-events: none;
     }
 
     .scene[data-copy-zone="top-right"]::after {
-      inset: 0 0 48%;
-      background: linear-gradient(180deg, rgba(22, 16, 23, .56), rgba(22, 16, 23, .28) 45%, rgba(22, 16, 23, 0));
+      inset: 0 0 44%;
+      background: linear-gradient(180deg, rgba(22, 16, 23, .64), rgba(22, 16, 23, .34) 50%, rgba(22, 16, 23, 0));
     }
 
     .scene-copy {
@@ -204,11 +204,24 @@
       text-wrap: balance;
     }
 
+    /* 副标题比大标题细、又常常落在渐变已经变淡的位置，浅色甲片和玻璃反光会把它洗掉。
+       一颗半透明的梅子色胶囊只托住这一行，不改大标题。 */
     .scene-copy p {
-      margin: .35em 0 0;
+      display: inline-block;
+      max-width: 100%;
+      margin: .42em 0 0;
+      padding: .07em .58em .09em;
+      color: #fffdfb;
       font-size: clamp(.96rem, 2vw, 1.65rem);
       font-weight: 600;
       letter-spacing: .015em;
+      line-height: 1.3;
+      text-shadow: 0 1px 1px rgba(32, 12, 22, .62), 0 2px 10px rgba(24, 8, 16, .38);
+      background: rgba(64, 36, 54, .52);
+      border-radius: 999px;
+      -webkit-backdrop-filter: blur(12px) saturate(1.15);
+      backdrop-filter: blur(12px) saturate(1.15);
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 250, .22);
     }
 
     .scene.is-active .scene-copy h1 { animation: copy-arrive .78s .27s cubic-bezier(.2,.7,.2,1) both; }
@@ -272,6 +285,10 @@
     }
 
     .booking-copy, .booking-actions { position: relative; z-index: 1; }
+
+    /* 横屏预约栏独占右半屏。玻璃外只看到这一半的人，左上角店名不在视野里。
+       竖屏顶栏已经有同一块字标，这里藏掉，避免上下各出现一次。 */
+    .booking-brand { display: none; }
 
     .booking-label {
       display: inline-flex;
@@ -436,6 +453,12 @@
         border-left: 1px solid #efe5ec;
       }
 
+      .booking-brand {
+        display: inline-flex;
+        margin: 0 0 clamp(3px, 0.55svh, 8px);
+        font-size: clamp(1.28rem, 2.15vw, 1.82rem);
+      }
+
       .booking h2 { font-size: clamp(2rem, 3.1vw, 4rem); }
       .booking-step { font-size: clamp(1rem, 1.65vw, 1.45rem); }
 
@@ -478,6 +501,7 @@
 
     @media (max-height: 620px) and (orientation: landscape) {
       .booking { gap: 10px; padding: 12px 16px; }
+      .booking-brand { margin-bottom: 3px; font-size: 1.12rem; }
       .booking-label { margin-bottom: 4px; font-size: .72rem; }
       .booking h2 { font-size: 1.65rem; line-height: 1.06; }
       .booking-step { margin-top: 5px; font-size: .72rem; }
@@ -539,6 +563,7 @@
 
     <aside class="booking" aria-label="预约方式">
       <div class="booking-copy">
+        <div class="brand booking-brand" aria-hidden="true">Na<span>Nail</span><b class="brand-mark">✦</b></div>
         <p class="booking-label">By appointment only · 预约制</p>
         <h2>扫码预约你的下一款。</h2>
         <p class="booking-step">加微信 · 发喜欢的款式 · 问档期</p>
