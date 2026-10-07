@@ -33,9 +33,74 @@
   ],
   "loops": [
     {
+      "id": "meta-loop",
+      "title": "Meta loop",
+      "label": "Primary mock. Repeated shape from 14 dated write-ups in your notes. Individual reports differ. Not one candidate's transcript. Linked prompts are from the notes unless the item itself is marked sourced for another company.",
+      "kind": "notes",
+      "rounds": [
+        {
+          "name": "SQL phone",
+          "minutes": 25,
+          "ask": "Bookstore-style joins, percentages, and a window or a subquery. About half of the 60-minute screen in the notes.",
+          "practice": [
+            "SQL.meta_pay_type",
+            "SQL.meta_copies_over_ten",
+            "SQL.meta_good_renewed_twice"
+          ]
+        },
+        {
+          "name": "Python phone",
+          "minutes": 25,
+          "ask": "Dict and list tasks from the notes: odd digits, most frequent review, and a three-category score.",
+          "practice": [
+            "PY.odd_digits",
+            "PY.frequent_review",
+            "PY.max_points_categories"
+          ]
+        },
+        {
+          "name": "SQL / ETL",
+          "minutes": 45,
+          "ask": "Optimize or transform, and say what a rerun does. One note adds a real-time pipeline. Do not assume every onsite asked that.",
+          "practice": [
+            "SQL.checkout_log",
+            "SQL.clean_missing",
+            "PIPE.cdc_merge"
+          ]
+        },
+        {
+          "name": "Modeling",
+          "minutes": 45,
+          "ask": "The notes say design a relational schema. One report names a classroom-style product and does not list tables. Use the drills. Do not invent the missing schema.",
+          "practice": [
+            "MODEL.nf_discuss",
+            "MODEL.ecommerce",
+            "CHK.grain"
+          ]
+        },
+        {
+          "name": "Product sense",
+          "minutes": 45,
+          "ask": "One note uses retention for a game. Define the metric and a guardrail. The drills are not reported Meta questions.",
+          "practice": [
+            "PS.define_active",
+            "PS.metric_drop"
+          ]
+        },
+        {
+          "name": "Ownership",
+          "minutes": 45,
+          "ask": "Collaboration, stakeholders, and ownership, from your private notes. Do not type the story here.",
+          "practice": [
+            "CHK.star"
+          ]
+        }
+      ]
+    },
+    {
       "id": "amazon-benchmark",
-      "title": "Amazon benchmark loop",
-      "label": "From your notes (July 2024 outline), not a transcript of one candidate.",
+      "title": "Amazon loop",
+      "label": "Second mock. July 2024 round map from your notes, including a leadership-principles round. STAR templates only. Oct 7 2026 snapshot: one Toronto early-career DE posting and two BIE roles.",
       "kind": "notes",
       "rounds": [
         {
@@ -69,9 +134,9 @@
           ]
         },
         {
-          "name": "Behavioral",
+          "name": "Leadership principles",
           "minutes": 45,
-          "ask": "Leadership prompts. Speak from your private notes. Do not type the story here.",
+          "ask": "Principles named in the July 2024 notes, then the prompts listed there. Speak from private notes. Do not type a story.",
           "practice": [
             "EXP.conflict_resolution",
             "BEH.disagree",
@@ -100,8 +165,8 @@
     },
     {
       "id": "big-bank",
-      "title": "Big-bank DE loop",
-      "label": "Assembled from 2026-10-07 posting requirements. Not a reported interview.",
+      "title": "Banks (safety)",
+      "label": "Safety. Assembled from 2026-10-07 posting requirements. Not a reported interview.",
       "kind": "postings",
       "rounds": [
         {
