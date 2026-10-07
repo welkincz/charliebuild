@@ -19,6 +19,14 @@ The title interaction is informed by
 [`bobobo521/boknows-text-image-template`](https://github.com/bobobo521/boknows-text-image-template)
 (MIT) and was reimplemented for this site.
 
+## DE interview reader
+
+`/interview/` is a static reader for reported senior / L5 data engineer
+interview questions and reports. The lists render from
+`interview/data/questions.json` and `interview/data/reports.json`, so a content
+refresh is a JSON update. With the local server above, open
+http://localhost:8000/interview/
+
 ## NaNail storefront display
 
 The separate iPad display lives at `nanail.charliebuild.com`, deployed as its
