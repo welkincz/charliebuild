@@ -1,0 +1,513 @@
+[
+  {
+    "id": "big-banks",
+    "name": "Canadian Big Banks",
+    "rank": 1,
+    "role": "Group playbook",
+    "level_label": "Core",
+    "from_postings": true,
+    "summary": "TD, RBC, BMO, and Scotiabank/Tangerine are the volume play. Their postings share SQL, modeling, Spark or Databricks, and CI/CD. This page does not invent interview questions.",
+    "loop": [
+      "No reported bank loop is in the notes. Do not treat the mock as a transcript.",
+      "Shared posting signals, snapshot 2026-10-07: SQL, data modeling, Spark/Databricks, Azure or AWS, and CI/CD.",
+      "Study the linked learn pages. Use Amazon only as the timed benchmark after the bank sprint."
+    ],
+    "stack": [
+      "SQL",
+      "Data modeling",
+      "Spark",
+      "Databricks",
+      "Azure or AWS",
+      "CI/CD"
+    ],
+    "learn": [
+      "sql-core",
+      "sql-patterns",
+      "facts-grain",
+      "scd",
+      "schemas",
+      "spark-fundamentals",
+      "etl-cdc",
+      "airflow-dbt",
+      "data-quality"
+    ],
+    "practice": [],
+    "report_company": null
+  },
+  {
+    "id": "td",
+    "name": "TD",
+    "rank": 1,
+    "role": "Priority",
+    "level_label": "Core, Senior is Stretch",
+    "from_postings": true,
+    "summary": "Highest careers-site count in the 2026-10-07 snapshot: 8 GTA DE-type roles. Data Engineer II is described as about 3–5 years and is the L4-shaped title. Senior is the stretch.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "Data modeling showed up across the DE postings reviewed.",
+      "Stack signals: SQL, Spark, Databricks, Azure, CI/CD. Scala or Hadoop appears on the senior posting."
+    ],
+    "stack": [
+      "SQL",
+      "Data modeling",
+      "Spark",
+      "Databricks",
+      "Azure",
+      "CI/CD"
+    ],
+    "learn": [
+      "facts-grain",
+      "scd",
+      "schemas",
+      "modeling-cases",
+      "spark-fundamentals",
+      "etl-cdc"
+    ],
+    "practice": [],
+    "report_company": null
+  },
+  {
+    "id": "rbc",
+    "name": "RBC",
+    "rank": 2,
+    "role": "Priority",
+    "level_label": "Core into Stretch",
+    "from_postings": true,
+    "summary": "Five GTA DE-type roles in the snapshot. Titles run Senior (about 3–6 years), Staff, and Lead. Senior is a realistic step from an L4 baseline.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "CI/CD appeared on the DE postings checked.",
+      "Stack signals: SQL, Python, Snowflake or Databricks, AWS, Azure, Spark."
+    ],
+    "stack": [
+      "SQL",
+      "Python",
+      "Snowflake",
+      "Databricks",
+      "AWS",
+      "Azure",
+      "CI/CD"
+    ],
+    "learn": [
+      "sql-patterns",
+      "py-data",
+      "wh-engines",
+      "snowflake-databricks",
+      "airflow-dbt"
+    ],
+    "practice": [],
+    "report_company": null
+  },
+  {
+    "id": "bmo",
+    "name": "BMO",
+    "rank": 3,
+    "role": "Priority",
+    "level_label": "Core",
+    "from_postings": true,
+    "summary": "Five GTA roles in the snapshot, including Associate, DE (about 2–5 years), and Senior (about 5–7). The most L4-shaped mix of the four banks.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "Stack signals: Python, Spark, some Scala, AWS, Azure, SQL, Hadoop."
+    ],
+    "stack": [
+      "Python",
+      "Spark",
+      "Scala",
+      "SQL",
+      "AWS",
+      "Azure"
+    ],
+    "learn": [
+      "py-data",
+      "spark-fundamentals",
+      "spark-internals",
+      "sql-core"
+    ],
+    "practice": [],
+    "report_company": null
+  },
+  {
+    "id": "scotiabank",
+    "name": "Scotiabank / Tangerine",
+    "rank": 4,
+    "role": "Priority",
+    "level_label": "Core",
+    "from_postings": true,
+    "summary": "Five GTA roles in the snapshot. The Tangerine DE posting pairs data modeling with data governance. The stack overlaps TD and BMO.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "Stack signals: SQL, Python, Azure, Spark, Databricks, and modeling. Governance is named on the Tangerine modeling posting."
+    ],
+    "stack": [
+      "SQL",
+      "Python",
+      "Azure",
+      "Spark",
+      "Databricks",
+      "Data modeling",
+      "Governance"
+    ],
+    "learn": [
+      "schemas",
+      "modeling-cases",
+      "governance",
+      "spark-fundamentals",
+      "data-quality"
+    ],
+    "practice": [],
+    "report_company": null
+  },
+  {
+    "id": "autodesk",
+    "name": "Autodesk",
+    "rank": 5,
+    "role": "L5 stretch",
+    "level_label": "Stretch",
+    "from_postings": true,
+    "summary": "Six GTA DE-type roles in the snapshot, skewed to Senior and Principal. Treat this as the L5 stretch after the banks.",
+    "loop": [
+      "From postings, not from a reported interview. The notes do not contain an Autodesk loop.",
+      "Stack signals: Python, AWS, Spark, Airflow, Snowflake, Hive, Kafka, dbt."
+    ],
+    "stack": [
+      "Python",
+      "AWS",
+      "Spark",
+      "Airflow",
+      "Snowflake",
+      "Kafka",
+      "dbt"
+    ],
+    "learn": [
+      "spark-internals",
+      "airflow-dbt",
+      "snowflake-databricks",
+      "kafka-kinesis",
+      "delivery"
+    ],
+    "practice": [],
+    "report_company": null
+  },
+  {
+    "id": "amazon",
+    "name": "Amazon",
+    "rank": 6,
+    "role": "Mock benchmark",
+    "level_label": "Core, design is Stretch",
+    "from_postings": false,
+    "summary": "The snapshot found one Toronto DE early-career posting plus two BIE roles, so this is not the volume target. It is the mock benchmark because the notes map a full loop and the sourced reports are deepest here.",
+    "loop": [
+      "Posting signals for the Toronto early-career DE role: SQL, ETL, relational versus dimensional modeling, Spark or Hadoop preferred.",
+      "July 2024 notes, phone: windows, CTE, subquery, a file word-count, and a fact/dimension sketch.",
+      "Notes, round 2: normalization, indexes, query cost, scalable ETL, most frequent element.",
+      "Notes, round 3: e-commerce model, revenue SQL, 1NF–3NF, many-to-many.",
+      "Notes, bar raiser: leadership principles. Use your private stories.",
+      "Notes, later technical: cleaning data, Python drills, ETL versus ELT.",
+      "Notes, hiring manager: project depth. Placeholder only."
+    ],
+    "stack": [
+      "SQL",
+      "Python",
+      "Modeling",
+      "ETL",
+      "AWS"
+    ],
+    "learn": [
+      "sql-windows",
+      "sql-patterns",
+      "modeling-cases",
+      "schemas",
+      "etl-cdc",
+      "values"
+    ],
+    "practice": [
+      "SQL.consecutive_login_streaks",
+      "SQL.nth_highest",
+      "MODEL.food_truck_business",
+      "MODEL.lending_book",
+      "MODEL.vendor_warehouse_delivery",
+      "MODEL.vendor_payment_system",
+      "DESIGN.batch_pipeline_scd",
+      "DESIGN.pb_scale_pipeline",
+      "EXP.conflict_resolution"
+    ],
+    "report_company": "Amazon"
+  },
+  {
+    "id": "meta",
+    "name": "Meta",
+    "rank": null,
+    "role": "Reference loop",
+    "level_label": "Stretch",
+    "from_postings": false,
+    "summary": "Reference loop from the notes. The 2026-10-07 snapshot did not find an open Toronto DE req. The notes describe a 60-minute SQL plus Python screen and an onsite with SQL/ETL, modeling, product sense, and ownership.",
+    "loop": [
+      "Recruiter, then a 60-minute screen split between SQL and Python.",
+      "Screen shape in the notes: about five SQL and five Python, bookstore schema, percentages, dict and list tasks.",
+      "Onsite in the notes: two SQL/ETL rounds, one modeling round, one ownership round, with product sense on some reports.",
+      "These prompts are Reported from your notes. They are not sourced ask-counts."
+    ],
+    "stack": [
+      "SQL",
+      "Python",
+      "Modeling",
+      "Product sense"
+    ],
+    "learn": [
+      "sql-patterns",
+      "py-data",
+      "schemas",
+      "metrics",
+      "case-method",
+      "values"
+    ],
+    "practice": [
+      "SQL.meta_good_renewed_twice",
+      "SQL.meta_top_invitees",
+      "PY.odd_digits",
+      "PY.frequent_review",
+      "SQL.checkout_log"
+    ],
+    "report_company": null
+  },
+  {
+    "id": "microsoft",
+    "name": "Microsoft",
+    "rank": null,
+    "role": "Reference loop",
+    "level_label": "Stretch",
+    "from_postings": false,
+    "summary": "Reference loop. The snapshot found Toronto roles that were not DE-titled. The notes describe Spark, DSA, modeling, and pipeline CI/CD. Sourced reports also exist.",
+    "loop": [
+      "Notes: big data and PySpark, then DSA, then design and dimensional modeling, then project depth and behavior.",
+      "Named coding in the notes: Dutch flag, merge intervals.",
+      "Notes call pipeline CI/CD a standard topic: schema checks, tests, rollback, quality.",
+      "Sourced reports are on the timeline below and in the practice items marked asked at."
+    ],
+    "stack": [
+      "Spark",
+      "SQL",
+      "Modeling",
+      "CI/CD"
+    ],
+    "learn": [
+      "spark-fundamentals",
+      "spark-internals",
+      "dsa-essentials",
+      "airflow-dbt"
+    ],
+    "practice": [
+      "SQL.rolling_avg_exclude_weekends",
+      "DSA.dutch_flag",
+      "DSA.merge_intervals",
+      "SPARK.job_stage_task",
+      "DESIGN.realtime_streaming_pipeline"
+    ],
+    "report_company": "Microsoft"
+  },
+  {
+    "id": "uber",
+    "name": "Uber",
+    "rank": null,
+    "role": "Reference loop",
+    "level_label": "Stretch",
+    "from_postings": false,
+    "summary": "Reference loop from the notes. Coding is the heavy part: min path sum, intervals, course schedule, plus a trending-dishes design.",
+    "loop": [
+      "Notes: a technical screen with minimum path sum.",
+      "Final rounds in the notes: merge intervals with binary search, a behavioral round, trending dishes, then course schedule plus two join-and-aggregate SQL questions whose text was not recorded.",
+      "The recruiter round's logistics are omitted here."
+    ],
+    "stack": [
+      "Python",
+      "SQL",
+      "Streaming design"
+    ],
+    "learn": [
+      "graphs-dp",
+      "dsa-essentials",
+      "case-uber"
+    ],
+    "practice": [
+      "DSA.min_path_sum",
+      "DSA.merge_intervals",
+      "DSA.course_schedule",
+      "DESIGN.trending_dishes",
+      "BEH.disagree"
+    ],
+    "report_company": null
+  },
+  {
+    "id": "netflix",
+    "name": "Netflix",
+    "rank": null,
+    "role": "Reference loop",
+    "level_label": "Stretch",
+    "from_postings": false,
+    "summary": "Reference loop from the notes: a coding round that names First Missing Positive and Meeting Rooms II, a design round, and a Spark or Flink deep dive.",
+    "loop": [
+      "Notes: recruiter, then a technical screen, then an onsite of coding, design, architecture, and culture.",
+      "Named coding: first missing positive, meeting rooms.",
+      "Design example in the notes: a top-titles style pipeline. Spark follow-up: OOM triage."
+    ],
+    "stack": [
+      "Python",
+      "Spark",
+      "Design"
+    ],
+    "learn": [
+      "graphs-dp",
+      "dsa-essentials",
+      "spark-internals",
+      "case-netflix"
+    ],
+    "practice": [
+      "DSA.first_missing_positive",
+      "DSA.meeting_rooms",
+      "SPARK.oom",
+      "DESIGN.top_titles"
+    ],
+    "report_company": null
+  },
+  {
+    "id": "tiktok",
+    "name": "TikTok",
+    "rank": null,
+    "role": "Reference loop",
+    "level_label": "Stretch",
+    "from_postings": false,
+    "summary": "Reference loop from the notes. The write-up emphasizes a coding assessment plus sessionization and retention SQL. It reads like a compiled brief. Prompts are Reported, not sourced.",
+    "loop": [
+      "Notes: a timed coding assessment heavy on DP and graphs, with three named problems.",
+      "SQL in the notes: 30-minute sessionization and day-N retention."
+    ],
+    "stack": [
+      "SQL",
+      "Python",
+      "Streaming analytics"
+    ],
+    "learn": [
+      "sql-windows",
+      "graphs-dp",
+      "case-tiktok"
+    ],
+    "practice": [
+      "SQL.tiktok_session",
+      "SQL.tiktok_retention",
+      "DSA.strict_increase",
+      "DSA.jump_energy",
+      "DSA.decode_wildcards"
+    ],
+    "report_company": null
+  },
+  {
+    "id": "google",
+    "name": "Google",
+    "rank": null,
+    "role": "Reference loop",
+    "level_label": "Core",
+    "from_postings": false,
+    "summary": "The notes contain one PySpark exercise: mutual friends. The snapshot did not find a Toronto DE-titled opening. There is no fuller loop to report.",
+    "loop": [
+      "Only the mutual-friends DataFrame exercise is in the notes.",
+      "Do not infer a loop structure that the notes do not contain."
+    ],
+    "stack": [
+      "PySpark"
+    ],
+    "learn": [
+      "spark-fundamentals"
+    ],
+    "practice": [
+      "SPARK.mutual_friends"
+    ],
+    "report_company": null
+  },
+  {
+    "id": "databricks",
+    "name": "Databricks",
+    "rank": null,
+    "role": "Sourced reports",
+    "level_label": "Core",
+    "from_postings": false,
+    "summary": "No Databricks playbook in the notes, and the snapshot did not find a Toronto DE opening. This page is the timeline of sourced reports already on the site.",
+    "loop": [
+      "Use the report timeline and the sourced questions.",
+      "Themes in those questions: large files, SQL, Spark partition calls, a data lake, and ride tracking."
+    ],
+    "stack": [
+      "Spark",
+      "Delta",
+      "SQL"
+    ],
+    "learn": [
+      "spark-fundamentals",
+      "lakehouse",
+      "sd-practice"
+    ],
+    "practice": [
+      "PY.large_csv_streaming",
+      "SQL.same_day_multi_purchases",
+      "SPARK.repartition_vs_coalesce",
+      "SPARK.cross_join_large_data",
+      "DESIGN.analytics_data_lake_ha",
+      "DESIGN.realtime_ride_tracking",
+      "DSA.binary_search"
+    ],
+    "report_company": "Databricks"
+  },
+  {
+    "id": "snowflake",
+    "name": "Snowflake",
+    "rank": null,
+    "role": "Sourced reports",
+    "level_label": "Core",
+    "from_postings": false,
+    "summary": "No Snowflake company playbook in the notes. The snapshot did not find a Toronto DE opening. Sourced questions about the product came from other employers' reports and are labeled that way in the bank.",
+    "loop": [
+      "Product mechanics to know: micro-partitions, warehouses, streams, tasks, Snowpipe.",
+      "The three Snowflake-company reports are on the timeline. Two more sourced reports sit under Other."
+    ],
+    "stack": [
+      "Snowflake",
+      "SQL",
+      "dbt"
+    ],
+    "learn": [
+      "wh-engines",
+      "snowflake-databricks",
+      "scd"
+    ],
+    "practice": [
+      "SNOW.architecture_micropartitions",
+      "SNOW.scd2_streams_merge",
+      "SNOW.snowpipe_streams_tasks"
+    ],
+    "report_company": "Snowflake"
+  },
+  {
+    "id": "other",
+    "name": "Other sourced reports",
+    "rank": null,
+    "role": "Sourced reports",
+    "level_label": "Core",
+    "from_postings": false,
+    "summary": "Sourced reports whose company field is Other. They are the Snowflake-product questions from consulting-firm loops. No extra narrative is added.",
+    "loop": [
+      "Read the timeline and the linked questions."
+    ],
+    "stack": [
+      "Snowflake"
+    ],
+    "learn": [
+      "wh-engines"
+    ],
+    "practice": [
+      "SNOW.architecture_micropartitions",
+      "SNOW.scd2_streams_merge",
+      "SNOW.snowpipe_streams_tasks"
+    ],
+    "report_company": "Other"
+  }
+]
