@@ -1,209 +1,173 @@
 [
   {
-    "id": "big-banks",
-    "name": "Canadian Big Banks",
+    "id": "meta",
+    "name": "Meta",
     "rank": 1,
-    "role": "Group playbook",
-    "level_label": "Core",
-    "from_postings": true,
-    "summary": "TD, RBC, BMO, and Scotiabank/Tangerine are the volume play. Their postings share SQL, modeling, Spark or Databricks, and CI/CD. This page does not invent interview questions.",
+    "role": "Primary playbook",
+    "level_label": "Core, product sense and modeling are in the loop",
+    "from_postings": false,
+    "summary": "Primary track. Your notes have 14 dated write-ups of this loop: a recruiter, a SQL-plus-Python phone screen, then an onsite that usually includes SQL/ETL, data modeling, product sense, and ownership. Reports do not all match. The Oct 7 2026 snapshot did not find an open Toronto DE req. These prompts are from your notes. They are not sourced asked-at counts. The sourced report file has no Meta timeline.",
     "loop": [
-      "No reported bank loop is in the notes. Do not treat the mock as a transcript.",
-      "Shared posting signals, snapshot 2026-10-07: SQL, data modeling, Spark/Databricks, Azure or AWS, and CI/CD.",
-      "Study the linked learn pages. Use Amazon only as the timed benchmark after the bank sprint."
+      "Phone screen in the notes: about 60 minutes, SQL and Python. Bookstore schema, percentages, windows, NULL, lists, and dicts.",
+      "Onsite shape that recurs: SQL/ETL, a relational model, product sense on some reports, and an ownership conversation.",
+      "One Jun 3 note adds a real-time pipeline design. One Aug 26 note says window functions were disallowed. Do not flatten those into every loop.",
+      "Oct 7 2026 snapshot: no open Toronto DE req found. That is a volume note. It does not change the study order."
     ],
     "stack": [
       "SQL",
-      "Data modeling",
-      "Spark",
-      "Databricks",
-      "Azure or AWS",
-      "CI/CD"
+      "Python",
+      "Modeling",
+      "Product sense"
     ],
     "learn": [
       "sql-core",
-      "sql-patterns",
-      "facts-grain",
-      "scd",
-      "schemas",
-      "spark-fundamentals",
-      "etl-cdc",
-      "airflow-dbt",
-      "data-quality"
-    ],
-    "practice": [],
-    "report_company": null
-  },
-  {
-    "id": "td",
-    "name": "TD",
-    "rank": 1,
-    "role": "Priority",
-    "level_label": "Core, Senior is Stretch",
-    "from_postings": true,
-    "summary": "Highest careers-site count in the 2026-10-07 snapshot: 8 GTA DE-type roles. Data Engineer II is described as about 3–5 years and is the L4-shaped title. Senior is the stretch.",
-    "loop": [
-      "From postings, not from a reported interview.",
-      "Data modeling showed up across the DE postings reviewed.",
-      "Stack signals: SQL, Spark, Databricks, Azure, CI/CD. Scala or Hadoop appears on the senior posting."
-    ],
-    "stack": [
-      "SQL",
-      "Data modeling",
-      "Spark",
-      "Databricks",
-      "Azure",
-      "CI/CD"
-    ],
-    "learn": [
-      "facts-grain",
-      "scd",
-      "schemas",
-      "modeling-cases",
-      "spark-fundamentals",
-      "etl-cdc"
-    ],
-    "practice": [],
-    "report_company": null
-  },
-  {
-    "id": "rbc",
-    "name": "RBC",
-    "rank": 2,
-    "role": "Priority",
-    "level_label": "Core into Stretch",
-    "from_postings": true,
-    "summary": "Five GTA DE-type roles in the snapshot. Titles run Senior (about 3–6 years), Staff, and Lead. Senior is a realistic step from an L4 baseline.",
-    "loop": [
-      "From postings, not from a reported interview.",
-      "CI/CD appeared on the DE postings checked.",
-      "Stack signals: SQL, Python, Snowflake or Databricks, AWS, Azure, Spark."
-    ],
-    "stack": [
-      "SQL",
-      "Python",
-      "Snowflake",
-      "Databricks",
-      "AWS",
-      "Azure",
-      "CI/CD"
-    ],
-    "learn": [
+      "sql-windows",
       "sql-patterns",
       "py-data",
-      "wh-engines",
-      "snowflake-databricks",
-      "airflow-dbt"
-    ],
-    "practice": [],
-    "report_company": null
-  },
-  {
-    "id": "bmo",
-    "name": "BMO",
-    "rank": 3,
-    "role": "Priority",
-    "level_label": "Core",
-    "from_postings": true,
-    "summary": "Five GTA roles in the snapshot, including Associate, DE (about 2–5 years), and Senior (about 5–7). The most L4-shaped mix of the four banks.",
-    "loop": [
-      "From postings, not from a reported interview.",
-      "Stack signals: Python, Spark, some Scala, AWS, Azure, SQL, Hadoop."
-    ],
-    "stack": [
-      "Python",
-      "Spark",
-      "Scala",
-      "SQL",
-      "AWS",
-      "Azure"
-    ],
-    "learn": [
-      "py-data",
-      "spark-fundamentals",
-      "spark-internals",
-      "sql-core"
-    ],
-    "practice": [],
-    "report_company": null
-  },
-  {
-    "id": "scotiabank",
-    "name": "Scotiabank / Tangerine",
-    "rank": 4,
-    "role": "Priority",
-    "level_label": "Core",
-    "from_postings": true,
-    "summary": "Five GTA roles in the snapshot. The Tangerine DE posting pairs data modeling with data governance. The stack overlaps TD and BMO.",
-    "loop": [
-      "From postings, not from a reported interview.",
-      "Stack signals: SQL, Python, Azure, Spark, Databricks, and modeling. Governance is named on the Tangerine modeling posting."
-    ],
-    "stack": [
-      "SQL",
-      "Python",
-      "Azure",
-      "Spark",
-      "Databricks",
-      "Data modeling",
-      "Governance"
-    ],
-    "learn": [
       "schemas",
       "modeling-cases",
-      "governance",
-      "spark-fundamentals",
-      "data-quality"
+      "metrics",
+      "case-method",
+      "values",
+      "star"
     ],
-    "practice": [],
-    "report_company": null
-  },
-  {
-    "id": "autodesk",
-    "name": "Autodesk",
-    "rank": 5,
-    "role": "L5 stretch",
-    "level_label": "Stretch",
-    "from_postings": true,
-    "summary": "Six GTA DE-type roles in the snapshot, skewed to Senior and Principal. Treat this as the L5 stretch after the banks.",
-    "loop": [
-      "From postings, not from a reported interview. The notes do not contain an Autodesk loop.",
-      "Stack signals: Python, AWS, Spark, Airflow, Snowflake, Hive, Kafka, dbt."
+    "practice": [
+      "SQL.meta_good_renewed_twice",
+      "SQL.meta_top_invitees",
+      "SQL.checkout_log",
+      "PY.odd_digits",
+      "PY.frequent_review",
+      "PY.max_points_categories",
+      "PS.define_active"
     ],
-    "stack": [
-      "Python",
-      "AWS",
-      "Spark",
-      "Airflow",
-      "Snowflake",
-      "Kafka",
-      "dbt"
-    ],
-    "learn": [
-      "spark-internals",
-      "airflow-dbt",
-      "snowflake-databricks",
-      "kafka-kinesis",
-      "delivery"
-    ],
-    "practice": [],
-    "report_company": null
+    "report_company": null,
+    "group": "1 · Primary",
+    "rounds": [
+      {
+        "name": "Recruiter",
+        "minutes": "20–30",
+        "focus": "Several 2025 notes start here: background, past projects, and fit. One Oct 22 note puts this at about 20–30 minutes. No technical prompt list is written down.",
+        "learn": [
+          "how-to-study",
+          "values"
+        ],
+        "practice": []
+      },
+      {
+        "name": "Phone, SQL half",
+        "minutes": "25–30",
+        "focus": "The repeated phone shape is about 60 minutes split with Python. Reports mention about five SQL questions, or about 25 minutes of SQL. A bookstore schema (books, copies, authors, customers, payments) shows up more than once. Skills named: joins, aggregations, percentages, subqueries, NULL, and windows. One Aug 26 note says a medium problem where window functions were not allowed. That is one write-up, not every screen.",
+        "learn": [
+          "sql-core",
+          "sql-windows",
+          "sql-patterns",
+          "sql-perf"
+        ],
+        "practice": [
+          "SQL.meta_good_renewed_twice",
+          "SQL.meta_copies_over_ten",
+          "SQL.meta_not_returned",
+          "SQL.meta_pay_type",
+          "SQL.meta_author_site",
+          "SQL.meta_top_invitees",
+          "SQL.meta_referrer_gap",
+          "SQL.meta_first_last_day",
+          "SQL.checkout_log"
+        ]
+      },
+      {
+        "name": "Phone, Python half",
+        "minutes": "25–30",
+        "focus": "The notes describe lists, dicts, strings, and sometimes a class. The named prompts are deduped in the practice bank. One Oct 22 note also includes binary search and the average length of lists. Binary search in the bank is a sourced Databricks item. This round only notes that one Meta write-up mentioned it.",
+        "learn": [
+          "py-data",
+          "dsa-essentials"
+        ],
+        "practice": [
+          "PY.odd_digits",
+          "PY.frequent_review",
+          "PY.max_points_categories",
+          "PY.workshop_years",
+          "PY.avg_list_length",
+          "DSA.binary_search"
+        ]
+      },
+      {
+        "name": "Onsite SQL / ETL",
+        "minutes": "45",
+        "focus": "Onsited write-ups often describe one or two SQL/ETL rounds: optimizing queries, transforming raw data, and designing a pipeline. A Jun 3 note asks for a pipeline for real-time data from multiple sources, with integrity and fault tolerance. Do not treat that single prompt as the standard onsite.",
+        "learn": [
+          "sql-perf",
+          "etl-cdc",
+          "when-stream"
+        ],
+        "practice": [
+          "SQL.clean_missing",
+          "SQL.late_event",
+          "PIPE.cdc_merge"
+        ]
+      },
+      {
+        "name": "Onsite modeling",
+        "minutes": "45",
+        "focus": "Notes describe designing a relational schema and talking through trade-offs. One Oct 22 report says the product was classroom-style and does not list tables, so there is no canonical schema to memorize. The linked models are drills from other loops, not Meta asked-at items.",
+        "learn": [
+          "schemas",
+          "facts-grain",
+          "scd",
+          "modeling-cases"
+        ],
+        "practice": [
+          "MODEL.nf_discuss",
+          "MODEL.ecommerce",
+          "CHK.grain"
+        ]
+      },
+      {
+        "name": "Product sense",
+        "minutes": "45",
+        "focus": "Not in every report. A Sep 30 note describes defining metrics, with retention for a game as the example. An Oct 22 note says product sense was checked lightly. A London May 16 note lists product sense as its own interview. The practice items are drills, not reported Meta questions.",
+        "learn": [
+          "metrics",
+          "metric-design",
+          "case-method",
+          "investigation"
+        ],
+        "practice": [
+          "PS.define_active",
+          "PS.metric_drop"
+        ]
+      },
+      {
+        "name": "Ownership",
+        "minutes": "45",
+        "focus": "Notes mention collaboration, stakeholders, past challenges, and ownership. Speak from private notes. This site stores no sample story.",
+        "learn": [
+          "star",
+          "values",
+          "story-bank"
+        ],
+        "practice": [
+          "CHK.star"
+        ]
+      }
+    ]
   },
   {
     "id": "amazon",
     "name": "Amazon",
-    "rank": 6,
-    "role": "Mock benchmark",
-    "level_label": "Core, design is Stretch",
+    "rank": 2,
+    "role": "Second playbook",
+    "level_label": "Core, leadership round is required",
     "from_postings": false,
-    "summary": "The snapshot found one Toronto DE early-career posting plus two BIE roles, so this is not the volume target. It is the mock benchmark because the notes map a full loop and the sourced reports are deepest here.",
+    "summary": "Second track, and still a timed benchmark. The July 2024 notes map six rounds, including a leadership-principles round. Use STAR templates only. Write stories locally. Oct 7 2026 snapshot: one Toronto early-career DE posting and two BIE roles. Sourced reports are the timeline below and are the only Amazon asked-at counts.",
     "loop": [
-      "Posting signals for the Toronto early-career DE role: SQL, ETL, relational versus dimensional modeling, Spark or Hadoop preferred.",
+      "Oct 7 2026 posting signals for the Toronto early-career DE role: SQL, ETL, relational versus dimensional modeling, Spark or Hadoop preferred.",
       "July 2024 notes, phone: windows, CTE, subquery, a file word-count, and a fact/dimension sketch.",
       "Notes, round 2: normalization, indexes, query cost, scalable ETL, most frequent element.",
       "Notes, round 3: e-commerce model, revenue SQL, 1NF–3NF, many-to-many.",
-      "Notes, bar raiser: leadership principles. Use your private stories.",
-      "Notes, later technical: cleaning data, Python drills, ETL versus ELT.",
+      "Notes, leadership round: the principles and prompts listed in the round below. No sample stories.",
+      "Notes, later technical: cleaning data, short Python drills, ETL versus ELT.",
       "Notes, hiring manager: project depth. Placeholder only."
     ],
     "stack": [
@@ -219,7 +183,9 @@
       "modeling-cases",
       "schemas",
       "etl-cdc",
-      "values"
+      "star",
+      "values",
+      "story-bank"
     ],
     "practice": [
       "SQL.consecutive_login_streaks",
@@ -228,48 +194,135 @@
       "MODEL.lending_book",
       "MODEL.vendor_warehouse_delivery",
       "MODEL.vendor_payment_system",
+      "MODEL.ecommerce",
       "DESIGN.batch_pipeline_scd",
-      "DESIGN.pb_scale_pipeline",
-      "EXP.conflict_resolution"
+      "EXP.conflict_resolution",
+      "BEH.lp_prompts"
     ],
-    "report_company": "Amazon"
+    "report_company": "Amazon",
+    "group": "2 · Second",
+    "rounds": [
+      {
+        "name": "Phone screen",
+        "minutes": "45",
+        "focus": "July 2024 notes: a window, a CTE, and a subquery, plus a Python file task and a fact/dimension sketch.",
+        "learn": [
+          "sql-windows",
+          "sql-core",
+          "py-data",
+          "facts-grain"
+        ],
+        "practice": [
+          "SQL.consecutive_login_streaks",
+          "SQL.nth_highest",
+          "SQL.cte_customer_totals",
+          "SQL.above_average",
+          "PY.most_repeated_word",
+          "MODEL.food_truck_business"
+        ]
+      },
+      {
+        "name": "Databases, query cost, ETL",
+        "minutes": "45",
+        "focus": "July 2024 notes: normalization versus denormalization, indexes, optimizing a large query, and an ETL for files landing in object storage. A short Python frequency task is also listed.",
+        "learn": [
+          "schemas",
+          "sql-perf",
+          "etl-cdc"
+        ],
+        "practice": [
+          "MODEL.nf_discuss",
+          "DESIGN.batch_pipeline_scd",
+          "PY.most_frequent_element"
+        ]
+      },
+      {
+        "name": "Modeling and SQL on your schema",
+        "minutes": "45",
+        "focus": "July 2024 notes: customer, product, order, order item, shipment, and payment. Then revenue per product, 1NF–3NF, when to denormalize, and many-to-many.",
+        "learn": [
+          "modeling-cases",
+          "schemas",
+          "scd"
+        ],
+        "practice": [
+          "MODEL.ecommerce",
+          "SQL.revenue_per_product",
+          "MODEL.vendor_warehouse_delivery",
+          "MODEL.vendor_payment_system",
+          "MODEL.lending_book"
+        ]
+      },
+      {
+        "name": "Leadership principles",
+        "minutes": "45",
+        "focus": "July 2024 notes name customer obsession, ownership, invent and simplify, deliver results, and hire and develop the best. Prompts listed there: disagreement, learning quickly, a simple solution, a tight deadline, and helping someone grow. Use STAR. Write the stories locally. Nothing on this page is a sample answer.",
+        "learn": [
+          "star",
+          "values",
+          "story-bank"
+        ],
+        "practice": [
+          "EXP.conflict_resolution",
+          "BEH.disagree",
+          "BEH.learn_quickly",
+          "BEH.lp_prompts",
+          "CHK.star"
+        ]
+      },
+      {
+        "name": "Harder SQL, Python, ETL versus ELT",
+        "minutes": "45",
+        "focus": "July 2024 notes: clean inconsistent or missing values, revenue with a join, even-number sum, a character-frequency map, and when to pick ETL or ELT. Integrity tests are a discussion, not a worksheet.",
+        "learn": [
+          "sql-core",
+          "etl-cdc",
+          "py-data",
+          "data-quality"
+        ],
+        "practice": [
+          "SQL.clean_missing",
+          "PY.sum_evens",
+          "PY.char_frequency"
+        ]
+      },
+      {
+        "name": "Hiring manager",
+        "minutes": "45",
+        "focus": "July 2024 notes: a hard project, what you would redesign, and a process you improved. Placeholder only. Do not type the story into the site.",
+        "learn": [
+          "story-bank",
+          "values"
+        ],
+        "practice": [
+          "BEH.lp_prompts"
+        ]
+      }
+    ]
   },
   {
-    "id": "meta",
-    "name": "Meta",
+    "id": "google",
+    "name": "Google",
     "rank": null,
     "role": "Reference loop",
-    "level_label": "Stretch",
+    "level_label": "Core",
     "from_postings": false,
-    "summary": "Reference loop from the notes. The 2026-10-07 snapshot did not find an open Toronto DE req. The notes describe a 60-minute SQL plus Python screen and an onsite with SQL/ETL, modeling, product sense, and ownership.",
+    "summary": "Reference only. The notes contain one PySpark exercise: mutual friends. Oct 7 2026 snapshot: no DE-titled Toronto opening. There is no fuller loop in the notes, so none is invented here.",
     "loop": [
-      "Recruiter, then a 60-minute screen split between SQL and Python.",
-      "Screen shape in the notes: about five SQL and five Python, bookstore schema, percentages, dict and list tasks.",
-      "Onsite in the notes: two SQL/ETL rounds, one modeling round, one ownership round, with product sense on some reports.",
-      "These prompts are Reported from your notes. They are not sourced ask-counts."
+      "Only the mutual-friends DataFrame exercise is in the notes.",
+      "Do not infer a loop structure that the notes do not contain."
     ],
     "stack": [
-      "SQL",
-      "Python",
-      "Modeling",
-      "Product sense"
+      "PySpark"
     ],
     "learn": [
-      "sql-patterns",
-      "py-data",
-      "schemas",
-      "metrics",
-      "case-method",
-      "values"
+      "spark-fundamentals"
     ],
     "practice": [
-      "SQL.meta_good_renewed_twice",
-      "SQL.meta_top_invitees",
-      "PY.odd_digits",
-      "PY.frequent_review",
-      "SQL.checkout_log"
+      "SPARK.mutual_friends"
     ],
-    "report_company": null
+    "report_company": null,
+    "group": "3 · Reference loops"
   },
   {
     "id": "microsoft",
@@ -278,7 +331,7 @@
     "role": "Reference loop",
     "level_label": "Stretch",
     "from_postings": false,
-    "summary": "Reference loop. The snapshot found Toronto roles that were not DE-titled. The notes describe Spark, DSA, modeling, and pipeline CI/CD. Sourced reports also exist.",
+    "summary": "Reference loop, with Google and Uber. Oct 7 2026 snapshot: no DE-titled Toronto opening (other Toronto postings were not DE). The notes describe Spark, DSA, modeling, and pipeline CI/CD. Sourced reports are on the timeline.",
     "loop": [
       "Notes: big data and PySpark, then DSA, then design and dimensional modeling, then project depth and behavior.",
       "Named coding in the notes: Dutch flag, merge intervals.",
@@ -304,7 +357,8 @@
       "SPARK.job_stage_task",
       "DESIGN.realtime_streaming_pipeline"
     ],
-    "report_company": "Microsoft"
+    "report_company": "Microsoft",
+    "group": "3 · Reference loops"
   },
   {
     "id": "uber",
@@ -313,7 +367,7 @@
     "role": "Reference loop",
     "level_label": "Stretch",
     "from_postings": false,
-    "summary": "Reference loop from the notes. Coding is the heavy part: min path sum, intervals, course schedule, plus a trending-dishes design.",
+    "summary": "Reference loop from the notes, with Google and Microsoft. Coding is the heavy part: min path sum, intervals, course schedule, plus a trending-dishes design.",
     "loop": [
       "Notes: a technical screen with minimum path sum.",
       "Final rounds in the notes: merge intervals with binary search, a behavioral round, trending dishes, then course schedule plus two join-and-aggregate SQL questions whose text was not recorded.",
@@ -336,7 +390,205 @@
       "DESIGN.trending_dishes",
       "BEH.disagree"
     ],
-    "report_company": null
+    "report_company": null,
+    "group": "3 · Reference loops"
+  },
+  {
+    "id": "autodesk",
+    "name": "Autodesk",
+    "rank": null,
+    "role": "L5 stretch, live practice",
+    "level_label": "Stretch",
+    "from_postings": true,
+    "summary": "Six GTA DE-type roles in the Oct 7 2026 snapshot, skewed to Senior and Principal. Use the posting as live L5 practice: Python, Spark, Airflow, Snowflake, Kafka, and dbt on AWS. The notes do not contain an Autodesk loop, so no interview questions are invented.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "Stack signals: Python, AWS, Spark, Airflow, Snowflake, Hive, Kafka, dbt.",
+      "Study these as Stretch drills after the Meta and Amazon loops, not as a reported question list."
+    ],
+    "stack": [
+      "Python",
+      "AWS",
+      "Spark",
+      "Airflow",
+      "Snowflake",
+      "Kafka",
+      "dbt"
+    ],
+    "learn": [
+      "spark-internals",
+      "airflow-dbt",
+      "snowflake-databricks",
+      "kafka-kinesis",
+      "delivery"
+    ],
+    "practice": [],
+    "report_company": null,
+    "group": "4 · Live practice"
+  },
+  {
+    "id": "big-banks",
+    "name": "Banks (safety)",
+    "rank": null,
+    "role": "Safety group",
+    "level_label": "Core",
+    "from_postings": true,
+    "summary": "Safety net after the big-tech loops: TD, RBC, BMO, and Scotiabank/Tangerine. Postings share SQL, modeling, Spark or Databricks, and CI/CD. This page does not invent interview questions, and it is not the study order.",
+    "loop": [
+      "No reported bank loop is in the notes. Do not treat the safety mock as a transcript.",
+      "Shared posting signals, snapshot 2026-10-07: SQL, data modeling, Spark/Databricks, Azure or AWS, and CI/CD.",
+      "Use this after Meta and Amazon feel steady. The optional plan week is the appendix."
+    ],
+    "stack": [
+      "SQL",
+      "Data modeling",
+      "Spark",
+      "Databricks",
+      "Azure or AWS",
+      "CI/CD"
+    ],
+    "learn": [
+      "sql-core",
+      "sql-patterns",
+      "facts-grain",
+      "scd",
+      "schemas",
+      "spark-fundamentals",
+      "etl-cdc",
+      "airflow-dbt",
+      "data-quality"
+    ],
+    "practice": [],
+    "report_company": null,
+    "group": "5 · Banks (safety)"
+  },
+  {
+    "id": "td",
+    "name": "TD",
+    "rank": null,
+    "role": "Safety",
+    "level_label": "Core, Senior is Stretch",
+    "from_postings": true,
+    "summary": "Highest careers-site count in the 2026-10-07 snapshot: 8 GTA DE-type roles. Data Engineer II is described as about 3–5 years and is the L4-shaped title. Senior is the stretch.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "Data modeling showed up across the DE postings reviewed.",
+      "Stack signals: SQL, Spark, Databricks, Azure, CI/CD. Scala or Hadoop appears on the senior posting."
+    ],
+    "stack": [
+      "SQL",
+      "Data modeling",
+      "Spark",
+      "Databricks",
+      "Azure",
+      "CI/CD"
+    ],
+    "learn": [
+      "facts-grain",
+      "scd",
+      "schemas",
+      "modeling-cases",
+      "spark-fundamentals",
+      "etl-cdc"
+    ],
+    "practice": [],
+    "report_company": null,
+    "group": "5 · Banks (safety)"
+  },
+  {
+    "id": "rbc",
+    "name": "RBC",
+    "rank": null,
+    "role": "Safety",
+    "level_label": "Core into Stretch",
+    "from_postings": true,
+    "summary": "Five GTA DE-type roles in the snapshot. Titles run Senior (about 3–6 years), Staff, and Lead. Senior is a realistic step from an L4 baseline.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "CI/CD appeared on the DE postings checked.",
+      "Stack signals: SQL, Python, Snowflake or Databricks, AWS, Azure, Spark."
+    ],
+    "stack": [
+      "SQL",
+      "Python",
+      "Snowflake",
+      "Databricks",
+      "AWS",
+      "Azure",
+      "CI/CD"
+    ],
+    "learn": [
+      "sql-patterns",
+      "py-data",
+      "wh-engines",
+      "snowflake-databricks",
+      "airflow-dbt"
+    ],
+    "practice": [],
+    "report_company": null,
+    "group": "5 · Banks (safety)"
+  },
+  {
+    "id": "bmo",
+    "name": "BMO",
+    "rank": null,
+    "role": "Safety",
+    "level_label": "Core",
+    "from_postings": true,
+    "summary": "Five GTA roles in the snapshot, including Associate, DE (about 2–5 years), and Senior (about 5–7). The most L4-shaped mix of the four banks.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "Stack signals: Python, Spark, some Scala, AWS, Azure, SQL, Hadoop."
+    ],
+    "stack": [
+      "Python",
+      "Spark",
+      "Scala",
+      "SQL",
+      "AWS",
+      "Azure"
+    ],
+    "learn": [
+      "py-data",
+      "spark-fundamentals",
+      "spark-internals",
+      "sql-core"
+    ],
+    "practice": [],
+    "report_company": null,
+    "group": "5 · Banks (safety)"
+  },
+  {
+    "id": "scotiabank",
+    "name": "Scotiabank / Tangerine",
+    "rank": null,
+    "role": "Safety",
+    "level_label": "Core",
+    "from_postings": true,
+    "summary": "Five GTA roles in the snapshot. The Tangerine DE posting pairs data modeling with data governance. The stack overlaps TD and BMO.",
+    "loop": [
+      "From postings, not from a reported interview.",
+      "Stack signals: SQL, Python, Azure, Spark, Databricks, and modeling. Governance is named on the Tangerine modeling posting."
+    ],
+    "stack": [
+      "SQL",
+      "Python",
+      "Azure",
+      "Spark",
+      "Databricks",
+      "Data modeling",
+      "Governance"
+    ],
+    "learn": [
+      "schemas",
+      "modeling-cases",
+      "governance",
+      "spark-fundamentals",
+      "data-quality"
+    ],
+    "practice": [],
+    "report_company": null,
+    "group": "5 · Banks (safety)"
   },
   {
     "id": "netflix",
@@ -368,7 +620,8 @@
       "SPARK.oom",
       "DESIGN.top_titles"
     ],
-    "report_company": null
+    "report_company": null,
+    "group": "Further reference"
   },
   {
     "id": "tiktok",
@@ -399,30 +652,8 @@
       "DSA.jump_energy",
       "DSA.decode_wildcards"
     ],
-    "report_company": null
-  },
-  {
-    "id": "google",
-    "name": "Google",
-    "rank": null,
-    "role": "Reference loop",
-    "level_label": "Core",
-    "from_postings": false,
-    "summary": "The notes contain one PySpark exercise: mutual friends. The snapshot did not find a Toronto DE-titled opening. There is no fuller loop to report.",
-    "loop": [
-      "Only the mutual-friends DataFrame exercise is in the notes.",
-      "Do not infer a loop structure that the notes do not contain."
-    ],
-    "stack": [
-      "PySpark"
-    ],
-    "learn": [
-      "spark-fundamentals"
-    ],
-    "practice": [
-      "SPARK.mutual_friends"
-    ],
-    "report_company": null
+    "report_company": null,
+    "group": "Further reference"
   },
   {
     "id": "databricks",
@@ -455,7 +686,8 @@
       "DESIGN.realtime_ride_tracking",
       "DSA.binary_search"
     ],
-    "report_company": "Databricks"
+    "report_company": "Databricks",
+    "group": "Further reference"
   },
   {
     "id": "snowflake",
@@ -484,7 +716,8 @@
       "SNOW.scd2_streams_merge",
       "SNOW.snowpipe_streams_tasks"
     ],
-    "report_company": "Snowflake"
+    "report_company": "Snowflake",
+    "group": "Further reference"
   },
   {
     "id": "other",
@@ -508,6 +741,7 @@
       "SNOW.scd2_streams_merge",
       "SNOW.snowpipe_streams_tasks"
     ],
-    "report_company": "Other"
+    "report_company": "Other",
+    "group": "Further reference"
   }
 ]

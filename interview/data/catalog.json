@@ -115,7 +115,7 @@
       "track": "Orientation",
       "level": "Core",
       "gap": false,
-      "summary": "What a data engineering loop actually scores, and how bank screens differ from the Amazon benchmark.",
+      "summary": "Meta is the primary loop in the notes. Amazon is second. Banks are a safety net, not the study order.",
       "file": "de-loop.md"
     },
     {
@@ -124,7 +124,7 @@
       "track": "Orientation",
       "level": "Core",
       "gap": false,
-      "summary": "Eight core weeks at about ten hours, daily SQL and Python, mocks from week 5.",
+      "summary": "Eight core weeks aimed at a Meta phone screen and an Amazon leadership round. Mocks start in week 5.",
       "file": "how-to-study.md"
     },
     {
@@ -214,7 +214,7 @@
       "track": "Modeling",
       "level": "Core",
       "gap": false,
-      "summary": "Declare the grain before you name a fact table (\u4e8b\u5b9e\u8868).",
+      "summary": "Declare the grain before you name a fact table (事实表).",
       "file": "facts-grain.md"
     },
     {
@@ -223,7 +223,7 @@
       "track": "Modeling",
       "level": "Core",
       "gap": false,
-      "summary": "Slowly changing dimensions (\u7f13\u6162\u53d8\u5316\u7ef4), especially Type 2.",
+      "summary": "Slowly changing dimensions (缓慢变化维), especially Type 2.",
       "file": "scd.md"
     },
     {
@@ -232,7 +232,7 @@
       "track": "Modeling",
       "level": "Core",
       "gap": false,
-      "summary": "Star, snowflake, and 1NF\u20133NF without reciting a textbook.",
+      "summary": "Star, snowflake, and 1NF–3NF without reciting a textbook.",
       "file": "schemas.md"
     },
     {

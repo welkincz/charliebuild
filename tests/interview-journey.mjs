@@ -91,14 +91,45 @@ for (const week of plan.weeks) {
 assert.equal(plan.weeks.filter((week) => !week.optional).length, 8);
 assert.equal(plan.weeks.filter((week) => week.optional).length, 4);
 
+const companyOrder = [
+  'meta', 'amazon', 'google', 'microsoft', 'uber', 'autodesk',
+  'big-banks', 'td', 'rbc', 'bmo', 'scotiabank',
+  'netflix', 'tiktok', 'databricks', 'snowflake', 'other',
+];
+assert.deepEqual(companies.map((company) => company.id), companyOrder);
+assert.equal(companies[0].group, '1 · Primary');
+assert.equal(companies[1].group, '2 · Second');
+assert.equal(companies.find((company) => company.id === 'google').group, '3 · Reference loops');
+assert.equal(companies.find((company) => company.id === 'autodesk').group, '4 · Live practice');
+assert.equal(companies.find((company) => company.id === 'big-banks').group, '5 · Banks (safety)');
+assert.equal(companies.find((company) => company.id === 'td').role, 'Safety');
+assert.equal(companies[0].rank, 1);
+assert.equal(companies[1].rank, 2);
+assert.equal(companies.find((company) => company.id === 'meta').report_company, null);
+assert.ok(companies.find((company) => company.id === 'meta').rounds.length >= 5);
+assert.ok(companies.find((company) => company.id === 'amazon').rounds.some((round) => /leadership/i.test(round.name)));
+
 for (const company of companies) {
   for (const id of company.learn) assert.ok(pageIds.has(id), company.id + ' ' + id);
   for (const id of company.practice) assert.ok(practiceIds.has(id), company.id + ' ' + id);
+  for (const round of company.rounds || []) {
+    for (const id of round.learn || []) assert.ok(pageIds.has(id), company.id + ' round ' + id);
+    for (const id of round.practice || []) assert.ok(practiceIds.has(id), company.id + ' round ' + id);
+  }
   if (['td', 'rbc', 'bmo', 'scotiabank', 'autodesk', 'big-banks'].includes(company.id)) {
     assert.equal(company.from_postings, true, company.id);
     assert.equal(company.practice.length, 0, company.id);
   }
 }
+
+assert.match(plan.intro, /Meta is the primary loop/);
+assert.equal(/Banks first/i.test(JSON.stringify(plan)), false);
+assert.match(plan.weeks[1].focus, /Product sense/);
+assert.match(plan.weeks[4].title, /Meta/);
+assert.equal(plan.weeks[11].title, 'Banks (safety)');
+assert.equal(plan.weeks[11].optional, true);
+assert.equal(plan.weeks[8].optional, true);
+assert.match(plan.weeks[8].title, /system design/i);
 
 for (const loop of mocks.loops) {
   assert.ok(loop.label, loop.id);
@@ -106,8 +137,18 @@ for (const loop of mocks.loops) {
     for (const id of round.practice) assert.ok(practiceIds.has(id), loop.id + ' ' + id);
   }
 }
-assert.ok(mocks.loops.some((loop) => loop.id === 'amazon-benchmark'));
-assert.ok(mocks.loops.some((loop) => loop.id === 'big-bank' && /posting/i.test(loop.label)));
+assert.equal(mocks.loops[0].id, 'meta-loop');
+assert.equal(mocks.loops[1].id, 'amazon-benchmark');
+assert.equal(mocks.loops[2].id, 'big-bank');
+assert.match(mocks.loops[2].label, /Safety/);
+assert.match(mocks.loops[2].label, /posting/i);
+assert.ok(mocks.loops[1].rounds.some((round) => /leadership/i.test(round.name)));
+
+const howTo = readFileSync(resolve(interview, 'content/learn/how-to-study.md'), 'utf8');
+const deLoop = readFileSync(resolve(interview, 'content/learn/de-loop.md'), 'utf8');
+assert.equal(/ordered for Toronto bank screens|Banks first/i.test(howTo + deLoop), false);
+assert.match(deLoop, /Meta is the primary loop/);
+assert.match(deLoop, /one early-career DE posting/);
 
 for (const page of reference) {
   const body = readFileSync(resolve(interview, 'content/reference', page.file), 'utf8');

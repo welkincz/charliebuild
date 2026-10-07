@@ -329,7 +329,12 @@
     }
     if (section === 'companies') {
       sidebar.appendChild(el('p', { class: 'tree-label', text: 'Companies' }));
+      var sidebarGroup = '';
       companies.forEach(function (company) {
+        if (company.group && company.group !== sidebarGroup) {
+          sidebarGroup = company.group;
+          sidebar.appendChild(el('p', { class: 'tree-label', text: company.group }));
+        }
         sidebar.appendChild(el('a', {
           href: '#/companies/' + company.id,
           class: 'tree-link' + (route.parts[1] === company.id ? ' is-current' : ''),
@@ -380,7 +385,7 @@
     setCrumbs(weekId ? [{ href: '#/plan', label: 'Plan' }, { label: 'Week ' + weekId }] : [{ label: 'Plan' }]);
     var head = el('div', { class: 'view-head' }, [
       el('h1', { text: weekId ? 'Week ' + weekId : 'Study plan' }),
-      el('p', { class: 'summary', text: 'Eight core weeks at about ' + plan.hours_per_week + ' hours, then four optional weeks. Banks first. Mocks start in week 5. Amazon is the timed benchmark.' })
+      el('p', { class: 'summary', text: plan.intro || '' })
     ]);
     var progress = el('p', { class: 'card-progress' }, [
       document.createTextNode(overall.done + ' of ' + overall.total + ' plan links done '),
@@ -625,9 +630,14 @@
     setCrumbs([{ label: 'Companies' }]);
     main.appendChild(el('div', { class: 'view-head' }, [
       el('h1', { text: 'Companies' }),
-      el('p', { class: 'summary', text: 'Toronto volume order for the banks, then Autodesk, then Amazon as the mock benchmark. Reference loops follow the notes. Bank pages are from postings.' })
+      el('p', { class: 'summary', text: 'Study order is Meta, then Amazon, then Google, Microsoft, and Uber. Autodesk is live L5 practice. Banks are the safety group. The Oct 7 2026 Toronto snapshot is a volume note, not this order.' })
     ]));
+    var indexGroup = '';
     companies.forEach(function (company) {
+      if (company.group && company.group !== indexGroup) {
+        indexGroup = company.group;
+        main.appendChild(el('h2', { text: company.group }));
+      }
       var card = el('article', { class: 'co-card' });
       card.appendChild(el('h2', {}, [el('a', { href: '#/companies/' + company.id, text: company.name })]));
       card.appendChild(el('p', { class: 'summary', text: company.role + (company.rank ? ' · rank ' + company.rank : '') + ' · ' + company.level_label }));
@@ -654,6 +664,25 @@
     var list = el('ul');
     (company.loop || []).forEach(function (line) { list.appendChild(el('li', { text: line })); });
     article.appendChild(list);
+    if (company.rounds && company.rounds.length) {
+      article.appendChild(el('h2', { text: 'Round by round' }));
+      company.rounds.forEach(function (round) {
+        var block = el('article', { class: 'round-card' });
+        block.appendChild(el('h3', { text: round.name + (round.minutes ? ' · ' + round.minutes + ' min' : '') }));
+        block.appendChild(el('p', { text: round.focus || '' }));
+        var links = el('div', { class: 'stack-links' });
+        (round.learn || []).forEach(function (pid) {
+          var page = pageById(pid);
+          links.appendChild(el('a', { href: '#/learn/' + pid, text: page ? page.title : pid }));
+        });
+        (round.practice || []).forEach(function (pid) {
+          var item = practiceById(pid);
+          links.appendChild(el('a', { href: '#/practice/' + encodeURIComponent(pid), text: item ? item.title : pid }));
+        });
+        block.appendChild(links);
+        article.appendChild(block);
+      });
+    }
     article.appendChild(el('h2', { text: 'Stack signals' }));
     var chips = el('div', { class: 'stack-links' });
     (company.stack || []).forEach(function (name) { chips.appendChild(el('span', { class: 'chip', text: name })); });
@@ -712,7 +741,7 @@
     if (!id) {
       main.appendChild(el('div', { class: 'view-head' }, [
         el('h1', { text: 'Mock' }),
-        el('p', { class: 'summary', text: 'Two loops. The Amazon one follows the notes. The bank one is built from posting requirements and says so.' })
+        el('p', { class: 'summary', text: 'Meta is the primary mock. Amazon is second, with a leadership-principles round and no sample stories. The bank loop is safety, built from posting requirements.' })
       ]));
       (mocks.loops || []).forEach(function (loop) {
         var card = el('article', { class: 'co-card' });
