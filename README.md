@@ -19,6 +19,13 @@ The title interaction is informed by
 [`bobobo521/boknows-text-image-template`](https://github.com/bobobo521/boknows-text-image-template)
 (MIT) and was reimplemented for this site.
 
+## DE interview reader
+
+`/interview/` is a static study path for reported senior / L5 data engineer
+interviews. Questions, reports, and the bank → topic map live in
+`interview/data/`. With the local server above, open
+http://localhost:8000/interview/
+
 ## NaNail storefront display
 
 The separate iPad display lives at `nanail.charliebuild.com`, deployed as its
