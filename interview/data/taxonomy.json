@@ -1,0 +1,86 @@
+{
+  "companies": ["Amazon", "Databricks", "Microsoft", "Snowflake", "Other"],
+  "reports": {
+    "id": "reports",
+    "name": "Interview reports",
+    "summary": "Write-ups grouped by company. A question links to a report when they share a source URL."
+  },
+  "banks": [
+    {
+      "id": "coding",
+      "name": "Coding",
+      "summary": "SQL and programming prompts from reported data engineer screens.",
+      "topics": [
+        {
+          "id": "sql",
+          "name": "SQL",
+          "summary": "Window functions, aggregation, and joins.",
+          "when": { "question_type": ["SQL"] }
+        },
+        {
+          "id": "python-dsa",
+          "name": "Python & data structures",
+          "summary": "Large-file Python and a core data-structure prompt.",
+          "when": { "question_type": ["Python", "DSA"] }
+        }
+      ]
+    },
+    {
+      "id": "knowledge",
+      "name": "DE Knowledge",
+      "summary": "Modeling, Spark, and warehouse questions from technical rounds.",
+      "topics": [
+        {
+          "id": "data-modeling",
+          "name": "Data modeling",
+          "summary": "Schema design for a business process.",
+          "when": { "topic_any": ["data_modeling"], "topic_none": ["Snowflake"] }
+        },
+        {
+          "id": "spark",
+          "name": "Spark & distributed compute",
+          "summary": "Repartitioning, coalescing, and large joins.",
+          "when": { "topic_any": ["Spark"] }
+        },
+        {
+          "id": "snowflake",
+          "name": "Snowflake, CDC & orchestration",
+          "summary": "Architecture, streams, tasks, and SCD Type-2 in Snowflake.",
+          "when": { "topic_any": ["Snowflake"] }
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "name": "Data System Design",
+      "summary": "Pipeline and streaming design prompts from system rounds.",
+      "topics": [
+        {
+          "id": "pipelines",
+          "name": "Pipelines & the lakehouse",
+          "summary": "Batch jobs, scale, and a lake for analytics.",
+          "fallback": true
+        },
+        {
+          "id": "streaming",
+          "name": "Streaming & Kafka",
+          "summary": "Real-time pipelines and live event streams.",
+          "when": { "topic_any": ["streaming", "kafka"], "topic_none": ["batch"] }
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "name": "Experience",
+      "summary": "Behavioral questions reported from data engineer loops.",
+      "topics": [
+        {
+          "id": "behavioral",
+          "name": "Behavioral & leadership",
+          "summary": "Conflict, stakeholders, and ownership.",
+          "fallback": true
+        }
+      ]
+    }
+  ]
+}

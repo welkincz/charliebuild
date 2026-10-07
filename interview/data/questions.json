@@ -14,6 +14,7 @@
       "window_function",
       "aggregation"
     ],
+    "study_topic": "sql",
     "difficulty": "medium",
     "evidence_grade": "B",
     "source_url": "https://www.reddit.com/r/datadrivenio/comments/1va231r/amazon_data_engineer_interview_experience/",
@@ -35,6 +36,7 @@
     "topic": [
       "python_data_manipulation"
     ],
+    "study_topic": "python-dsa",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.linkedin.com/posts/ajay026_data-databricks-sql-activity-7415980446921957376-Vi-o",
@@ -57,6 +59,7 @@
       "dsa",
       "Spark"
     ],
+    "study_topic": "python-dsa",
     "difficulty": "easy",
     "evidence_grade": "B",
     "source_url": "https://www.jointaro.com/interviews/companies/databricks/experiences/data-engineer-bengaluru-august-1-2023-no-offer-positive-2382326c/",
@@ -79,6 +82,7 @@
       "aggregation",
       "joins"
     ],
+    "study_topic": "sql",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.linkedin.com/posts/ajay026_data-databricks-sql-activity-7415980446921957376-Vi-o",
@@ -101,6 +105,7 @@
       "window_function",
       "aggregation"
     ],
+    "study_topic": "sql",
     "difficulty": "hard",
     "evidence_grade": "A",
     "source_url": "https://www.jointaro.com/interviews/companies/microsoft/experiences/data-engineer-redmond-washington-september-1-2025-no-offer-positive-68d4ba7e/",
@@ -122,6 +127,7 @@
     "topic": [
       "data_modeling"
     ],
+    "study_topic": "data-modeling",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://roundz.substack.com/p/interview-experience-176-amazon-data-engineer-sde2-l5",
@@ -143,6 +149,7 @@
     "topic": [
       "data_modeling"
     ],
+    "study_topic": "data-modeling",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.reddit.com/r/dataengineersindia/comments/1oezpqu/data_engineer_interview_experience_3_yoe_pyspark/",
@@ -164,6 +171,7 @@
     "topic": [
       "data_modeling"
     ],
+    "study_topic": "data-modeling",
     "difficulty": "medium",
     "evidence_grade": "B",
     "source_url": "https://www.jointaro.com/interviews/companies/amazon/experiences/data-engineer-dallas-texas-march-1-2025-accepted-offer-neutral-1311047e/",
@@ -185,6 +193,7 @@
     "topic": [
       "data_modeling"
     ],
+    "study_topic": "data-modeling",
     "difficulty": "hard",
     "evidence_grade": "A",
     "source_url": "https://www.reddit.com/r/dataengineersindia/comments/1sdy5za/amazon_data_engineer_ii_interview_experience/",
@@ -207,6 +216,7 @@
       "Spark",
       "partitioning"
     ],
+    "study_topic": "spark",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.linkedin.com/posts/ajay026_data-databricks-sql-activity-7415980446921957376-Vi-o",
@@ -230,6 +240,7 @@
       "joins",
       "scalability"
     ],
+    "study_topic": "spark",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.linkedin.com/posts/ajay026_data-databricks-sql-activity-7415980446921957376-Vi-o",
@@ -252,6 +263,7 @@
       "Snowflake",
       "partitioning"
     ],
+    "study_topic": "snowflake",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.reddit.com/r/dataengineersindia/comments/1rwc6ye/pwc_senior_associate_gcp_data_engineer_interview/",
@@ -275,6 +287,7 @@
       "CDC",
       "Snowflake"
     ],
+    "study_topic": "snowflake",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.reddit.com/r/dataengineersindia/comments/1piw6sf/ey_snowflake_developer_interview_experience/",
@@ -298,6 +311,7 @@
       "CDC",
       "orchestration"
     ],
+    "study_topic": "snowflake",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.reddit.com/r/dataengineersindia/comments/1rwc6ye/pwc_senior_associate_gcp_data_engineer_interview/",
@@ -320,6 +334,7 @@
       "batch",
       "data_modeling"
     ],
+    "study_topic": "pipelines",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.reddit.com/r/dataengineersindia/comments/1oezpqu/data_engineer_interview_experience_3_yoe_pyspark/",
@@ -343,6 +358,7 @@
       "batch",
       "streaming"
     ],
+    "study_topic": "pipelines",
     "difficulty": "hard",
     "evidence_grade": "A",
     "source_url": "https://roundz.substack.com/p/interview-experience-176-amazon-data-engineer-sde2-l5",
@@ -366,6 +382,7 @@
       "reliability",
       "scalability"
     ],
+    "study_topic": "pipelines",
     "difficulty": "hard",
     "evidence_grade": "A",
     "source_url": "https://www.linkedin.com/posts/ajay026_data-databricks-sql-activity-7415980446921957376-Vi-o",
@@ -389,6 +406,7 @@
       "scalability",
       "kafka"
     ],
+    "study_topic": "streaming",
     "difficulty": "hard",
     "evidence_grade": "A",
     "source_url": "https://www.linkedin.com/posts/ajay026_data-databricks-sql-activity-7415980446921957376-Vi-o",
@@ -411,6 +429,7 @@
       "streaming",
       "scalability"
     ],
+    "study_topic": "streaming",
     "difficulty": "medium",
     "evidence_grade": "B",
     "source_url": "https://www.jointaro.com/interviews/companies/microsoft/experiences/data-engineer-seattle-wa-august-1-2024-no-offer-positive-25b508ff/",
@@ -433,6 +452,7 @@
       "stakeholder",
       "ownership"
     ],
+    "study_topic": "behavioral",
     "difficulty": "medium",
     "evidence_grade": "A",
     "source_url": "https://www.jointaro.com/interviews/companies/amazon/experiences/data-engineer-austin-tx-may-1-2025-no-offer-neutral-3437cae7/",

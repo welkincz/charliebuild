@@ -21,10 +21,9 @@ The title interaction is informed by
 
 ## DE interview reader
 
-`/interview/` is a static reader for reported senior / L5 data engineer
-interview questions and reports. The lists render from
-`interview/data/questions.json` and `interview/data/reports.json`, so a content
-refresh is a JSON update. With the local server above, open
+`/interview/` is a static study path for reported senior / L5 data engineer
+interviews. Questions, reports, and the bank → topic map live in
+`interview/data/`. With the local server above, open
 http://localhost:8000/interview/
 
 ## NaNail storefront display
