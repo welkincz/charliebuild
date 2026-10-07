@@ -1,0 +1,791 @@
+{
+  "hours_per_week": 10,
+  "weeks": [
+    {
+      "id": 1,
+      "title": "SQL core and modeling grain",
+      "optional": false,
+      "hours": 10,
+      "focus": "Bank screens start here: joins, windows, facts, and SCD.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "de-loop",
+            "how-to-study",
+            "sql-core"
+          ],
+          "practice": [
+            "SQL.same_day_multi_purchases",
+            "SQL.cte_customer_totals",
+            "PY.sum_evens"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "sql-windows"
+          ],
+          "practice": [
+            "SQL.consecutive_login_streaks",
+            "SQL.running_total",
+            "DSA.binary_search"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "facts-grain"
+          ],
+          "practice": [
+            "CHK.grain",
+            "CHK.additive",
+            "MODEL.food_truck_business",
+            "SQL.pivot_status"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "scd"
+          ],
+          "practice": [
+            "SNOW.scd2_streams_merge",
+            "MODEL.scd2_pattern",
+            "CHK.scd2",
+            "PY.most_frequent_element"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "star",
+            "story-bank"
+          ],
+          "practice": [
+            "CHK.star",
+            "BEH.disagree",
+            "SQL.above_average",
+            "SQL.null_safe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Patterns, schemas, and Python",
+      "optional": false,
+      "hours": 10,
+      "focus": "Interview SQL shapes, normal forms, and the Meta-style Python screens from the notes.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "sql-patterns"
+          ],
+          "practice": [
+            "SQL.dedupe_latest",
+            "SQL.topn_group",
+            "SQL.nth_highest"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "sql-patterns",
+            "schemas"
+          ],
+          "practice": [
+            "SQL.meta_copies_over_ten",
+            "SQL.meta_pay_type",
+            "MODEL.nf_discuss"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "modeling-cases"
+          ],
+          "practice": [
+            "MODEL.ecommerce",
+            "SQL.revenue_per_product",
+            "PY.odd_digits"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "py-data"
+          ],
+          "practice": [
+            "PY.frequent_review",
+            "PY.most_repeated_word",
+            "SQL.meta_good_renewed_twice"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "values"
+          ],
+          "practice": [
+            "BEH.learn_quickly",
+            "BEH.lp_prompts",
+            "SQL.funnel",
+            "PY.char_frequency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Warehouses, lakehouse, Spark basics",
+      "optional": false,
+      "hours": 10,
+      "focus": "What the bank postings name next: Databricks, Snowflake, and Spark behavior.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "wh-internals",
+            "wh-engines"
+          ],
+          "practice": [
+            "SNOW.architecture_micropartitions",
+            "SNOW.snowpipe_streams_tasks",
+            "CHK.prune"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "lakehouse",
+            "snowflake-databricks"
+          ],
+          "practice": [
+            "DESIGN.analytics_data_lake_ha",
+            "SQL.clean_missing",
+            "DSA.dutch_flag"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "spark-fundamentals"
+          ],
+          "practice": [
+            "SPARK.repartition_vs_coalesce",
+            "SPARK.job_stage_task",
+            "CHK.coalesce"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "pandas-files",
+            "dsa-essentials"
+          ],
+          "practice": [
+            "PY.large_csv_streaming",
+            "PY.chunk_count",
+            "DSA.merge_intervals"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "wh-cost"
+          ],
+          "practice": [
+            "SPARK.write_files",
+            "SQL.meta_not_returned",
+            "PY.two_sum"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Pipelines, quality, and SQL cost",
+      "optional": false,
+      "hours": 10,
+      "focus": "Idempotent loads, the gap-fill ops topics, and harder SQL from the notes.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "etl-cdc"
+          ],
+          "practice": [
+            "DESIGN.batch_pipeline_scd",
+            "SQL.late_event",
+            "CHK.idempotent"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "airflow-dbt"
+          ],
+          "practice": [
+            "DBT.incremental",
+            "AF.interval",
+            "PIPE.cdc_merge"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "data-quality",
+            "governance"
+          ],
+          "practice": [
+            "DQ.freshness",
+            "GOV.mask_or_token",
+            "SQL.meta_author_site"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "sql-perf",
+            "spark-internals"
+          ],
+          "practice": [
+            "SPARK.cross_join_large_data",
+            "SPARK.broadcast_when",
+            "SQL.rolling_avg_exclude_weekends"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "modeling-cases"
+          ],
+          "practice": [
+            "MODEL.lending_book",
+            "MODEL.vendor_payment_system",
+            "MODEL.vendor_warehouse_delivery"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Streaming and the first mock",
+      "optional": false,
+      "hours": 10,
+      "focus": "Mocks start. A SQL plus modeling loop, then streaming semantics.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "when-stream",
+            "kafka-kinesis"
+          ],
+          "practice": [
+            "CHK.kafka_order",
+            "SQL.tiktok_session",
+            "PY.avg_list_length"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "delivery",
+            "stream-processing"
+          ],
+          "practice": [
+            "STREAM.eos_sink",
+            "CHK.exactly",
+            "DESIGN.realtime_streaming_pipeline"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "sd-framework"
+          ],
+          "practice": [
+            "DESIGN.realtime_ride_tracking",
+            "SQL.checkout_log",
+            "DSA.meeting_rooms"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "metrics"
+          ],
+          "practice": [
+            "PS.define_active",
+            "SQL.meta_first_last_day",
+            "PY.anagrams"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "sd-practice"
+          ],
+          "practice": [
+            "SQL.meta_referrer_gap",
+            "SQL.meta_top_invitees",
+            "PY.max_points_categories"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Design reps and product sense",
+      "optional": false,
+      "hours": 10,
+      "focus": "Sourced design prompts, then a system-design mock.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "estimation",
+            "storage"
+          ],
+          "practice": [
+            "SD.estimate_day",
+            "DESIGN.pb_scale_pipeline"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "compute",
+            "db-selection"
+          ],
+          "practice": [
+            "SPARK.oom",
+            "SPARK.salt"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "case-uber",
+            "case-netflix"
+          ],
+          "practice": [
+            "DESIGN.trending_dishes",
+            "DESIGN.top_titles"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "metric-design",
+            "investigation"
+          ],
+          "practice": [
+            "PS.metric_drop",
+            "SQL.tiktok_retention"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "case-method",
+            "graphs-dp"
+          ],
+          "practice": [
+            "DSA.min_path_sum",
+            "DSA.course_schedule"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Canadian Big Banks sprint",
+      "optional": false,
+      "hours": 10,
+      "focus": "Posting-driven replay: SQL, modeling, Spark on Azure or AWS, CI/CD. No invented bank questions.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "de-loop"
+          ],
+          "practice": [
+            "SQL.cohort_week",
+            "SQL.funnel",
+            "MODEL.food_truck_business"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "spark-fundamentals",
+            "etl-cdc"
+          ],
+          "practice": [
+            "SPARK.repartition_vs_coalesce",
+            "PIPE.cdc_merge",
+            "CHK.idempotent"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "airflow-dbt",
+            "data-quality"
+          ],
+          "practice": [
+            "AF.interval",
+            "DQ.freshness",
+            "DBT.incremental"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "schemas",
+            "governance"
+          ],
+          "practice": [
+            "MODEL.ecommerce",
+            "GOV.mask_or_token",
+            "MODEL.nf_discuss"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "sd-practice"
+          ],
+          "practice": [
+            "DESIGN.batch_pipeline_scd",
+            "DESIGN.analytics_data_lake_ha",
+            "BEH.lp_prompts"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Amazon benchmark loop",
+      "optional": false,
+      "hours": 10,
+      "focus": "The notes' most complete loop, used as a full mock even though Toronto volume is low.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "sql-patterns",
+            "py-data"
+          ],
+          "practice": [
+            "SQL.nth_highest",
+            "SQL.clean_missing",
+            "PY.most_repeated_word"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "modeling-cases"
+          ],
+          "practice": [
+            "MODEL.vendor_warehouse_delivery",
+            "SQL.revenue_per_product",
+            "MODEL.nf_discuss"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "values",
+            "star"
+          ],
+          "practice": [
+            "EXP.conflict_resolution",
+            "BEH.disagree",
+            "BEH.learn_quickly"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "sd-framework",
+            "etl-cdc"
+          ],
+          "practice": [
+            "DESIGN.pb_scale_pipeline",
+            "DESIGN.batch_pipeline_scd"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "how-to-study"
+          ],
+          "practice": [
+            "SQL.rolling_avg_exclude_weekends",
+            "PY.large_csv_streaming",
+            "DSA.binary_search"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Autodesk stretch",
+      "optional": true,
+      "hours": 8,
+      "focus": "Airflow, Kafka, dbt, Snowflake, and Spark at L5 depth. From the posting, not from a reported loop.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "snowflake-databricks"
+          ],
+          "practice": [
+            "SNOW.snowpipe_streams_tasks",
+            "SNOW.scd2_streams_merge"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "airflow-dbt"
+          ],
+          "practice": [
+            "DBT.incremental",
+            "AF.interval"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "kafka-kinesis",
+            "delivery"
+          ],
+          "practice": [
+            "CHK.kafka_order",
+            "STREAM.eos_sink",
+            "CHK.exactly"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "spark-internals"
+          ],
+          "practice": [
+            "SPARK.salt",
+            "SPARK.broadcast_when",
+            "SPARK.oom"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "wh-cost",
+            "governance"
+          ],
+          "practice": [
+            "GOV.mask_or_token",
+            "SD.estimate_day"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Internals deep dive",
+      "optional": true,
+      "hours": 8,
+      "focus": "The gap-fill pages: Spark internals and Kafka semantics.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "spark-internals"
+          ],
+          "practice": [
+            "SPARK.cross_join_large_data",
+            "CHK.broadcast"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "spark-internals"
+          ],
+          "practice": [
+            "SPARK.oom",
+            "SPARK.salt"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "delivery"
+          ],
+          "practice": [
+            "STREAM.eos_sink",
+            "DESIGN.realtime_ride_tracking"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "stream-processing"
+          ],
+          "practice": [
+            "DESIGN.realtime_streaming_pipeline",
+            "SQL.tiktok_session"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "data-quality"
+          ],
+          "practice": [
+            "DQ.freshness",
+            "PIPE.cdc_merge"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Meta and Microsoft reference",
+      "optional": true,
+      "hours": 8,
+      "focus": "Reference loops from the notes. Not a Toronto volume ranking.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "py-data",
+            "sql-patterns"
+          ],
+          "practice": [
+            "PY.odd_digits",
+            "PY.frequent_review",
+            "SQL.meta_top_invitees"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "sql-windows"
+          ],
+          "practice": [
+            "SQL.checkout_log",
+            "SQL.meta_referrer_gap",
+            "SQL.meta_first_last_day"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "metric-design",
+            "investigation",
+            "case-method"
+          ],
+          "practice": [
+            "PS.define_active",
+            "PS.metric_drop"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "spark-internals",
+            "dsa-essentials"
+          ],
+          "practice": [
+            "DSA.dutch_flag",
+            "DSA.merge_intervals",
+            "SPARK.job_stage_task"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "case-method",
+            "values"
+          ],
+          "practice": [
+            "BEH.learn_quickly",
+            "EXP.conflict_resolution"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Uber, Netflix, TikTok, Google",
+      "optional": true,
+      "hours": 8,
+      "focus": "Coding-heavy reference loops and the Google mutual-friends exercise.",
+      "days": [
+        {
+          "label": "Day 1",
+          "learn": [
+            "graphs-dp"
+          ],
+          "practice": [
+            "DSA.min_path_sum",
+            "DSA.course_schedule"
+          ]
+        },
+        {
+          "label": "Day 2",
+          "learn": [
+            "graphs-dp",
+            "dsa-essentials"
+          ],
+          "practice": [
+            "DSA.first_missing_positive",
+            "DSA.meeting_rooms"
+          ]
+        },
+        {
+          "label": "Day 3",
+          "learn": [
+            "case-tiktok",
+            "sql-patterns"
+          ],
+          "practice": [
+            "SQL.tiktok_session",
+            "SQL.tiktok_retention",
+            "DSA.strict_increase"
+          ]
+        },
+        {
+          "label": "Day 4",
+          "learn": [
+            "case-uber",
+            "case-netflix"
+          ],
+          "practice": [
+            "DESIGN.trending_dishes",
+            "DESIGN.top_titles",
+            "DSA.decode_wildcards"
+          ]
+        },
+        {
+          "label": "Day 5",
+          "learn": [
+            "spark-fundamentals"
+          ],
+          "practice": [
+            "SPARK.mutual_friends",
+            "DSA.jump_energy",
+            "PY.workshop_years"
+          ]
+        }
+      ]
+    }
+  ]
+}

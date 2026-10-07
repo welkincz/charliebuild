@@ -114,7 +114,7 @@ assert.deepEqual(Object.keys(counts).sort(), topicIds.slice().sort());
 assert.match(script, /\/interview\/data\/questions\.json/);
 assert.match(script, /\/interview\/data\/reports\.json/);
 assert.match(script, /\/interview\/data\/taxonomy\.json/);
-assert.match(page, /Predicted and AI-written questions are not included/);
+assert.match(page, /Only Reported\+sourced items count as asked at/);
 assert.match(page, /<meta name="robots" content="noindex, nofollow">/);
 assert.match(script, /localStorage/);
 assert.doesNotMatch(home, /href=["'][^"']*interview\//);

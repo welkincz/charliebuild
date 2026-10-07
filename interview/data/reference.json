@@ -1,0 +1,20 @@
+[
+  {
+    "id": "sql-cheat",
+    "title": "SQL cheat sheet",
+    "summary": "The patterns worth re-reading the morning of a screen.",
+    "file": "sql-cheat.md"
+  },
+  {
+    "id": "glossary",
+    "title": "Glossary",
+    "summary": "English terms with the Chinese wording from the notes, where it helps you map back.",
+    "file": "glossary.md"
+  },
+  {
+    "id": "sd-template",
+    "title": "System design template",
+    "summary": "The four-quadrant page and the checklist, in one place.",
+    "file": "sd-template.md"
+  }
+]

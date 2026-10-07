@@ -5,35 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>DE prep — Charlie Build</title>
-<meta name="description" content="Personal senior / L5 data engineer study path. Reported, source-backed questions and reports only.">
+<meta name="description" content="Private L4 data engineering study path with an L5 stretch. Sourced questions stay labeled.">
 <link rel="canonical" href="https://charliebuild.com/interview/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3.5' fill='%231B222B'/%3E%3Crect x='5' y='3.5' width='5' height='9' rx='1' fill='%23C79B3E'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/interview/reader.css">
 </head>
 <body>
 <a class="visually-hidden" href="#main">Skip to content</a>
+<div class="chrome">
 <header class="topbar">
-  <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar">Topics</button>
-  <a class="brand" href="#/">DE Prep</a>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar">Menu</button>
+  <a class="brand" href="#/plan">DE Prep</a>
   <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+  <form class="search-form" id="search-form" role="search">
+    <label class="visually-hidden" for="search">Search</label>
+    <input id="search" type="search" name="q" placeholder="Search" autocomplete="off">
+  </form>
   <div class="top-actions">
     <button class="study-next" id="study-next" type="button">Study next</button>
     <a href="../">Home</a>
   </div>
 </header>
+<nav class="sectionbar" id="sections" aria-label="Sections">
+  <a href="#/plan">Plan</a>
+  <a href="#/learn">Learn</a>
+  <a href="#/practice">Practice</a>
+  <a href="#/mock">Mock</a>
+  <a href="#/companies">Companies</a>
+  <a href="#/reference">Reference</a>
+</nav>
+</div>
 <button class="scrim" id="scrim" type="button" hidden aria-label="Close topics"></button>
 <div class="app is-hub" id="app">
   <aside class="sidebar" id="sidebar" aria-label="Topics"></aside>
   <main class="main" id="main">
     <p class="load-error">Loading the study path…</p>
     <noscript>
-      <p class="load-error">JavaScript loads the question, report, and topic files and runs the study path.</p>
+      <p class="load-error">JavaScript loads the study files and runs the path.</p>
     </noscript>
   </main>
 </div>
 <footer class="site-foot">
-  <p>Reported only. Predicted and AI-written questions are not included.</p>
-  <p>A is first-hand and recent, about the last 18 months. B is first-hand but older, imprecise, or a third-person rewrite.</p>
+  <p>Only Reported+sourced items count as asked at. Reported items come from the notes. Worked examples, practice drills, and self-checks are study material, not sourced reports.</p>
+  <p>A is first-hand and recent, about the last 18 months. B is first-hand but older, imprecise, or a third-person rewrite. Core is the L4 bar. Stretch is L5.</p>
   <p>
     <a href="https://app.notion.com/p/0ef279ba87454dadb454f3ba2b6bf31e">Interview reports</a>
     ·
@@ -42,6 +56,7 @@
     <a href="https://app.notion.com/p/3f12f5aa746281e48ba7da4e54a8ccd9">Project</a>
   </p>
 </footer>
+<script src="/interview/vendor/markdown.js"></script>
 <script src="/interview/reader.js"></script>
 </body>
 </html>

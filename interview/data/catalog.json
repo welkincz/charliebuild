@@ -1,0 +1,536 @@
+{
+  "tracks": [
+    {
+      "id": "orientation",
+      "title": "Orientation",
+      "pages": [
+        "de-loop",
+        "how-to-study",
+        "sas-bridge"
+      ]
+    },
+    {
+      "id": "sql",
+      "title": "SQL",
+      "pages": [
+        "sql-core",
+        "sql-windows",
+        "sql-patterns",
+        "sql-perf"
+      ]
+    },
+    {
+      "id": "python",
+      "title": "Python & DSA",
+      "pages": [
+        "py-data",
+        "dsa-essentials",
+        "graphs-dp",
+        "pandas-files"
+      ]
+    },
+    {
+      "id": "modeling",
+      "title": "Modeling",
+      "pages": [
+        "facts-grain",
+        "scd",
+        "schemas",
+        "modeling-cases"
+      ]
+    },
+    {
+      "id": "warehouse",
+      "title": "Warehouse & lakehouse",
+      "pages": [
+        "wh-internals",
+        "wh-engines",
+        "lakehouse",
+        "wh-cost",
+        "snowflake-databricks"
+      ]
+    },
+    {
+      "id": "spark",
+      "title": "Spark & pipelines",
+      "pages": [
+        "spark-fundamentals",
+        "spark-internals",
+        "etl-cdc",
+        "airflow-dbt",
+        "data-quality",
+        "governance"
+      ]
+    },
+    {
+      "id": "streaming",
+      "title": "Streaming",
+      "pages": [
+        "when-stream",
+        "kafka-kinesis",
+        "delivery",
+        "stream-processing"
+      ]
+    },
+    {
+      "id": "design",
+      "title": "System design",
+      "pages": [
+        "sd-framework",
+        "estimation",
+        "storage",
+        "compute",
+        "db-selection",
+        "case-robinhood",
+        "case-netflix",
+        "case-uber",
+        "case-tiktok",
+        "sd-practice"
+      ]
+    },
+    {
+      "id": "product",
+      "title": "Product sense",
+      "pages": [
+        "metrics",
+        "metric-design",
+        "investigation",
+        "case-method"
+      ]
+    },
+    {
+      "id": "behavioral",
+      "title": "Behavioral",
+      "pages": [
+        "star",
+        "values",
+        "story-bank"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "de-loop",
+      "title": "The DE interview loop",
+      "track": "Orientation",
+      "level": "Core",
+      "gap": false,
+      "summary": "What a data engineering loop actually scores, and how bank screens differ from the Amazon benchmark.",
+      "file": "de-loop.md"
+    },
+    {
+      "id": "how-to-study",
+      "title": "How to study this path",
+      "track": "Orientation",
+      "level": "Core",
+      "gap": false,
+      "summary": "Eight core weeks at about ten hours, daily SQL and Python, mocks from week 5.",
+      "file": "how-to-study.md"
+    },
+    {
+      "id": "sas-bridge",
+      "title": "From SAS and warehouse SQL to this stack",
+      "track": "Orientation",
+      "level": "Core",
+      "gap": false,
+      "summary": "A generic map from procedural SQL habits to Spark, warehouses, and dimensional models.",
+      "file": "sas-bridge.md"
+    },
+    {
+      "id": "sql-core",
+      "title": "Core querying",
+      "track": "SQL",
+      "level": "Core",
+      "gap": false,
+      "summary": "Joins, aggregation, NULL, and the order you narrate a query.",
+      "file": "sql-core.md"
+    },
+    {
+      "id": "sql-windows",
+      "title": "Window functions and CTEs",
+      "track": "SQL",
+      "level": "Core",
+      "gap": false,
+      "summary": "Frames, partitions, and readable multi-step queries.",
+      "file": "sql-windows.md"
+    },
+    {
+      "id": "sql-patterns",
+      "title": "Interview patterns",
+      "track": "SQL",
+      "level": "Core",
+      "gap": false,
+      "summary": "The patterns that recur once windows and joins are fluent.",
+      "file": "sql-patterns.md"
+    },
+    {
+      "id": "sql-perf",
+      "title": "SQL performance",
+      "track": "SQL",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "Pruning, join strategy, and how you talk about a slow query.",
+      "file": "sql-perf.md"
+    },
+    {
+      "id": "py-data",
+      "title": "Python for data screens",
+      "track": "Python & DSA",
+      "level": "Core",
+      "gap": false,
+      "summary": "Dicts, lists, strings, and business-shaped functions.",
+      "file": "py-data.md"
+    },
+    {
+      "id": "dsa-essentials",
+      "title": "DSA essentials for DE",
+      "track": "Python & DSA",
+      "level": "Core",
+      "gap": false,
+      "summary": "Hashing, two pointers, intervals, binary search, and a heap.",
+      "file": "dsa-essentials.md"
+    },
+    {
+      "id": "graphs-dp",
+      "title": "Graphs and DP basics",
+      "track": "Python & DSA",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "The stretch coding that reference loops actually name.",
+      "file": "graphs-dp.md"
+    },
+    {
+      "id": "pandas-files",
+      "title": "pandas and large files",
+      "track": "Python & DSA",
+      "level": "Core",
+      "gap": false,
+      "summary": "Chunking, types, and the 100 GB file question.",
+      "file": "pandas-files.md"
+    },
+    {
+      "id": "facts-grain",
+      "title": "Facts, grain, and fact types",
+      "track": "Modeling",
+      "level": "Core",
+      "gap": false,
+      "summary": "Declare the grain before you name a fact table (\u4e8b\u5b9e\u8868).",
+      "file": "facts-grain.md"
+    },
+    {
+      "id": "scd",
+      "title": "Dimensions and SCD types",
+      "track": "Modeling",
+      "level": "Core",
+      "gap": false,
+      "summary": "Slowly changing dimensions (\u7f13\u6162\u53d8\u5316\u7ef4), especially Type 2.",
+      "file": "scd.md"
+    },
+    {
+      "id": "schemas",
+      "title": "Schemas and normalization",
+      "track": "Modeling",
+      "level": "Core",
+      "gap": false,
+      "summary": "Star, snowflake, and 1NF\u20133NF without reciting a textbook.",
+      "file": "schemas.md"
+    },
+    {
+      "id": "modeling-cases",
+      "title": "Modeling method and cases",
+      "track": "Modeling",
+      "level": "Core",
+      "gap": false,
+      "summary": "A repeatable way to answer an open modeling prompt.",
+      "file": "modeling-cases.md"
+    },
+    {
+      "id": "wh-internals",
+      "title": "Warehouse internals",
+      "track": "Warehouse & lakehouse",
+      "level": "Core",
+      "gap": false,
+      "summary": "Columnar storage, MPP, and why analytic queries look the way they do.",
+      "file": "wh-internals.md"
+    },
+    {
+      "id": "wh-engines",
+      "title": "Redshift, Snowflake, and BigQuery",
+      "track": "Warehouse & lakehouse",
+      "level": "Core",
+      "gap": false,
+      "summary": "How to compare engines without reciting a brochure.",
+      "file": "wh-engines.md"
+    },
+    {
+      "id": "lakehouse",
+      "title": "Lakehouse table formats",
+      "track": "Warehouse & lakehouse",
+      "level": "Core",
+      "gap": false,
+      "summary": "Delta, Iceberg, and Hudi as logs on files.",
+      "file": "lakehouse.md"
+    },
+    {
+      "id": "wh-cost",
+      "title": "Warehouse and storage cost",
+      "track": "Warehouse & lakehouse",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "The levers that change a bill without changing the answer.",
+      "file": "wh-cost.md"
+    },
+    {
+      "id": "snowflake-databricks",
+      "title": "Snowflake and Databricks depth",
+      "track": "Warehouse & lakehouse",
+      "level": "Stretch",
+      "gap": true,
+      "summary": "Platform details the notes only sketch.",
+      "file": "snowflake-databricks.md"
+    },
+    {
+      "id": "spark-fundamentals",
+      "title": "Spark fundamentals",
+      "track": "Spark & pipelines",
+      "level": "Core",
+      "gap": false,
+      "summary": "DataFrames, lazy plans, and narrow versus wide transforms.",
+      "file": "spark-fundamentals.md"
+    },
+    {
+      "id": "spark-internals",
+      "title": "Spark internals and tuning",
+      "track": "Spark & pipelines",
+      "level": "Stretch",
+      "gap": true,
+      "summary": "Shuffle, joins, skew, and OOM.",
+      "file": "spark-internals.md"
+    },
+    {
+      "id": "etl-cdc",
+      "title": "ETL, ELT, CDC, and idempotency",
+      "track": "Spark & pipelines",
+      "level": "Core",
+      "gap": false,
+      "summary": "Land, transform, and make a rerun safe.",
+      "file": "etl-cdc.md"
+    },
+    {
+      "id": "airflow-dbt",
+      "title": "Airflow and dbt",
+      "track": "Spark & pipelines",
+      "level": "Stretch",
+      "gap": true,
+      "summary": "Orchestration and SQL transforms.",
+      "file": "airflow-dbt.md"
+    },
+    {
+      "id": "data-quality",
+      "title": "Data quality",
+      "track": "Spark & pipelines",
+      "level": "Stretch",
+      "gap": true,
+      "summary": "Tests, contracts, and what you do when a check fails.",
+      "file": "data-quality.md"
+    },
+    {
+      "id": "governance",
+      "title": "Governance and access",
+      "track": "Spark & pipelines",
+      "level": "Stretch",
+      "gap": true,
+      "summary": "Masking, permissions, and retention as design choices.",
+      "file": "governance.md"
+    },
+    {
+      "id": "when-stream",
+      "title": "When to stream",
+      "track": "Streaming",
+      "level": "Core",
+      "gap": false,
+      "summary": "Most bank pipelines are batch. Streaming is a choice you justify.",
+      "file": "when-stream.md"
+    },
+    {
+      "id": "kafka-kinesis",
+      "title": "Kafka and Kinesis",
+      "track": "Streaming",
+      "level": "Core",
+      "gap": false,
+      "summary": "Logs, partitions, and consumer groups.",
+      "file": "kafka-kinesis.md"
+    },
+    {
+      "id": "delivery",
+      "title": "Delivery semantics",
+      "track": "Streaming",
+      "level": "Stretch",
+      "gap": true,
+      "summary": "At-least-once, exactly-once, and what the sink must do.",
+      "file": "delivery.md"
+    },
+    {
+      "id": "stream-processing",
+      "title": "Windows, watermarks, and engines",
+      "track": "Streaming",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "Event time, late data, and Flink versus Spark Structured Streaming.",
+      "file": "stream-processing.md"
+    },
+    {
+      "id": "sd-framework",
+      "title": "Four quadrants and the checklist",
+      "track": "System design",
+      "level": "Core",
+      "gap": false,
+      "summary": "One way to spend a 45-minute design round.",
+      "file": "sd-framework.md"
+    },
+    {
+      "id": "estimation",
+      "title": "Estimation",
+      "track": "System design",
+      "level": "Core",
+      "gap": false,
+      "summary": "Orders of magnitude you can recompute in the room.",
+      "file": "estimation.md"
+    },
+    {
+      "id": "storage",
+      "title": "Storage and file formats",
+      "track": "System design",
+      "level": "Core",
+      "gap": false,
+      "summary": "Object storage, Parquet, and partitions.",
+      "file": "storage.md"
+    },
+    {
+      "id": "compute",
+      "title": "Compute, scaling, and caching",
+      "track": "System design",
+      "level": "Core",
+      "gap": false,
+      "summary": "Scale the bottleneck you named, and cache the read you repeated.",
+      "file": "compute.md"
+    },
+    {
+      "id": "db-selection",
+      "title": "Choosing a database",
+      "track": "System design",
+      "level": "Core",
+      "gap": false,
+      "summary": "OLTP, warehouse, lake, and search solve different jobs.",
+      "file": "db-selection.md"
+    },
+    {
+      "id": "case-robinhood",
+      "title": "Case: brokerage-style data lake",
+      "track": "System design",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "A market-data lake: facts, late prints, and a serving aggregate.",
+      "file": "case-robinhood.md"
+    },
+    {
+      "id": "case-netflix",
+      "title": "Case: title popularity pipeline",
+      "track": "System design",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "From play events to a top-titles aggregate.",
+      "file": "case-netflix.md"
+    },
+    {
+      "id": "case-uber",
+      "title": "Case: trending dishes",
+      "track": "System design",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "A near-real-time ranking from the Uber notes.",
+      "file": "case-uber.md"
+    },
+    {
+      "id": "case-tiktok",
+      "title": "Case: event-scale analytics",
+      "track": "System design",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "Sessionization and retention at high event volume.",
+      "file": "case-tiktok.md"
+    },
+    {
+      "id": "sd-practice",
+      "title": "Design practice",
+      "track": "System design",
+      "level": "Core",
+      "gap": false,
+      "summary": "How to rehearse the sourced design prompts.",
+      "file": "sd-practice.md"
+    },
+    {
+      "id": "metrics",
+      "title": "Metrics fundamentals",
+      "track": "Product sense",
+      "level": "Core",
+      "gap": false,
+      "summary": "Define the metric before you move it.",
+      "file": "metrics.md"
+    },
+    {
+      "id": "metric-design",
+      "title": "Metric design and event schema",
+      "track": "Product sense",
+      "level": "Core",
+      "gap": false,
+      "summary": "The event has to be able to compute the metric.",
+      "file": "metric-design.md"
+    },
+    {
+      "id": "investigation",
+      "title": "Investigating a metric drop",
+      "track": "Product sense",
+      "level": "Stretch",
+      "gap": false,
+      "summary": "A structured way to explain a broken number.",
+      "file": "investigation.md"
+    },
+    {
+      "id": "case-method",
+      "title": "Case method",
+      "track": "Product sense",
+      "level": "Core",
+      "gap": false,
+      "summary": "A short structure for an open product prompt.",
+      "file": "case-method.md"
+    },
+    {
+      "id": "star",
+      "title": "STAR method",
+      "track": "Behavioral",
+      "level": "Core",
+      "gap": false,
+      "summary": "A template. Your stories stay off this site.",
+      "file": "star.md"
+    },
+    {
+      "id": "values",
+      "title": "Principles and prompt lists",
+      "track": "Behavioral",
+      "level": "Core",
+      "gap": false,
+      "summary": "The prompts the notes actually list, without sample answers.",
+      "file": "values.md"
+    },
+    {
+      "id": "story-bank",
+      "title": "Your story bank",
+      "track": "Behavioral",
+      "level": "Core",
+      "gap": false,
+      "summary": "A placeholder. Nothing personal is stored here.",
+      "file": "story-bank.md"
+    }
+  ]
+}

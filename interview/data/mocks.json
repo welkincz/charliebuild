@@ -1,0 +1,159 @@
+{
+  "rubric": [
+    {
+      "id": "correct",
+      "label": "Correctness",
+      "help": "The result matches the grain and the edge cases you named."
+    },
+    {
+      "id": "communicate",
+      "label": "Communication",
+      "help": "You stated assumptions and narrated the steps."
+    },
+    {
+      "id": "tradeoff",
+      "label": "Trade-offs",
+      "help": "You named one alternative and why you did not pick it."
+    },
+    {
+      "id": "sql",
+      "label": "SQL fluency",
+      "help": "Joins, windows, and NULL behave. Core bar."
+    },
+    {
+      "id": "model",
+      "label": "Modeling",
+      "help": "Grain, fact type, and SCD choice are explicit."
+    },
+    {
+      "id": "ops",
+      "label": "Failure behavior",
+      "help": "A rerun, a late row, or a bad batch has a defined outcome."
+    }
+  ],
+  "loops": [
+    {
+      "id": "amazon-benchmark",
+      "title": "Amazon benchmark loop",
+      "label": "From your notes (July 2024 outline), not a transcript of one candidate.",
+      "kind": "notes",
+      "rounds": [
+        {
+          "name": "Phone screen",
+          "minutes": 45,
+          "ask": "SQL window, CTE, and subquery, plus a short Python task and a fact/dimension sketch.",
+          "practice": [
+            "SQL.consecutive_login_streaks",
+            "SQL.nth_highest",
+            "PY.most_repeated_word",
+            "MODEL.food_truck_business"
+          ]
+        },
+        {
+          "name": "SQL, performance, ETL",
+          "minutes": 45,
+          "ask": "Normalization, indexes, a large-query plan, and an ETL for files landing in storage.",
+          "practice": [
+            "MODEL.nf_discuss",
+            "DESIGN.batch_pipeline_scd",
+            "PY.most_frequent_element"
+          ]
+        },
+        {
+          "name": "Modeling",
+          "minutes": 45,
+          "ask": "E-commerce entities, revenue SQL, normal forms, many-to-many.",
+          "practice": [
+            "MODEL.ecommerce",
+            "SQL.revenue_per_product"
+          ]
+        },
+        {
+          "name": "Behavioral",
+          "minutes": 45,
+          "ask": "Leadership prompts. Speak from your private notes. Do not type the story here.",
+          "practice": [
+            "EXP.conflict_resolution",
+            "BEH.disagree",
+            "BEH.learn_quickly"
+          ]
+        },
+        {
+          "name": "Harder SQL and ETL versus ELT",
+          "minutes": 45,
+          "ask": "Clean missing data, then choose ETL or ELT.",
+          "practice": [
+            "SQL.clean_missing",
+            "PY.sum_evens",
+            "PY.char_frequency"
+          ]
+        },
+        {
+          "name": "Hiring manager",
+          "minutes": 45,
+          "ask": "Project depth. Use the local story placeholder. No sample project is provided.",
+          "practice": [
+            "BEH.lp_prompts"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "big-bank",
+      "title": "Big-bank DE loop",
+      "label": "Assembled from 2026-10-07 posting requirements. Not a reported interview.",
+      "kind": "postings",
+      "rounds": [
+        {
+          "name": "SQL screen",
+          "minutes": 45,
+          "ask": "Joins, aggregation, and a window. Postings require SQL. They do not list these prompts.",
+          "practice": [
+            "SQL.same_day_multi_purchases",
+            "SQL.dedupe_latest",
+            "SQL.rolling_avg_exclude_weekends"
+          ]
+        },
+        {
+          "name": "Data modeling",
+          "minutes": 45,
+          "ask": "Grain, a star, and an SCD choice. Modeling is on the TD and Tangerine postings.",
+          "practice": [
+            "MODEL.lending_book",
+            "MODEL.scd2_pattern",
+            "CHK.grain"
+          ]
+        },
+        {
+          "name": "Spark or Databricks",
+          "minutes": 45,
+          "ask": "Narrow versus wide, a join, and a file-size choice. Spark and Databricks are posting stack signals.",
+          "practice": [
+            "SPARK.repartition_vs_coalesce",
+            "SPARK.cross_join_large_data",
+            "SPARK.job_stage_task"
+          ]
+        },
+        {
+          "name": "Pipeline and CI",
+          "minutes": 45,
+          "ask": "Idempotent load, a test, and what a retry does. CI/CD is on the RBC and TD postings.",
+          "practice": [
+            "PIPE.cdc_merge",
+            "DQ.freshness",
+            "AF.interval"
+          ]
+        },
+        {
+          "name": "Behavioral",
+          "minutes": 30,
+          "ask": "STAR from your private notes. Postings do not include behavioral question text.",
+          "practice": [
+            "CHK.star",
+            "BEH.disagree"
+          ]
+        }
+      ]
+    }
+  ]
+}
