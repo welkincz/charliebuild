@@ -1,0 +1,7 @@
+.git
+.wrangler
+.superpowers
+.playwright-cli
+.DS_Store
+docs
+tests
