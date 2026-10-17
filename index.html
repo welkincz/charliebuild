@@ -548,6 +548,52 @@
     color: var(--signal);
   }
 
+  /* ---------- small tools ---------- */
+
+  .small-tools {
+    padding: clamp(3rem, 6vw, 5.5rem) 0 0.25rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .small-tools-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.25rem 2.5rem;
+    margin-bottom: clamp(1.5rem, 3vw, 2.15rem);
+  }
+
+  .small-tools-heading {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(1.75rem, 3vw, 2.8rem);
+    font-weight: 620;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .small-tools-note {
+    max-width: 42ch;
+    margin: 0.55rem 0 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .small-tools-all {
+    flex: none;
+    color: inherit;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 220ms var(--ease-out);
+  }
+
+  .small-tools-all:hover { border-bottom-color: var(--ink); }
+
   .site-foot {
     display: flex;
     justify-content: space-between;
@@ -618,6 +664,16 @@
       flex-direction: column;
       gap: 0.35rem;
     }
+
+    .small-tools-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.15rem;
+    }
+
+    .small-tools-all {
+      padding-top: 0.85rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -632,7 +688,8 @@
     .entry-name,
     .entry-index,
     .entry-kind,
-    .entry::after { transition: none; }
+    .entry::after,
+    .small-tools-all { transition: none; }
 
     .entry:hover .entry-name,
     .entry:focus-within .entry-name { transform: none; }
@@ -657,6 +714,7 @@
     .entry:focus-within .glyph-route .path { stroke-dashoffset: 0; }
   }
 </style>
+<link rel="stylesheet" href="/assets/small-tools.css">
 </head>
 <body>
 
@@ -841,6 +899,29 @@
         <span class="entry-kind">source</span>
       </article>
     </div>
+  </section>
+
+  <section class="small-tools" aria-labelledby="small-tools-heading">
+    <div class="small-tools-head">
+      <div>
+        <h2 class="small-tools-heading" id="small-tools-heading">Small tools</h2>
+        <p class="small-tools-note">Live utilities I ship and keep honest.</p>
+      </div>
+      <a class="small-tools-all" href="/tools">all small tools</a>
+    </div>
+    <ul class="tool-grid">
+      <!-- small-tools:start -->
+      <li>
+        <a class="tool-card" href="https://charliebuild.com/tools/mortgage/">
+          <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Canadian mortgage calculator, first screen: an $800,000 home, 20% down, 4.50% interest, 25 years, and a payment of $3,542 per month." width="1280" height="730" loading="lazy" decoding="async">
+          <span class="tool-body">
+            <span class="tool-name">Canadian mortgage calculator</span>
+            <span class="tool-hook">$800k · 20% down · $3,542/mo</span>
+          </span>
+        </a>
+      </li>
+      <!-- small-tools:end -->
+    </ul>
   </section>
 
   <footer class="site-foot">

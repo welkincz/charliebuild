@@ -1,0 +1,128 @@
+/* Shared small-tool cards. Tokens come from the page (:root). */
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 48rem) {
+  .tool-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tool-grid > li {
+  display: flex;
+  min-width: 0;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 44px;
+  overflow: hidden;
+  color: #1b222b;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid rgba(27, 34, 43, 0.1);
+  border-radius: 14px;
+  box-shadow:
+    0 1px 1px rgba(27, 34, 43, 0.04),
+    0 10px 28px rgba(27, 34, 43, 0.05);
+  transition:
+    transform 240ms var(--ease-out, cubic-bezier(0.76, 0, 0.24, 1)),
+    border-color 220ms var(--ease-out, cubic-bezier(0.76, 0, 0.24, 1)),
+    box-shadow 240ms var(--ease-out, cubic-bezier(0.76, 0, 0.24, 1));
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(27, 34, 43, 0.28);
+  box-shadow:
+    0 1px 1px rgba(27, 34, 43, 0.05),
+    0 16px 34px rgba(27, 34, 43, 0.08);
+}
+
+.tool-card:focus-visible {
+  outline: 2px solid var(--focus, #2f5fa8);
+  outline-offset: 4px;
+}
+
+.tool-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f7f7f4;
+}
+
+.tool-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  padding: 0.9rem 1rem 1.05rem;
+  border-top: 1px solid var(--rule, #d9ddd8);
+}
+
+.tool-name {
+  font-size: 1.05rem;
+  font-weight: 620;
+  letter-spacing: -0.018em;
+  line-height: 1.3;
+}
+
+.tool-hook {
+  color: #5c6166;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tool-card {
+    color: var(--ink, #e2e5e8);
+    background: #1b2128;
+    border-color: rgba(226, 229, 232, 0.14);
+    box-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.28),
+      0 12px 32px rgba(0, 0, 0, 0.32);
+  }
+
+  .tool-card:hover {
+    border-color: rgba(226, 229, 232, 0.38);
+  }
+
+  .tool-hook {
+    color: var(--muted, #a2abb5);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tool-grid > li {
+    animation: tool-enter 260ms var(--ease-out, cubic-bezier(0.76, 0, 0.24, 1)) both;
+  }
+
+  .tool-grid > li:nth-child(2) { animation-delay: 90ms; }
+  .tool-grid > li:nth-child(3) { animation-delay: 180ms; }
+  .tool-grid > li:nth-child(4) { animation-delay: 270ms; }
+  .tool-grid > li:nth-child(5) { animation-delay: 360ms; }
+  .tool-grid > li:nth-child(6) { animation-delay: 450ms; }
+}
+
+@keyframes tool-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card {
+    transition: none;
+  }
+
+  .tool-card:hover {
+    transform: none;
+  }
+}
