@@ -60,7 +60,7 @@
   }
 
   .shell {
-    width: min(100%, 72rem);
+    width: min(100%, 92rem);
     margin: 0 auto;
     padding: clamp(1.4rem, 3vw, 2.8rem) clamp(1.25rem, 4vw, 4.5rem) 4rem;
   }
@@ -82,26 +82,8 @@
   .tools-home:hover { border-bottom-color: var(--ink); }
 
   .tools-index {
-    padding-top: clamp(2.4rem, 5vw, 3.6rem);
-  }
-
-  .tools-heading {
-    margin: 0;
-    max-width: 16ch;
-    font-size: clamp(1.75rem, 3vw, 2.8rem);
-    font-weight: 620;
-    line-height: 1.08;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
-  }
-
-  .tools-lede {
-    max-width: 36ch;
-    margin: 0.7rem 0 clamp(1.6rem, 3vw, 2.2rem);
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.5;
-    text-wrap: pretty;
+    border-top: 0;
+    padding-top: clamp(2.2rem, 4vw, 3.2rem);
   }
 
   .site-foot {
@@ -146,22 +128,28 @@
     <a class="tools-home" href="/">Charlie Guo</a>
   </header>
 
-  <section class="tools-index" aria-labelledby="tools-heading">
-    <h1 class="tools-heading" id="tools-heading">Small tools</h1>
-    <p class="tools-lede">Live utilities I ship and keep honest.</p>
-    <ul class="tool-grid">
-      <!-- small-tools:start -->
-      <li>
-        <a class="tool-card" href="https://charliebuild.com/tools/mortgage/">
-          <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Canadian mortgage calculator, first screen: an $800,000 home, 20% down, 4.50% interest, 25 years, and a payment of $3,542 per month." width="1280" height="730" loading="lazy" decoding="async">
-          <span class="tool-body">
-            <span class="tool-name">Canadian mortgage calculator</span>
-            <span class="tool-hook">$800k · 20% down · $3,542/mo</span>
-          </span>
-        </a>
-      </li>
-      <!-- small-tools:end -->
+  <section class="small-tools tools-index" aria-labelledby="tools-heading">
+    <div>
+      <h1 class="tool-kicker" id="tools-heading">Small tools</h1>
+      <p class="small-tools-note">Live utilities I ship and keep honest.</p>
+    </div>
+    <!-- small-tools:start -->
+    <ul class="tool-grid" data-layout="single">
+    <li>
+      <a class="tool-card" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">
+        <span class="tool-shot-frame">
+          <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Payment of $3,542 per month beside the home price slider at $800,000." width="1880" height="455" loading="lazy" decoding="async">
+        </span>
+        <span class="tool-body">
+          <span class="tool-tags">React · Live</span>
+          <span class="tool-name">Canadian mortgage calculator</span>
+          <span class="tool-hook">$800k · 20% down · $3,542/mo</span>
+          <span class="tool-open">Open tool <span class="tool-open-arrow" aria-hidden="true">→</span></span>
+        </span>
+      </a>
+    </li>
     </ul>
+    <!-- small-tools:end -->
   </section>
 
   <footer class="site-foot">
