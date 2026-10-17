@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderSmallToolsList, smallTools } from '../assets/small-tools.js';
+import { renderSmallToolsList, smallTools, smallToolsLayout } from '../assets/small-tools.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -66,12 +66,14 @@ for (const tool of smallTools) {
   assert.equal(typeof tool.href, 'string');
   assert.equal(typeof tool.image, 'string');
   assert.equal(typeof tool.alt, 'string');
+  assert.ok(Array.isArray(tool.tags) && tool.tags.length > 0, tool.name);
+  assert.ok(tool.tags.every((tag) => typeof tag === 'string' && tag.trim()), tool.name);
   assert.equal(typeof tool.width, 'number');
   assert.equal(typeof tool.height, 'number');
   assert.ok(tool.name.trim(), 'name');
   assert.ok(tool.hook.trim(), 'hook');
   assert.ok(tool.alt.trim(), 'alt');
-  assert.match(tool.href, /^https:\/\/charliebuild\.com\/tools\/[^/]+\/$/);
+  assert.match(tool.href, /^https:\/\/charliebuild\.com\/tools\/[^/?]+\/(\?.*)?$/);
   assert.equal(tool.href.includes('pages.dev'), false, tool.href);
   assert.match(tool.image, /^\/assets\/tools\/.+\.(webp|avif)$/);
   const file = resolve(repoRoot, tool.image.slice(1));
@@ -82,18 +84,33 @@ for (const tool of smallTools) {
 }
 
 const mortgage = smallTools[0];
+const shareHref = 'https://charliebuild.com/tools/mortgage/?p=800000&d=160000';
 assert.equal(mortgage.name, 'Canadian mortgage calculator');
 assert.equal(mortgage.hook, '$800k · 20% down · $3,542/mo');
-assert.equal(mortgage.href, 'https://charliebuild.com/tools/mortgage/');
+assert.equal(mortgage.href, shareHref);
+assert.deepEqual(mortgage.tags, ['React', 'Live']);
 
 const rendered = normalize(renderSmallToolsList());
+assert.equal(smallToolsLayout(smallTools), 'single');
+assert.match(rendered, /data-layout="single"/);
+assert.equal((rendered.match(/<li>/g) || []).length, 1);
 assert.match(rendered, /loading="lazy"/);
-assert.match(rendered, /width="1280"/);
-assert.match(rendered, /height="730"/);
-assert.equal(mortgage.width, 1280);
-assert.equal(mortgage.height, 730);
+assert.match(rendered, new RegExp('width="' + mortgage.width + '"'));
+assert.match(rendered, new RegExp('height="' + mortgage.height + '"'));
 assert.match(rendered, /class="tool-card"/);
+assert.match(rendered, /class="tool-tags">React · Live</);
+assert.match(rendered, /Open tool <span class="tool-open-arrow"/);
+assert.match(rendered, /href="https:\/\/charliebuild\.com\/tools\/mortgage\/\?p=800000&amp;d=160000"/);
 assert.match(rendered, /Canadian mortgage calculator/);
+
+const many = renderSmallToolsList([
+  mortgage,
+  { ...mortgage, name: 'Second tool', href: 'https://charliebuild.com/tools/second/' },
+]);
+assert.equal(smallToolsLayout([mortgage, mortgage]), 'grid');
+assert.match(normalize(many), /data-layout="grid"/);
+assert.equal((many.match(/<li>/g) || []).length, 2);
+assert.doesNotMatch(normalize(many), /data-layout="single"/);
 
 const home = read('index.html');
 const toolsPage = read('tools/index.html');
@@ -107,17 +124,31 @@ const projects = home.indexOf('class="projects"');
 const section = home.indexOf('class="small-tools"');
 const foot = home.indexOf('class="site-foot"');
 assert.ok(hero >= 0 && projects > hero && section > projects && foot > section, 'section order');
-assert.match(home, /<a class="small-tools-all" href="\/tools">all small tools<\/a>/);
+assert.match(home, /<a class="small-tools-all" href="\/tools\/">all small tools<\/a>/);
+assert.match(home, /class="tool-kicker"/);
 assert.match(home, /href="\/assets\/small-tools\.css"/);
+assert.doesNotMatch(home, /href="\/tools"(?!\/)/);
 assert.doesNotMatch(home, /href=["'][^"']*interview\//);
+assert.ok(home.includes('?p=800000&amp;d=160000'), 'homepage card uses the share link');
 
-assert.match(toolsPage, /<h1 class="tools-heading" id="tools-heading">Small tools<\/h1>/);
+assert.match(toolsPage, /<h1 class="tool-kicker" id="tools-heading">Small tools<\/h1>/);
 assert.match(toolsPage, /Live utilities I ship and keep honest\./);
 assert.match(toolsPage, /href="\/assets\/small-tools\.css"/);
 assert.match(toolsPage, /<a class="tools-home" href="\/">Charlie Guo<\/a>/);
+assert.doesNotMatch(toolsPage, /href="\/tools"(?!\/)/);
+assert.ok(toolsPage.includes('?p=800000&amp;d=160000'), '/tools card uses the share link');
 
+assert.match(css, /grid-template-columns:\s*minmax\(13rem,\s*0\.42fr\)/);
 assert.match(css, /grid-template-columns:\s*1fr;/);
+assert.match(css, /\[data-layout="single"\]/);
+assert.match(css, /\[data-layout="grid"\]/);
+assert.match(css, /flex:\s*0 0 60%/);
 assert.match(css, /grid-template-columns:\s*1fr 1fr;/);
+assert.match(css, /translateY\(-2px\)/);
+assert.match(css, /scale\(1\.02\)/);
+assert.match(css, /translateX\(4px\)/);
+assert.match(css, /200ms/);
+assert.match(css, /text-transform:\s*uppercase/);
 assert.match(css, /prefers-reduced-motion:\s*reduce/);
 assert.match(css, /focus-visible/);
 assert.match(css, /#5c6166/i);
