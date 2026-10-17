@@ -22,8 +22,8 @@ export const smallTools = [
     href: 'https://charliebuild.com/tools/mortgage/',
     image: '/assets/tools/mortgage.webp',
     alt: 'Canadian mortgage calculator, first screen: an $800,000 home, 20% down, 4.50% interest, 25 years, and a payment of $3,542 per month.',
-    width: 1200,
-    height: 683,
+    width: 1280,
+    height: 730,
   },
 ];
 

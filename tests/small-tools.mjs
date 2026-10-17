@@ -88,8 +88,10 @@ assert.equal(mortgage.href, 'https://charliebuild.com/tools/mortgage/');
 
 const rendered = normalize(renderSmallToolsList());
 assert.match(rendered, /loading="lazy"/);
-assert.match(rendered, /width="1200"/);
-assert.match(rendered, /height="683"/);
+assert.match(rendered, /width="1280"/);
+assert.match(rendered, /height="730"/);
+assert.equal(mortgage.width, 1280);
+assert.equal(mortgage.height, 730);
 assert.match(rendered, /class="tool-card"/);
 assert.match(rendered, /Canadian mortgage calculator/);
 
