@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Small tools — Charlie Build</title>
+<meta name="description" content="Live utilities I ship and keep honest.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3.5' fill='%231B222B'/%3E%3Crect x='5' y='3.5' width='5' height='9' rx='1' fill='%23C79B3E'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/small-tools.css">
+<style>
+  :root {
+    --paper: #F6F7F5;
+    --ink: #1B222B;
+    --muted: #586371;
+    --faint: #626D7A;
+    --rule: #D9DDD8;
+    --signal: #8A6A1C;
+    --focus: #2F5FA8;
+    --ease-out: cubic-bezier(0.76, 0, 0.24, 1);
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14181D;
+      --ink: #E2E5E8;
+      --muted: #A2ABB5;
+      --faint: #848E99;
+      --rule: #303740;
+      --signal: #D0A64C;
+      --focus: #82ADE7;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--signal);
+    color: var(--paper);
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 4px;
+  }
+
+  .shell {
+    width: min(100%, 72rem);
+    margin: 0 auto;
+    padding: clamp(1.4rem, 3vw, 2.8rem) clamp(1.25rem, 4vw, 4.5rem) 4rem;
+  }
+
+  .tools-bar {
+    margin: 0;
+    padding-bottom: 1.15rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .tools-home {
+    font-size: 0.9rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .tools-home:hover { border-bottom-color: var(--ink); }
+
+  .tools-index {
+    padding-top: clamp(2.4rem, 5vw, 3.6rem);
+  }
+
+  .tools-heading {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(1.75rem, 3vw, 2.8rem);
+    font-weight: 620;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .tools-lede {
+    max-width: 36ch;
+    margin: 0.7rem 0 clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .site-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    color: var(--faint);
+    font-size: 0.72rem;
+  }
+
+  .site-foot p { margin: 0; }
+
+  .site-foot a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .site-foot a:hover { border-bottom-color: var(--ink); }
+
+  @media (max-width: 42rem) {
+    .shell { padding-inline: clamp(1rem, 5vw, 1.5rem); }
+
+    .site-foot {
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tools-home,
+    .site-foot a { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="tools-bar">
+    <a class="tools-home" href="/">Charlie Guo</a>
+  </header>
+
+  <section class="tools-index" aria-labelledby="tools-heading">
+    <h1 class="tools-heading" id="tools-heading">Small tools</h1>
+    <p class="tools-lede">Live utilities I ship and keep honest.</p>
+    <ul class="tool-grid">
+      <!-- small-tools:start -->
+      <li>
+        <a class="tool-card" href="https://charliebuild.com/tools/mortgage/">
+          <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Canadian mortgage calculator, first screen: an $800,000 home, 20% down, 4.50% interest, 25 years, and a payment of $3,542 per month." width="1200" height="683" loading="lazy" decoding="async">
+          <span class="tool-body">
+            <span class="tool-name">Canadian mortgage calculator</span>
+            <span class="tool-hook">$800k · 20% down · $3,542/mo</span>
+          </span>
+        </a>
+      </li>
+      <!-- small-tools:end -->
+    </ul>
+  </section>
+
+  <footer class="site-foot">
+    <p>Made in Toronto, one understandable piece at a time.</p>
+    <p><a href="/">Charlie Build</a></p>
+  </footer>
+</main>
+</body>
+</html>
