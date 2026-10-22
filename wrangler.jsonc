@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "charliebuild",
+  "compatibility_date": "2026-10-06",
+  // 与 Workers Builds 生产构建自动生成的配置一致；提交进仓库后，PR 预览构建
+  // （npx wrangler versions upload）也能找到静态资源目录。
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "."
+  }
+}
