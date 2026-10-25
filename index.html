@@ -422,6 +422,19 @@
 
   .entry-more summary::-webkit-details-marker { display: none; }
 
+  .entry-more a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 220ms var(--ease-out);
+  }
+
+  .entry-more a:hover,
+  .entry-more a:focus-visible {
+    border-bottom-color: var(--ink);
+  }
+
+
   .entry-more summary:hover,
   .entry-more summary:focus-visible {
     border-bottom-color: var(--ink);
@@ -784,6 +797,16 @@
             branch roll-ups and the run behind the numbers. Seeded sources,
             tested transformations and checked AI summaries.
           </p>
+          <details class="entry-more">
+            <summary>More</summary>
+            <p>
+              It runs every Monday on GitHub Actions: two messy synthetic sources,
+              incremental loads with quarantine, a dbt star schema on DuckDB, and
+              checks that reconcile every injected defect. Read the
+              <a href="https://pulse.charliebuild.com/case-study">case study</a> or the
+              <a href="https://github.com/welkincz/advisor-pulse">source</a>.
+            </p>
+          </details>
         </div>
         <span class="entry-kind">project</span>
       </article>
