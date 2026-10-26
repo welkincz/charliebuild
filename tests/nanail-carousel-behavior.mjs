@@ -80,7 +80,7 @@ assert.equal(
   1,
   'reduced motion keeps the slideshow timer running while the page is visible',
 );
-assert.equal(intervals[0].delay, 5500, 'each photo holds for five and a half seconds');
+assert.equal(intervals[0].delay, 4000, 'each photo holds for four seconds');
 
 intervals[0].callback();
 assert.equal(scenes[0].classList.contains('is-active'), false, 'first scene becomes inactive');
