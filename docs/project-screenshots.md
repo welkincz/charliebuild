@@ -20,3 +20,7 @@ Existing suite: `node --test tests/*.mjs`.
 Browser suite: `node scripts/check-project-carousel.cjs`, using a development installation of Playwright. `PLAYWRIGHT_MODULE` can point to an existing installation. Set `CHECK_WEBKIT=1` to also run WebKit; install its browser first if needed. The check starts and closes its own local HTTP server.
 
 Screenshots are written to `/tmp/charliebuild-carousel-qa`, or the directory set by `SCREENSHOT_DIR`. Playwright is used only for development, and the portfolio adds no runtime dependency or build step.
+
+## Project order
+
+Advisor Pulse is the featured data engineering project and default slide, followed by Orbit (small personal tool), NaNail (built for someone else, a nail studio), and the archived Nova Scotia travel handbook.

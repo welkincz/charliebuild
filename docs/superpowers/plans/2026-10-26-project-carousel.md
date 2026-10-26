@@ -40,3 +40,7 @@
 - A separate reviewer confirmed a WebKit fragment-navigation issue; the regression failed, a hashchange handler fixed it, and both the final suite and focused reviewer recheck passed.
 - Inspected desktop and mobile screenshots. Four WebP source screenshots total 220,254 bytes.
 - Local preview: http://127.0.0.1:8016/#projects-heading. Production has not been changed.
+
+## Approved ordering revision
+
+User revision: Advisor Pulse is the lead project, Orbit is a small tool, NaNail was built for someone else, and Nova Scotia travel comes last. Updated slides, visible navigation, descriptions and browser expectations to match.

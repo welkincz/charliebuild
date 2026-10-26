@@ -43,20 +43,21 @@ async function check(browserType, label) {
         return document.querySelector('.project-nav [aria-current="true"]')?.textContent.trim() === expected && slide && Math.abs(slide.getBoundingClientRect().left - track.getBoundingClientRect().left) < 2;
       }, name);
       assert.equal(await page.locator('.project-slide:not([inert])').count(), 1, 'only the active project accepts focus');
-      const positions = { 'NaNail': '01 / 04', 'Advisor Pulse': '02 / 04', 'Orbit': '03 / 04', 'Nova Scotia': '04 / 04' };
+      const positions = { 'Advisor Pulse': '01 / 04', 'Orbit': '02 / 04', 'NaNail': '03 / 04', 'Nova Scotia': '04 / 04' };
       assert.equal(await page.locator('[data-project-position]').textContent(), positions[name]);
       await page.locator('.project-slide.is-active img').evaluate(image => image.decode());
     }
-    await selected('NaNail');
+    await selected('Advisor Pulse');
     assert.equal(await page.getByRole('button', { name: 'Previous project' }).isDisabled(), true);
     assert.equal(await nav.getByRole('link').count(), 4);
     assert.equal(await page.locator('.project-slide.is-active img').evaluate(image => image.naturalWidth > 0), true, 'selected screenshot loads');
     await page.locator('.projects').scrollIntoViewIfNeeded();
     await page.screenshot({ path: path.join(output, `${label}-desktop.png`), fullPage: true });
     await page.locator('.projects').screenshot({ path: path.join(output, `${label}-projects-desktop.png`) });
-    await page.getByRole('button', { name: 'Next project' }).click();
-    await selected('Advisor Pulse');
     assert.equal(await page.locator('.project-slide.is-active').getByRole('link', { name: 'Open project' }).getAttribute('href'), 'https://pulse.charliebuild.com/');
+    await page.getByRole('button', { name: 'Next project' }).click();
+    await selected('Orbit');
+    assert.equal(await page.locator('.project-slide.is-active').getByRole('link', { name: 'Open project' }).getAttribute('href'), 'https://orbit.charliebuild.com/');
     await nav.getByRole('link', { name: 'Orbit', exact: true }).click();
     await selected('Orbit');
     await track.focus();
@@ -64,9 +65,9 @@ async function check(browserType, label) {
     await selected('Nova Scotia');
     assert.equal(await page.getByRole('button', { name: 'Next project' }).isDisabled(), true);
     await page.keyboard.press('Home');
-    await selected('NaNail');
-    await page.keyboard.press('ArrowRight');
     await selected('Advisor Pulse');
+    await page.keyboard.press('ArrowRight');
+    await selected('Orbit');
     // Repeated input during motion must advance from the requested destination.
     await page.getByRole('button', { name: 'Next project' }).evaluate(button => { button.click(); button.click(); });
     await selected('Nova Scotia');
@@ -120,7 +121,7 @@ async function check(browserType, label) {
         await new Promise(resolve => setTimeout(resolve, 25));
       }
       await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-      await touch.waitForFunction(() => document.querySelector('.project-nav [aria-current="true"]')?.textContent.trim() === 'Advisor Pulse');
+      await touch.waitForFunction(() => document.querySelector('.project-nav [aria-current="true"]')?.textContent.trim() === 'Orbit');
       await mobile.close();
     }
     console.log(`${label}: selection, arrows, keyboard, resize, reduced motion, rapid selection, screenshots and no-JS checks passed`);
