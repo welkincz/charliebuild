@@ -1,0 +1,10 @@
+.git
+.wrangler
+.superpowers
+.playwright-cli
+.DS_Store
+docs
+tests
+wrangler.jsonc
+nanail
+scripts
