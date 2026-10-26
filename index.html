@@ -422,6 +422,19 @@
 
   .entry-more summary::-webkit-details-marker { display: none; }
 
+  .entry-more a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 220ms var(--ease-out);
+  }
+
+  .entry-more a:hover,
+  .entry-more a:focus-visible {
+    border-bottom-color: var(--ink);
+  }
+
+
   .entry-more summary:hover,
   .entry-more summary:focus-visible {
     border-bottom-color: var(--ink);
@@ -657,6 +670,7 @@
     .entry:focus-within .glyph-route .path { stroke-dashoffset: 0; }
   }
 </style>
+<link rel="stylesheet" href="/assets/small-tools.css">
 </head>
 <body>
 
@@ -763,6 +777,42 @@
     <div class="project-list">
       <article class="entry">
         <span class="entry-index" aria-hidden="true">01</span>
+        <svg class="glyph glyph-pulse" viewBox="0 0 18 18" aria-hidden="true">
+          <path d="M2 3h3v12H2M2 9h6l2-3 2 6 2-8 2 5h1"/>
+          <circle class="dot" cx="2" cy="3" r="1"/>
+          <circle class="dot" cx="2" cy="9" r="1"/>
+          <circle class="dot" cx="2" cy="15" r="1"/>
+        </svg>
+        <div class="entry-main">
+          <a class="entry-name" href="https://pulse.charliebuild.com/">Advisor Pulse</a>
+          <ul class="entry-tags" aria-label="Advisor Pulse tags">
+            <li>Python</li>
+            <li>dbt</li>
+            <li>DuckDB</li>
+          </ul>
+        </div>
+        <div class="entry-copy">
+          <p class="entry-note">
+            A weekly report for a fictional bank: portfolio contact coverage,
+            branch roll-ups and the run behind the numbers. Seeded sources,
+            tested transformations and checked AI summaries.
+          </p>
+          <details class="entry-more">
+            <summary>More</summary>
+            <p>
+              It runs every Monday on GitHub Actions: two messy synthetic sources,
+              incremental loads with quarantine, a dbt star schema on DuckDB, and
+              checks that reconcile every injected defect. Read the
+              <a href="https://pulse.charliebuild.com/case-study">case study</a> or the
+              <a href="https://github.com/welkincz/advisor-pulse">source</a>.
+            </p>
+          </details>
+        </div>
+        <span class="entry-kind">project</span>
+      </article>
+
+      <article class="entry">
+        <span class="entry-index" aria-hidden="true">02</span>
         <svg class="glyph glyph-orbit" viewBox="0 0 18 18" aria-hidden="true">
           <circle cx="9" cy="9" r="6.4"/>
           <circle class="dot" cx="9" cy="9" r="1.9"/>
@@ -793,7 +843,7 @@
       </article>
 
       <article class="entry">
-        <span class="entry-index" aria-hidden="true">02</span>
+        <span class="entry-index" aria-hidden="true">03</span>
         <svg class="glyph glyph-route" viewBox="0 0 18 18" aria-hidden="true">
           <path class="path" d="M2.6 14.2c2.6.2 3-3.1 5.1-4.2 2.2-1.1 1.6-4 2.9-5 1.2-.9 3.2-.6 4.6-1.3"/>
           <circle class="dot" cx="2.6" cy="14.2" r="1.3"/>
@@ -817,7 +867,7 @@
       </article>
 
       <article class="entry">
-        <span class="entry-index" aria-hidden="true">03</span>
+        <span class="entry-index" aria-hidden="true">04</span>
         <svg class="glyph glyph-edge" viewBox="0 0 18 18" aria-hidden="true">
           <circle class="dot" cx="4" cy="9" r="1.6"/>
           <path class="arc" d="M8 4.6a5.6 5.6 0 0 1 0 8.8"/>
@@ -841,6 +891,31 @@
         <span class="entry-kind">source</span>
       </article>
     </div>
+  </section>
+
+  <section class="small-tools" aria-labelledby="small-tools-heading">
+    <div>
+      <h2 class="tool-kicker" id="small-tools-heading">Small tools</h2>
+      <p class="small-tools-note">Live utilities I ship and keep honest.</p>
+      <a class="small-tools-all" href="/tools/">all small tools</a>
+    </div>
+    <!-- small-tools:start -->
+    <ul class="tool-grid" data-layout="single">
+    <li>
+      <a class="tool-card" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">
+        <span class="tool-shot-frame">
+          <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Payment of $3,542 per month beside the home price slider at $800,000." width="1880" height="455" loading="lazy" decoding="async">
+        </span>
+        <span class="tool-body">
+          <span class="tool-tags">React · Live</span>
+          <span class="tool-name">Canadian mortgage calculator</span>
+          <span class="tool-hook">$800k · 20% down · $3,542/mo</span>
+          <span class="tool-open">Open tool <span class="tool-open-arrow" aria-hidden="true">→</span></span>
+        </span>
+      </a>
+    </li>
+    </ul>
+    <!-- small-tools:end -->
   </section>
 
   <footer class="site-foot">

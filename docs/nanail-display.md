@@ -20,7 +20,7 @@ and landscape screens and a reduced-motion setting.
 - Optimized copies used by the site live in `nanail/display/assets/`.
 - `nanail/display/index.html` controls the photo order, copy, timing, and
   appointment links. There is no automatic social-media feed or CMS.
-- Six work photos rotate on a 5.5-second hold. A passer-by gets a few seconds of
+- Eight work photos rotate on a 4-second hold. A passer-by gets a few seconds of
   attention at most, so the loop is short on purpose.
 - The WeChat QR is the supplied account image, untouched. Do not regenerate it:
   it is a version-5 code carrying a high error-correction level so the WeChat

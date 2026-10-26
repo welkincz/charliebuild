@@ -41,7 +41,7 @@ assert.equal(
 );
 
 const sceneSafeZones = html.match(/<div class="scene[^"]*" data-copy-zone="[^"]+"/g) ?? [];
-assert.equal(sceneSafeZones.length, 6, 'every work scene declares an image-specific copy-safe zone');
+assert.equal(sceneSafeZones.length, 8, 'every work scene declares an image-specific copy-safe zone');
 
 for (const match of html.matchAll(/(?:src|href)="\.\/(assets\/[^"?#]+)"/g)) {
   const assetPath = resolve(dirname(pagePath), match[1]);
