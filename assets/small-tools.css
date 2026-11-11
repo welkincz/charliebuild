@@ -22,7 +22,7 @@
 
 .small-tools-note {
   max-width: 28ch;
-  margin: 0;
+  margin: 1rem 0 0;
   color: var(--muted, #586371);
   font-size: 0.82rem;
   font-weight: 400;
@@ -96,7 +96,7 @@
 .tool-shot-frame {
   display: block;
   overflow: hidden;
-  background: #f7f7f4;
+  padding: 12px;
   line-height: 0;
 }
 

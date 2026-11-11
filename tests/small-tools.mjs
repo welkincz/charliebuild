@@ -125,13 +125,15 @@ const section = home.indexOf('class="small-tools"');
 const foot = home.indexOf('class="site-foot"');
 assert.ok(hero >= 0 && projects > hero && section > projects && foot > section, 'section order');
 assert.match(home, /<a class="small-tools-all" href="\/tools\/">all small tools<\/a>/);
-assert.match(home, /class="tool-kicker"/);
+assert.match(home, /<p class="tool-kicker">Small tools<\/p>/);
+assert.match(home, /<h2 class="projects-heading" id="small-tools-heading">Built to use\.<\/h2>/);
 assert.match(home, /href="\/assets\/small-tools\.css"/);
 assert.doesNotMatch(home, /href="\/tools"(?!\/)/);
 assert.doesNotMatch(home, /href=["'][^"']*interview\//);
 assert.ok(home.includes('?p=800000&amp;d=160000'), 'homepage card uses the share link');
 
-assert.match(toolsPage, /<h1 class="tool-kicker" id="tools-heading">Small tools<\/h1>/);
+assert.match(toolsPage, /<p class="tool-kicker">Small tools<\/p>/);
+assert.match(toolsPage, /<h1 class="projects-heading" id="tools-heading">Built to use\.<\/h1>/);
 assert.match(toolsPage, /Live utilities I ship and keep honest\./);
 assert.match(toolsPage, /href="\/assets\/small-tools\.css"/);
 assert.match(toolsPage, /<a class="tools-home" href="\/">Charlie Guo<\/a>/);
@@ -152,6 +154,7 @@ assert.match(css, /text-transform:\s*uppercase/);
 assert.match(css, /prefers-reduced-motion:\s*reduce/);
 assert.match(css, /focus-visible/);
 assert.match(css, /#5c6166/i);
+assert.match(css, /padding:\s*12px/);
 
 assert.equal(existsSync(resolve(repoRoot, 'tools/index.html')), true);
 assert.equal(existsSync(resolve(repoRoot, 'tools/mortgage')), false);
