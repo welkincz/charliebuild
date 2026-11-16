@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
-const pages = ['index.html', 'tools/index.html', '404.html'];
+const pages = ['index.html', 'tools/index.html', 'resume/index.html', '404.html'];
 
 function meta(html, attr, key) {
   const match = html.match(new RegExp('<meta ' + attr + '="' + key.replace(/[.:]/g, '\\$&') + '" content="([^"]*)"'));
@@ -100,6 +100,18 @@ assert.match(headers, /connect-src 'self'[^;]*;/, 'edge readout fetches /cdn-cgi
 const ignored = read('.assetsignore').split('\n');
 for (const internal of ['.git', '.github', '.gitignore', 'node_modules', 'package-lock.json', 'docs', 'tests', 'scripts', 'nanail', 'package.json', 'README.md', 'wrangler.jsonc']) {
   assert.ok(ignored.includes(internal), internal + ' must not be published');
+}
+
+// The public résumé: linked, one page, and no phone number.
+const resume = read('resume/index.html');
+assert.match(home, /<a href="\/resume\/">Résumé<\/a>/, 'header links the résumé');
+assert.doesNotMatch(resume, /\b\d{3}[-. ]\d{3}[-. ]\d{4}\b/, 'public résumé must not show a phone number');
+assert.match(resume, /<link rel="canonical" href="https:\/\/charliebuild\.com\/resume\/">/);
+const pdf = readFileSync(resolve(root, 'resume/Chaozheng-Charlie-Guo-Data-Engineer-Resume.pdf')).toString('latin1');
+assert.equal(pdf.slice(0, 5), '%PDF-');
+assert.equal((pdf.match(/\/Type\s*\/Page\b/g) || []).length, 1, 'résumé PDF is one page');
+for (const heading of ['Summary', 'Skills', 'Experience', 'Projects', 'Education']) {
+  assert.match(resume, new RegExp('<h2 id="' + heading.toLowerCase() + '">' + heading + '</h2>'), 'standard ATS heading ' + heading);
 }
 
 console.log('Site contract test passed.');
