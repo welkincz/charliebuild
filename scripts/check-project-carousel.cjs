@@ -48,6 +48,10 @@ async function check(browserType, label) {
       await page.locator('.project-slide.is-active img').evaluate(image => image.decode());
     }
     await selected('Advisor Pulse');
+    // The hero call to action lands on selected work without moving the carousel.
+    await page.getByRole('link', { name: 'See selected work' }).click();
+    await page.waitForFunction(() => { const top = document.getElementById('work').getBoundingClientRect().top; return top > -4 && top < innerHeight / 3; });
+    await selected('Advisor Pulse');
     assert.equal(await page.getByRole('button', { name: 'Previous project' }).isDisabled(), true);
     assert.equal(await nav.getByRole('link').count(), 4);
     assert.equal(await page.locator('.project-slide.is-active img').evaluate(image => image.naturalWidth > 0), true, 'selected screenshot loads');

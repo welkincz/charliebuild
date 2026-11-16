@@ -1,4 +1,5 @@
 .git
+.github
 .wrangler
 .superpowers
 .playwright-cli
@@ -8,3 +9,9 @@ tests
 wrangler.jsonc
 nanail
 scripts
+package.json
+README.md
+node_modules
+package-lock.json
+.gitignore
+.assetsignore

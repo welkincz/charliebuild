@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chaozheng (Charlie) Guo, Data Engineer: Résumé</title>
+<meta name="description" content="Résumé of Chaozheng (Charlie) Guo, a data engineer in Toronto: SAS-to-Python migration and dbt at RBC, banking reporting pipelines, and Advisor Pulse.">
+<meta name="author" content="Charlie Guo">
+<link rel="canonical" href="https://charliebuild.com/resume/">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Charlie Build">
+<meta property="og:url" content="https://charliebuild.com/resume/">
+<meta property="og:title" content="Charlie Guo, Data Engineer: résumé">
+<meta property="og:description" content="Banking data pipelines, SAS-to-Python migration and dbt at RBC. Toronto.">
+<meta property="og:image" content="https://charliebuild.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root {
+    --paper: #F6F7F5; --sheet: #FFFFFF; --ink: #1B222B; --muted: #586371;
+    --faint: #626D7A; --rule: #D9DDD8; --signal: #8A6A1C; --focus: #2F5FA8;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14181D; --sheet: #1B2128; --ink: #E2E5E8; --muted: #A2ABB5;
+      --faint: #848E99; --rule: #303740; --signal: #D0A64C; --focus: #82ADE7;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+  .bar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem 1.5rem;
+    width: min(100% - 2rem, 52rem); margin: 0 auto; padding: 1.4rem 0 1rem;
+    font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif; font-size: 0.85rem;
+  }
+  .bar a { text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .bar a:hover { border-bottom-color: var(--ink); }
+  .download {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem;
+    border: 0 !important; border-radius: 999px; background: var(--ink); color: var(--paper);
+    font-weight: 600;
+  }
+  .download:hover { background: var(--signal); }
+
+  .sheet {
+    width: min(100% - 2rem, 52rem); margin: 0 auto 3rem;
+    padding: clamp(1.25rem, 5vw, 3.2rem);
+    background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px;
+  }
+
+  h1 { margin: 0; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+  .headline { margin: 0.2rem 0 0; font-size: 1rem; font-weight: 600; color: var(--signal); }
+  .contact { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.86rem; }
+  .contact a { text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+
+  h2 {
+    margin: 1.4rem 0 0.5rem; padding-bottom: 0.2rem; border-bottom: 1px solid var(--rule);
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  p, ul { margin: 0; }
+  .summary { font-size: 0.93rem; }
+
+  .skills { display: grid; gap: 0.15rem; font-size: 0.88rem; }
+  .skills b { font-weight: 650; }
+
+  .role + .role { margin-top: 0.85rem; }
+  .role-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; }
+  h3 { margin: 0; font-size: 0.95rem; font-weight: 650; }
+  .when { color: var(--muted); font-size: 0.86rem; white-space: nowrap; }
+  .org { margin: 0; color: var(--muted); font-size: 0.86rem; }
+  .role ul { margin-top: 0.3rem; padding-left: 1.1rem; font-size: 0.88rem; }
+  .role li + li { margin-top: 0.18rem; }
+  .role li::marker { color: var(--faint); }
+
+  .edu { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; font-size: 0.88rem; }
+  .edu + .edu { margin-top: 0.15rem; }
+
+  @media print {
+    @page { size: Letter; margin: 0.4in 0.5in; }
+    :root { --ink: #000; --muted: #333; --faint: #555; --rule: #999; --signal: #000; }
+    html, body { background: #fff; color: #000; }
+    body { font-size: 9.6pt; line-height: 1.28; }
+    .bar { display: none; }
+    .sheet { width: auto; margin: 0; padding: 0; border: 0; border-radius: 0; background: #fff; }
+    h1 { font-size: 17pt; }
+    .headline { font-size: 10.5pt; }
+    .contact, .org, .when { font-size: 9pt; }
+    h2 { margin: 8pt 0 3pt; font-size: 9pt; }
+    .summary, .skills, .role ul, .edu { font-size: 9.5pt; }
+    .role + .role { margin-top: 6pt; }
+    .role ul { margin-top: 2pt; }
+    .role li + li { margin-top: 1pt; }
+    h2, h3, .role-head { break-after: avoid; }
+    li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="bar" aria-label="Résumé">
+  <a href="/">← Charlie Guo</a>
+  <a class="download" href="/resume/Chaozheng-Charlie-Guo-Data-Engineer-Resume.pdf" download>Download PDF</a>
+</nav>
+
+<main class="sheet">
+  <header>
+    <h1>Chaozheng (Charlie) Guo</h1>
+    <p class="headline">Data Engineer</p>
+    <p class="contact">
+      Toronto, ON |
+      <a href="mailto:welkincz@live.cn">welkincz@live.cn</a> |
+      <a href="https://www.linkedin.com/in/chaozheng-charlie-guo/">linkedin.com/in/chaozheng-charlie-guo</a> |
+      <a href="https://github.com/welkincz">github.com/welkincz</a> |
+      <a href="https://charliebuild.com/">charliebuild.com</a>
+    </p>
+  </header>
+
+  <section aria-labelledby="summary">
+    <h2 id="summary">Summary</h2>
+    <p class="summary">Data engineer in Canadian banking (RBC, Scotiabank), currently moving RBC Commercial Banking's weekly reporting from SAS to Python and dbt. Six years owning production reporting for advisors and executives, plus the change work a migration needs: automated reconciliation against legacy outputs, a shared dbt pattern and GitHub adoption across a 10-developer team.</p>
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">Skills</h2>
+    <div class="skills">
+      <p><b>Languages:</b> Python, SQL, SAS, Shell, PowerShell</p>
+      <p><b>Data engineering:</b> ETL/ELT, dbt, data modeling (star schema, SCD Type 2), incremental loads, data quality tests, reconciliation</p>
+      <p><b>Platforms:</b> Snowflake (pilot), SQL Server, Teradata, DuckDB, Cloudflare R2</p>
+      <p><b>Delivery:</b> Git, GitHub, GitHub Actions, CI/CD</p>
+      <p><b>BI:</b> Tableau (TabPy), Power BI, Power Query</p>
+      <p><b>AI tooling:</b> Model Context Protocol (MCP) servers, Claude Code, coding agents</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
+
+    <div class="role">
+      <div class="role-head">
+        <h3>Senior Manager, Business Intelligence and Information Management</h3>
+        <span class="when">Sep 2024 – Present</span>
+      </div>
+      <p class="org">RBC (Royal Bank of Canada), Commercial Banking | Toronto, ON</p>
+      <ul>
+        <li>Built reusable Python components and automated checks that reconcile each output against the legacy SAS result; migrated 20 SAS jobs.</li>
+        <li>Cut the weekly production SAS pipeline from 8–9 hours to 6 by optimizing 20+ SAS processes, with outputs unchanged.</li>
+        <li>Piloted dbt and set the development pattern all 10 developers on the team now follow; supported a Snowflake pilot.</li>
+        <li>Own activity reporting for all Commercial Banking lines, from requirements to advisor metrics and executive rollups.</li>
+        <li>Built HR-driven role-based access for internal reports, so advisor-to-executive views follow weekly org changes.</li>
+        <li>Helped move the team to GitHub for version control and collaborative development; mentor new team members.</li>
+        <li>As AI champion, built three local MCP servers (GitHub, Confluence, Outlook) and five shared agent instruction files.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3>Manager, Data Engineering and BI</h3>
+        <span class="when">Feb 2022 – Sep 2024</span>
+      </div>
+      <p class="org">RBC (Royal Bank of Canada), Personal Banking | Toronto, ON</p>
+      <ul>
+        <li>Built the SAS ETL workflows behind five Tableau reporting products, including one used by 1,000+ financial planners.</li>
+        <li>Built a Tableau write-back workflow with TabPy so planners record missing business context directly in the database.</li>
+        <li>Wrote a Python app on the Jira API that syncs tickets and assignments across projects, saving about five hours a week.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <h3>Senior Data Analyst, Business Intelligence</h3>
+        <span class="when">Sep 2020 – Feb 2022</span>
+      </div>
+      <p class="org">Scotiabank | Toronto, ON</p>
+      <ul>
+        <li>Owned a national Power BI reporting product for 1,000+ advisors, from requirements to deployment and enhancements.</li>
+        <li>Automated the monthly Scotia iTRADE trade-rebate list in Power Query, from a full workday to under two hours.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="projects">
+    <h2 id="projects">Projects</h2>
+    <div class="role">
+      <div class="role-head">
+        <h3>Advisor Pulse: weekly banking data pipeline</h3>
+        <span class="when">2026</span>
+      </div>
+      <p class="org">Python, SQL, dbt, DuckDB, GitHub Actions | <a href="https://pulse.charliebuild.com/">pulse.charliebuild.com</a> | <a href="https://github.com/welkincz/advisor-pulse">github.com/welkincz/advisor-pulse</a></p>
+      <ul>
+        <li>Weekly batch pipeline on synthetic banking data: idempotent incremental Python loads into DuckDB with a quarantine, then a dbt star schema with enforced contracts; 2.2M rows over 107 weeks.</li>
+        <li>Rebuilt advisor and portfolio ownership as SCD Type 2 history from events, so any backfilled week reproduces exactly.</li>
+        <li>Checked data quality against ground truth: every injected defect reconciled with quarantine, 107 of 107 weeks.</li>
+        <li>Orchestrated on GitHub Actions with retries, run logs and Cloudflare R2 state; the report runs on DuckDB-WASM.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="education">
+    <h2 id="education">Education</h2>
+    <p class="edu"><span><b>Master of Management Analytics</b>, Smith School of Business, Queen's University</span><span class="when">2020</span></p>
+    <p class="edu"><span><b>MBA</b>, Goodman School of Business, Brock University</span><span class="when">2015</span></p>
+  </section>
+</main>
+
+</body>
+</html>
