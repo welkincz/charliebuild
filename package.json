@@ -8,6 +8,7 @@
     "test:browser": "node scripts/check-project-carousel.cjs",
     "render:tools": "node scripts/render-small-tools.mjs",
     "render:og": "node scripts/render-og.cjs",
-    "dev": "python3 -m http.server 8000"
+    "dev": "python3 -m http.server 8000",
+    "render:resume": "node scripts/render-resume.cjs"
   }
 }

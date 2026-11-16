@@ -14,6 +14,7 @@ The portfolio of **Charlie Guo**, a data engineer in Toronto. Live at
 | **Hero** | An interactive wordmark: each of the 12 letters swaps for a generated image of an interest. A short statement of what I do sits beside it. |
 | **Selected work** | A keyboard-, touch- and screen-reader-friendly carousel of four shipped projects. [Advisor Pulse](https://pulse.charliebuild.com/) leads: a Python + dbt + DuckDB pipeline that turns messy synthetic banking sources into a tested weekly report ([case study](https://pulse.charliebuild.com/case-study), [source](https://github.com/welkincz/advisor-pulse)). |
 | **Small tools** | Live utilities rendered from one data file, [`assets/small-tools.js`](assets/small-tools.js). |
+| **Résumé** | [`/resume/`](resume/index.html): one HTML source that prints to a one-page, single-column, text-based PDF that ATS parsers read in order. The public copy has no phone number. |
 | **Edge readout** | The Cloudflare data centre, HTTP version, TLS version and time to first byte for *your* request, read from `/cdn-cgi/trace` and the Navigation Timing API. |
 
 ## How it's built
@@ -55,7 +56,9 @@ npm run test:browser   # needs Playwright: npm i --no-save playwright
 
 After editing `assets/small-tools.js`, run `npm run render:tools` to stamp the
 cards into both pages. After editing `scripts/og/og.html`, run
-`npm run render:og`.
+`npm run render:og`. After editing `resume/index.html`, run
+`npm run render:resume` on macOS; `npm test` fails if the PDF is no longer
+one page.
 
 ## Deploy
 
