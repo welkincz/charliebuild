@@ -3,9 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Charlie Build — Charlie Guo</title>
-<meta name="description" content="Small, inspectable software built by Charlie Guo to understand the systems underneath.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3.5' fill='%231B222B'/%3E%3Crect x='5' y='3.5' width='5' height='9' rx='1' fill='%23C79B3E'/%3E%3C/svg%3E">
+<title>Charlie Guo — Data engineer in Toronto · Charlie Build</title>
+<meta name="description" content="Charlie Guo is a data engineer in Toronto who builds tested data pipelines and the reports on top of them. Selected work in Python, SQL, dbt and DuckDB.">
+<meta name="author" content="Charlie Guo">
+<link rel="canonical" href="https://charliebuild.com/">
+<meta name="theme-color" content="#F6F7F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14181D" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Charlie Build">
+<meta property="og:url" content="https://charliebuild.com/">
+<meta property="og:title" content="Charlie Guo — Data engineer in Toronto">
+<meta property="og:description" content="Tested data pipelines and the reports on top of them. Selected work in Python, SQL, dbt and DuckDB.">
+<meta property="og:image" content="https://charliebuild.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Charlie Build wordmark for Charlie Guo, data engineer in Toronto, beside the line: Tested data pipelines and the reports on top of them.">
+<meta property="og:locale" content="en_CA">
+<meta property="profile:first_name" content="Charlie">
+<meta property="profile:last_name" content="Guo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Charlie Guo — Data engineer in Toronto">
+<meta name="twitter:description" content="Tested data pipelines and the reports on top of them.">
+<meta name="twitter:image" content="https://charliebuild.com/assets/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://charliebuild.com/#person",
+      "name": "Charlie Guo",
+      "alternateName": "Chaozheng Guo",
+      "jobTitle": "Data Engineer",
+      "url": "https://charliebuild.com/",
+      "image": "https://charliebuild.com/assets/og.png",
+      "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+      "knowsAbout": ["Data engineering", "Analytics engineering", "Python", "SQL", "dbt", "DuckDB", "Data quality", "Cloudflare Workers"],
+      "sameAs": ["https://github.com/welkincz", "https://www.linkedin.com/in/chaozheng-charlie-guo/"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://charliebuild.com/#website",
+      "name": "Charlie Build",
+      "url": "https://charliebuild.com/",
+      "author": { "@id": "https://charliebuild.com/#person" }
+    }
+  ]
+}
+</script>
 <style>
   :root {
     --paper: #F6F7F5;
@@ -173,7 +220,7 @@
     min-height: clamp(35rem, 72svh, 54rem);
     display: grid;
     align-content: center;
-    padding: clamp(4.5rem, 9vw, 8.5rem) 0 clamp(4rem, 8vw, 7rem);
+    padding: clamp(4.5rem, 9vw, 8.5rem) 0 clamp(2.5rem, 5vw, 4rem);
   }
 
   .wordmark {
@@ -288,6 +335,96 @@
     100% { opacity: 1; transform: scale(1); }
   }
 
+  /* ---------- positioning ---------- */
+
+  .hero-top {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
+    align-items: end;
+  }
+
+  .pitch {
+    max-width: 30rem;
+  }
+
+  .pitch-kicker,
+  .pitch-stack {
+    margin: 0;
+    color: var(--faint);
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .pitch-statement {
+    margin: 0.7rem 0 0;
+    color: var(--ink);
+    font-size: clamp(1.12rem, 1.5vw, 1.32rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+
+  .pitch-stack {
+    margin-top: 1rem;
+    letter-spacing: 0.03em;
+    text-transform: none;
+  }
+
+  .pitch-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.4rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .pitch-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0 1.15rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 180ms var(--ease-out);
+  }
+
+  .pitch-primary:hover { background: var(--signal); }
+
+  .pitch-primary svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 220ms var(--ease-soft);
+  }
+
+  .pitch-primary:hover svg { transform: translateY(2px); }
+
+  .pitch-secondary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: none;
+  }
+
+  .pitch-secondary span { border-bottom: 1px solid var(--signal); }
+  .pitch-secondary:hover span { border-bottom-color: var(--ink); }
+
+  @media (min-width: 72rem) {
+    .hero-top {
+      grid-template-columns: minmax(0, 1fr) minmax(19rem, 27rem);
+    }
+
+    .pitch { padding-bottom: 0.4rem; }
+  }
+
   .letter-guide {
     min-height: 3.1rem;
     margin: clamp(2.7rem, 5vw, 4.5rem) 0 0;
@@ -317,6 +454,34 @@
               drop-shadow(0 0.05em 0.12em rgba(0, 0, 0, 0.52));
     }
   }
+
+  .contact {
+    padding: clamp(3rem, 6vw, 5.5rem) 0 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .contact .projects-heading { max-width: 16ch; text-wrap: balance; }
+
+  @media (min-width: 58.01rem) {
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 3rem clamp(3rem, 8vw, 8rem);
+      align-items: end;
+    }
+
+    .contact-note { margin-top: 0; }
+  }
+
+  .contact-note {
+    max-width: 46ch;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-wrap: pretty;
+  }
+
+  .contact .pitch-primary:hover svg { transform: translate(2px, -2px); }
 
   .site-foot {
     display: flex;
@@ -382,7 +547,12 @@
 
     .letter,
     .char,
-    .edge-readout dd { transition: none; }
+    .edge-readout dd,
+    .pitch-primary,
+    .pitch-primary svg { transition: none; }
+
+    .pitch-primary:hover svg,
+    .contact .pitch-primary:hover svg { transform: none; }
 
     .letter.active .specimen {
       animation: none;
@@ -434,6 +604,7 @@
   <section class="hero" aria-labelledby="page-title">
     <h1 id="page-title" class="visually-hidden">Charlie Build</h1>
 
+    <div class="hero-top">
     <div class="wordmark" role="group" aria-label="Charlie Build, an interactive title">
       <span class="word word-charlie">
         <button class="letter" type="button" disabled aria-label="C, inspired by Rick and Morty" aria-describedby="letter-guide" data-interest="Rick and Morty" data-detail="A volatile dimensional portal turns the C into a tiny experiment." style="--spread:.15em;--tilt:-3deg;--asset-height:1.03em">
@@ -490,13 +661,24 @@
       </span>
     </div>
 
+    <div class="pitch">
+      <p class="pitch-kicker">Data engineering · Analytics engineering</p>
+      <p class="pitch-statement">I build tested data pipelines and the reports on top of them, so every number can be traced back to where it came from.</p>
+      <p class="pitch-stack">Python · SQL · dbt · DuckDB · Cloudflare</p>
+      <div class="pitch-actions">
+        <a class="pitch-primary" href="#work">See selected work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a>
+        <a class="pitch-secondary" href="https://pulse.charliebuild.com/case-study"><span>Read the Advisor Pulse case study</span></a>
+      </div>
+    </div>
+    </div>
+
     <p class="letter-guide" id="letter-guide" aria-live="polite">
       <span class="interest-name" id="interest-name">Twelve letters, six obsessions.</span>
       <span class="interest-detail" id="interest-detail">Hover, focus, or tap a letter to see what it is made from.</span>
     </p>
   </section>
 
-  <section class="projects" aria-labelledby="projects-heading">
+  <section class="projects" id="work" aria-labelledby="projects-heading">
     <div class="projects-intro">
       <div>
         <p class="projects-kicker">Selected work</p>
@@ -512,7 +694,7 @@
         <a href="#project-nanail">NaNail</a>
         <a href="#project-travel">Nova Scotia</a>
       </nav>
-      <div id="project-track" class="project-track" aria-label="Project screenshots. Use left and right arrow keys to change project.">
+      <div id="project-track" class="project-track" role="group" aria-label="Project screenshots. Use left and right arrow keys to change project.">
         <article class="project-slide" id="project-pulse" aria-labelledby="project-pulse-name">
           <div class="project-visual">
             <img class="project-shot" src="/assets/projects/pulse.webp" alt="Advisor Pulse weekly report showing portfolio contact coverage, its trend chart and banking activity measures using fictional data." width="1440" height="960" loading="lazy" decoding="async">
@@ -605,6 +787,20 @@
     <!-- small-tools:end -->
   </section>
 
+  <section class="contact" aria-labelledby="contact-heading">
+    <div>
+      <p class="tool-kicker">Contact</p>
+      <h2 class="projects-heading" id="contact-heading">Working on something with data?</h2>
+    </div>
+    <div>
+    <p class="contact-note">I like problems where the numbers have to be right and someone has to trust them. The fastest way to reach me is LinkedIn.</p>
+    <div class="pitch-actions">
+      <a class="pitch-primary" href="https://www.linkedin.com/in/chaozheng-charlie-guo/">Message me on LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      <a class="pitch-secondary" href="https://github.com/welkincz"><span>See my code on GitHub</span></a>
+    </div>
+    </div>
+  </section>
+
   <footer class="site-foot">
     <div>
       <p>Made in Toronto, one understandable piece at a time.</p>
@@ -613,7 +809,7 @@
     <div>
       <p>Text works first. The surprises are optional.</p>
       <p class="foot-meta">
-        no framework · Cloudflare Pages ·
+        no framework · Cloudflare Workers ·
         <a href="https://github.com/welkincz/charliebuild">source</a>
       </p>
     </div>
