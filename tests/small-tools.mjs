@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderSmallToolsList, smallTools, smallToolsLayout } from '../assets/small-tools.js';
+import { canadianMonthlyPayment, renderSmallToolsList, smallTools, smallToolsLayout } from '../assets/small-tools.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -90,6 +90,25 @@ assert.equal(mortgage.hook, '$800k · 20% down · $3,542/mo');
 assert.equal(mortgage.href, shareHref);
 assert.deepEqual(mortgage.tags, ['React', 'Live']);
 
+// 4.50% fixed, 25 years, monthly, semi-annual compounding, no CMHC.
+// 3542.23 is the published card regression. 4427.78 is
+// mortgagePayment(800_000, 0.045, 25, "monthly", "semi").rounded
+// from welkincz/fun-little-things mortgage/src/lib/mortgage/payment.ts
+// for a $1,000,000 price and $200,000 (20%) down payment.
+const atEightHundred = canadianMonthlyPayment(800_000, 160_000);
+assert.ok(Math.abs(atEightHundred - 3542.23) <= 0.01, String(atEightHundred));
+const atOneMillion = canadianMonthlyPayment(1_000_000, 200_000);
+assert.ok(Math.abs(atOneMillion - 4427.78) <= 0.01, String(atOneMillion));
+
+function assertSliderOutsideAnchor(html, label) {
+  const at = html.indexOf('<input type="range"');
+  assert.ok(at > 0, label + ' slider');
+  const before = html.slice(0, at);
+  const opens = (before.match(/<a[\s>]/g) || []).length;
+  const closes = (before.match(/<\/a>/g) || []).length;
+  assert.equal(opens, closes, label + ' slider is inside an anchor');
+}
+
 const rendered = normalize(renderSmallToolsList());
 assert.equal(smallToolsLayout(smallTools), 'single');
 assert.match(rendered, /data-layout="single"/);
@@ -102,6 +121,16 @@ assert.match(rendered, /class="tool-tags">React · Live</);
 assert.match(rendered, /Open tool <span class="tool-open-arrow"/);
 assert.match(rendered, /href="https:\/\/charliebuild\.com\/tools\/mortgage\/\?p=800000&amp;d=160000"/);
 assert.match(rendered, /Canadian mortgage calculator/);
+assert.match(rendered, /type="range"/);
+assert.match(rendered, /min="400000"/);
+assert.match(rendered, /max="2000000"/);
+assert.match(rendered, /step="10000"/);
+assert.match(rendered, /value="800000"/);
+assert.match(rendered, /aria-live="polite"/);
+assert.match(rendered, /Home price/);
+assert.match(rendered, /\$800k/);
+assert.match(rendered, /\$3,542\/mo/);
+assertSliderOutsideAnchor(rendered, 'rendered');
 
 const many = renderSmallToolsList([
   mortgage,
@@ -131,6 +160,12 @@ assert.match(home, /href="\/assets\/small-tools\.css"/);
 assert.doesNotMatch(home, /href="\/tools"(?!\/)/);
 assert.doesNotMatch(home, /href=["'][^"']*interview\//);
 assert.ok(home.includes('?p=800000&amp;d=160000'), 'homepage card uses the share link');
+assert.match(home, /type="range"/, 'homepage slider');
+assert.match(home, /min="400000"/);
+assert.match(home, /max="2000000"/);
+assert.match(home, /step="10000"/);
+assert.match(home, /value="800000"/);
+assertSliderOutsideAnchor(between(home), 'homepage');
 
 assert.match(toolsPage, /<p class="tool-kicker">Small tools<\/p>/);
 assert.match(toolsPage, /<h1 class="projects-heading" id="tools-heading">Built to use\.<\/h1>/);
@@ -139,6 +174,12 @@ assert.match(toolsPage, /href="\/assets\/small-tools\.css"/);
 assert.match(toolsPage, /<a class="tools-home" href="\/">Charlie Guo<\/a>/);
 assert.doesNotMatch(toolsPage, /href="\/tools"(?!\/)/);
 assert.ok(toolsPage.includes('?p=800000&amp;d=160000'), '/tools card uses the share link');
+assert.match(toolsPage, /type="range"/, '/tools slider');
+assert.match(toolsPage, /min="400000"/);
+assert.match(toolsPage, /max="2000000"/);
+assert.match(toolsPage, /step="10000"/);
+assert.match(toolsPage, /value="800000"/);
+assertSliderOutsideAnchor(between(toolsPage), '/tools');
 
 assert.match(css, /grid-template-columns:\s*minmax\(13rem,\s*0\.42fr\)/);
 assert.match(css, /grid-template-columns:\s*1fr;/);

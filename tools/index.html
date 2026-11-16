@@ -139,19 +139,30 @@
     <!-- small-tools:start -->
     <ul class="tool-grid" data-layout="single">
     <li>
-      <a class="tool-card" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">
-        <span class="tool-shot-frame">
-          <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Payment of $3,542 per month beside the home price slider at $800,000." width="1880" height="455" loading="lazy" decoding="async">
-        </span>
-        <span class="tool-body">
-          <span class="tool-tags">React · Live</span>
-          <span class="tool-name">Canadian mortgage calculator</span>
-          <span class="tool-hook">$800k · 20% down · $3,542/mo</span>
-          <span class="tool-open">Open tool <span class="tool-open-arrow" aria-hidden="true">→</span></span>
-        </span>
-      </a>
+      <div class="tool-card" data-mortgage-card data-down-ratio="0.2">
+        <a class="tool-shot-link" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">
+          <span class="tool-shot-frame">
+            <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Payment of $3,542 per month beside the home price slider at $800,000." width="1880" height="455" loading="lazy" decoding="async">
+          </span>
+        </a>
+        <div class="tool-body">
+          <a class="tool-copy-link" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">
+            <span class="tool-tags">React · Live</span>
+            <span class="tool-name">Canadian mortgage calculator</span>
+          </a>
+          <span class="tool-hook"><span data-mortgage-price>$800k</span> · 20% down · <span data-mortgage-payment aria-live="polite">$3,542/mo</span></span>
+          <label class="tool-price">
+            <span class="tool-price-label">Home price</span>
+            <input type="range" min="400000" max="2000000" step="10000" value="800000" aria-valuetext="$800,000">
+          </label>
+          <a class="tool-open-link" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">
+            <span class="tool-open">Open tool <span class="tool-open-arrow" aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </div>
     </li>
     </ul>
+    <script type="module" src="/assets/small-tools.js"></script>
     <!-- small-tools:end -->
   </section>
 
