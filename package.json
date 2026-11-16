@@ -1,0 +1,13 @@
+{
+  "name": "charliebuild",
+  "private": true,
+  "description": "charliebuild.com: a static portfolio served from Cloudflare's edge.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/site-contract.mjs && node tests/small-tools.mjs && node tests/nanail-display-smoke.mjs && node tests/nanail-carousel-behavior.mjs",
+    "test:browser": "node scripts/check-project-carousel.cjs",
+    "render:tools": "node scripts/render-small-tools.mjs",
+    "render:og": "node scripts/render-og.cjs",
+    "dev": "python3 -m http.server 8000"
+  }
+}
