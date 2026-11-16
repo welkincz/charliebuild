@@ -8,6 +8,8 @@
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    // Unknown paths get the branded 404.html with a real 404 status.
+    "not_found_handling": "404-page"
   }
 }

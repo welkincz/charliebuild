@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; }
+  body {
+    width: 1200px; height: 630px; box-sizing: border-box;
+    padding: 64px 72px;
+    background: #F6F7F5; color: #1B222B;
+    font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+    display: grid; grid-template-rows: auto 1fr auto;
+    position: relative; overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  canvas { position: absolute; inset: 0; z-index: 0; }
+  header, main, footer { position: relative; z-index: 1; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid #D9DDD8; }
+  .name { font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; color: #626D7A; }
+  main { display: grid; grid-template-columns: auto 1fr; align-items: end; gap: 56px; padding-bottom: 36px; }
+  .wordmark { font-size: 176px; font-weight: 720; line-height: 0.8; letter-spacing: -0.082em; }
+  .wordmark span { display: block; }
+  .wordmark span + span { margin-left: 110px; }
+  .gold { color: #8A6A1C; }
+  .pitch { font-size: 33px; font-weight: 500; line-height: 1.32; letter-spacing: -0.015em; padding-bottom: 8px; }
+  footer { display: flex; justify-content: space-between; padding-top: 18px; border-top: 1px solid #D9DDD8; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1200" height="630"></canvas>
+<header><span class="name">Charlie Guo</span><span class="mono">Data engineer · Toronto</span></header>
+<main>
+  <div class="wordmark"><span>Charlie</span><span>Bui<span class="gold" style="display:inline;margin:0">l</span>d</span></div>
+  <p class="pitch">Tested data pipelines and the reports on top of them.</p>
+</main>
+<footer><span class="mono" style="text-transform:none;letter-spacing:.04em">Python · SQL · dbt · DuckDB</span><span class="mono">charliebuild.com</span></footer>
+<script>
+  // Same marching-squares contour field as the homepage, frozen at t=0.
+  var c = document.getElementById('c'), x = c.getContext('2d');
+  var W = 1200, H = 630, s = 20, cols = W / s + 1, rows = Math.ceil(H / s) + 1, cw = W / (cols - 1), ch = H / (rows - 1);
+  function f(a, b) { return Math.sin(a * 1.9) * Math.cos(b * 1.5) + 0.75 * Math.sin((a + b) * 1.15) + 0.55 * Math.cos(a * 2.7 - b * 2.1) + 0.35 * Math.sin(b * 3.4); }
+  var g = []; for (var r = 0; r < rows; r++) for (var k = 0; k < cols; k++) g.push(f(k / (cols - 1) * 3.2 - 1.6, r / (rows - 1) * 2.4 - 1.2));
+  x.strokeStyle = 'rgba(27,34,43,0.09)'; x.lineWidth = 1.2; x.beginPath();
+  [-1.5, -0.9, -0.3, 0.3, 0.9, 1.5].forEach(function (L) {
+    for (var r = 0; r < rows - 1; r++) for (var k = 0; k < cols - 1; k++) {
+      var a = g[r * cols + k], b = g[r * cols + k + 1], d = g[(r + 1) * cols + k + 1], e = g[(r + 1) * cols + k];
+      var i = (a > L ? 8 : 0) | (b > L ? 4 : 0) | (d > L ? 2 : 0) | (e > L ? 1 : 0);
+      if (!i || i === 15) continue;
+      var X = k * cw, Y = r * ch;
+      var T = [X + cw * (L - a) / (b - a), Y], R = [X + cw, Y + ch * (L - b) / (d - b)], B = [X + cw * (L - e) / (d - e), Y + ch], Lf = [X, Y + ch * (L - a) / (e - a)];
+      function S(p, q) { x.moveTo(p[0], p[1]); x.lineTo(q[0], q[1]); }
+      ({1:[[Lf,B]],14:[[Lf,B]],2:[[B,R]],13:[[B,R]],3:[[Lf,R]],12:[[Lf,R]],4:[[T,R]],11:[[T,R]],6:[[T,B]],9:[[T,B]],7:[[Lf,T]],8:[[Lf,T]],5:[[Lf,T],[B,R]],10:[[Lf,B],[T,R]]})[i].forEach(function (p) { S(p[0], p[1]); });
+    }
+  });
+  x.stroke();
+</script>
+</body>
+</html>
