@@ -113,9 +113,22 @@ const rendered = normalize(renderSmallToolsList());
 assert.equal(smallToolsLayout(smallTools), 'single');
 assert.match(rendered, /data-layout="single"/);
 assert.equal((rendered.match(/<li>/g) || []).length, 1);
-assert.match(rendered, /loading="lazy"/);
-assert.match(rendered, new RegExp('width="' + mortgage.width + '"'));
-assert.match(rendered, new RegExp('height="' + mortgage.height + '"'));
+assert.doesNotMatch(rendered, /<img/);
+assert.doesNotMatch(rendered, /tool-shot/);
+assert.doesNotMatch(rendered, /mortgage\.webp/);
+assert.match(rendered, /class="tool-lead"/);
+assert.match(rendered, /class="tool-controls"/);
+const plain = normalize(renderSmallToolsList([{
+  ...mortgage,
+  mortgage: undefined,
+  name: 'Plain tool',
+  href: 'https://charliebuild.com/tools/plain/',
+  hook: 'One concrete outcome',
+}]));
+assert.match(plain, /loading="lazy"/);
+assert.match(plain, /tool-shot/);
+assert.match(plain, new RegExp('width="' + mortgage.width + '"'));
+assert.match(plain, new RegExp('height="' + mortgage.height + '"'));
 assert.match(rendered, /class="tool-card"/);
 assert.match(rendered, /class="tool-tags">React · Live</);
 assert.match(rendered, /Open tool <span class="tool-open-arrow"/);
@@ -163,6 +176,7 @@ assert.match(home, /<a class="small-tools-all" href="\/tools\/">all small tools<
 assert.match(home, /<p class="tool-kicker">Small tools<\/p>/);
 assert.match(home, /<h2 class="projects-heading" id="small-tools-heading">Built to use\.<\/h2>/);
 assert.match(home, /href="\/assets\/small-tools\.css"/);
+assert.doesNotMatch(home, /rel="preload"/);
 assert.doesNotMatch(home, /href="\/tools"(?!\/)/);
 assert.doesNotMatch(home, /href=["'][^"']*interview\//);
 assert.ok(home.includes('?p=800000&amp;d=160000'), 'homepage card uses the share link');
@@ -177,6 +191,7 @@ assert.match(toolsPage, /<p class="tool-kicker">Small tools<\/p>/);
 assert.match(toolsPage, /<h1 class="projects-heading" id="tools-heading">Built to use\.<\/h1>/);
 assert.match(toolsPage, /Live utilities I ship and keep honest\./);
 assert.match(toolsPage, /href="\/assets\/small-tools\.css"/);
+assert.match(toolsPage, /rel="preload" href="\/assets\/fonts\/fraunces-latin-wght500\.woff2" as="font" type="font\/woff2" crossorigin/);
 assert.match(toolsPage, /<a class="tools-home" href="\/">Charlie Guo<\/a>/);
 assert.doesNotMatch(toolsPage, /href="\/tools"(?!\/)/);
 assert.ok(toolsPage.includes('?p=800000&amp;d=160000'), '/tools card uses the share link');
@@ -207,9 +222,19 @@ assert.match(css, /Fraunces/);
 assert.match(css, /tabular-nums/);
 assert.match(css, /font-size:\s*2\.375rem/);
 assert.match(css, /\.is-ready/);
-assert.match(css, /opacity:\s*0\.6/);
+assert.match(css, /@font-face/);
+assert.match(css, /font-display:\s*swap/);
+assert.match(css, /\/assets\/fonts\/fraunces-latin-wght500\.woff2/);
+assert.match(css, /Georgia/);
+assert.match(css, /@container mortgage-card \(min-width:\s*40rem\)/);
+assert.doesNotMatch(css, /\[data-mortgage-card\] \.tool-shot/);
 assert.match(css, /outline:\s*2px solid #135E4B/i);
 assert.match(css, /outline-offset:\s*2px/);
+
+const fraunces = resolve(repoRoot, 'assets/fonts/fraunces-latin-wght500.woff2');
+assert.equal(existsSync(fraunces), true);
+assert.equal(readFileSync(fraunces).subarray(0, 4).toString('ascii'), 'wOF2');
+assert.match(readFileSync(resolve(repoRoot, 'assets/fonts/Fraunces-OFL.txt'), 'utf8'), /SIL Open Font License/);
 
 assert.equal(existsSync(resolve(repoRoot, 'tools/index.html')), true);
 assert.equal(existsSync(resolve(repoRoot, 'tools/mortgage')), false);
