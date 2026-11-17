@@ -136,9 +136,9 @@ export const smallTools = [
     tags: ['React', 'Live'],
     href: mortgageToolHref(mortgagePrice, mortgagePreview.downRatio),
     image: '/assets/tools/mortgage.webp',
-    alt: 'Payment of $3,542 per month beside the home price slider at $800,000.',
-    width: 1880,
-    height: 455,
+    alt: 'Payment frequency control from the mortgage calculator, with Monthly selected.',
+    width: 772,
+    height: 196,
     mortgage: mortgagePreview,
   },
 ];
@@ -174,7 +174,7 @@ function renderMortgageCard(tool) {
   const href = escapeHtml(tool.href);
   const tags = tool.tags.map((tag) => escapeHtml(tag)).join(' · ');
   const priceText = formatCompactPrice(price);
-  const paymentText = formatMonthlyPayment(canadianMonthlyPayment(price, downPaymentFor(price, ratio)));
+  const paymentText = formatDollars(canadianMonthlyPayment(price, downPaymentFor(price, ratio)));
   return [
     '<li>',
     '  <div class="tool-card" data-mortgage-card data-down-ratio="' + escapeHtml(ratio) + '">',
@@ -188,9 +188,16 @@ function renderMortgageCard(tool) {
     '        <span class="tool-tags">' + tags + '</span>',
     '        <span class="tool-name">' + escapeHtml(tool.name) + '</span>',
     '      </a>',
-    '      <span class="tool-hook"><span data-mortgage-price>' + escapeHtml(priceText) + '</span> · ' + String(Math.round(ratio * 100)) + '% down · <span data-mortgage-payment aria-live="polite">' + escapeHtml(paymentText) + '</span></span>',
+    '      <p class="tool-pay" aria-live="polite">',
+    '        <span class="tool-pay-figure" data-mortgage-payment>' + escapeHtml(paymentText) + '</span>',
+    '        <span class="tool-pay-suffix">/mo</span>',
+    '      </p>',
+    '      <span class="tool-hook">' + String(Math.round(ratio * 100)) + '% down</span>',
     '      <label class="tool-price">',
-    '        <span class="tool-price-label">Home price</span>',
+    '        <span class="tool-price-head">',
+    '          <span class="tool-price-label">Home price</span>',
+    '          <span class="tool-price-value" data-mortgage-price>' + escapeHtml(priceText) + '</span>',
+    '        </span>',
     '        <input type="range" min="' + String(preview.min) + '" max="' + String(preview.max) + '" step="' + String(preview.step) + '" value="' + String(price) + '" aria-valuetext="' + escapeHtml(formatDollars(price)) + '">',
     '      </label>',
     '      <a class="tool-open-link" href="' + href + '">',
@@ -240,6 +247,44 @@ export function renderSmallToolsList(tools = smallTools) {
 }
 
 /**
+ * @param {HTMLInputElement} input
+ */
+function paintRange(input) {
+  const min = Number(input.min);
+  const max = Number(input.max);
+  const value = Number(input.value);
+  const span = max - min;
+  const pct = span > 0 ? ((value - min) / span) * 100 : 0;
+  input.style.setProperty('--fill', pct + '%');
+}
+
+function prefersReducedMotion() {
+  return typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Short opacity tick when a figure changes. Skipped while one is already
+ * running so a drag does not hold the number faded, and skipped entirely
+ * when the reader asks for reduced motion.
+ * @param {Element | null} el
+ */
+function tickNumber(el) {
+  if (!el || prefersReducedMotion() || typeof el.animate !== 'function') return;
+  if (typeof el.getAnimations === 'function' && el.getAnimations().some((anim) => anim.playState === 'running')) return;
+  el.animate([{ opacity: 0.55 }, { opacity: 1 }], { duration: 140, easing: 'ease-out' });
+}
+
+/**
+ * @param {Element | null} el
+ * @param {string} text
+ */
+function setNumber(el, text) {
+  if (!el || el.textContent === text) return;
+  el.textContent = text;
+  tickNumber(el);
+}
+
+/**
  * @param {ParentNode} root
  */
 export function mountMortgageCards(root) {
@@ -248,6 +293,8 @@ export function mountMortgageCards(root) {
     const input = card.querySelector('input[type="range"]');
     if (!input || input.getAttribute('data-mortgage-bound') === '1') continue;
     input.setAttribute('data-mortgage-bound', '1');
+    card.classList.add('is-ready');
+    paintRange(input);
     const priceEl = card.querySelector('[data-mortgage-price]');
     const paymentEl = card.querySelector('[data-mortgage-payment]');
     const links = card.querySelectorAll('a[href]');
@@ -256,8 +303,8 @@ export function mountMortgageCards(root) {
     input.addEventListener('input', () => {
       const price = Number(input.value);
       const down = downPaymentFor(price, ratio);
-      if (priceEl) priceEl.textContent = formatCompactPrice(price);
-      if (paymentEl) paymentEl.textContent = formatMonthlyPayment(canadianMonthlyPayment(price, down));
+      setNumber(priceEl, formatCompactPrice(price));
+      setNumber(paymentEl, formatDollars(canadianMonthlyPayment(price, down)));
       if (links.length > 0) {
         const url = new URL(links[0].href, 'https://charliebuild.com');
         url.searchParams.set('p', String(price));
@@ -266,6 +313,7 @@ export function mountMortgageCards(root) {
         for (const link of links) link.href = href;
       }
       input.setAttribute('aria-valuetext', formatDollars(price));
+      paintRange(input);
     });
   }
 }

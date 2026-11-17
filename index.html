@@ -592,7 +592,7 @@
       <div class="tool-card" data-mortgage-card data-down-ratio="0.2">
         <a class="tool-shot-link" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">
           <span class="tool-shot-frame">
-            <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Payment of $3,542 per month beside the home price slider at $800,000." width="1880" height="455" loading="lazy" decoding="async">
+            <img class="tool-shot" src="/assets/tools/mortgage.webp" alt="Payment frequency control from the mortgage calculator, with Monthly selected." width="772" height="196" loading="lazy" decoding="async">
           </span>
         </a>
         <div class="tool-body">
@@ -600,9 +600,16 @@
             <span class="tool-tags">React · Live</span>
             <span class="tool-name">Canadian mortgage calculator</span>
           </a>
-          <span class="tool-hook"><span data-mortgage-price>$800k</span> · 20% down · <span data-mortgage-payment aria-live="polite">$3,542/mo</span></span>
+          <p class="tool-pay" aria-live="polite">
+            <span class="tool-pay-figure" data-mortgage-payment>$3,542</span>
+            <span class="tool-pay-suffix">/mo</span>
+          </p>
+          <span class="tool-hook">20% down</span>
           <label class="tool-price">
-            <span class="tool-price-label">Home price</span>
+            <span class="tool-price-head">
+              <span class="tool-price-label">Home price</span>
+              <span class="tool-price-value" data-mortgage-price>$800k</span>
+            </span>
             <input type="range" min="400000" max="2000000" step="10000" value="800000" aria-valuetext="$800,000">
           </label>
           <a class="tool-open-link" href="https://charliebuild.com/tools/mortgage/?p=800000&amp;d=160000">

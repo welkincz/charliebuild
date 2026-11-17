@@ -129,7 +129,13 @@ assert.match(rendered, /value="800000"/);
 assert.match(rendered, /aria-live="polite"/);
 assert.match(rendered, /Home price/);
 assert.match(rendered, /\$800k/);
-assert.match(rendered, /\$3,542\/mo/);
+assert.match(rendered, /data-mortgage-payment[^>]*>\$3,542</);
+assert.match(rendered, /tool-pay-suffix">\/mo</);
+assert.match(rendered, /20% down/);
+assert.match(rendered, /tool-price-value" data-mortgage-price>\$800k</);
+assert.doesNotMatch(rendered, /\$3,542\/mo/);
+assert.match(rendered, /aria-valuetext="\$800,000"/);
+assert.doesNotMatch(rendered, /\$640,000/);
 assertSliderOutsideAnchor(rendered, 'rendered');
 
 const many = renderSmallToolsList([
@@ -196,6 +202,14 @@ assert.match(css, /prefers-reduced-motion:\s*reduce/);
 assert.match(css, /focus-visible/);
 assert.match(css, /#5c6166/i);
 assert.match(css, /padding:\s*12px/);
+assert.match(css, /#135E4B/i);
+assert.match(css, /Fraunces/);
+assert.match(css, /tabular-nums/);
+assert.match(css, /font-size:\s*2\.375rem/);
+assert.match(css, /\.is-ready/);
+assert.match(css, /opacity:\s*0\.6/);
+assert.match(css, /outline:\s*2px solid #135E4B/i);
+assert.match(css, /outline-offset:\s*2px/);
 
 assert.equal(existsSync(resolve(repoRoot, 'tools/index.html')), true);
 assert.equal(existsSync(resolve(repoRoot, 'tools/mortgage')), false);
