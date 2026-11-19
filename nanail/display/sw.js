@@ -8,7 +8,7 @@
 //
 // 改过 display/ 里的任何文件之后，把 VERSION 往上加一位再部署，
 // 否则 iPad 上缓存的旧图片不会被替换。
-const VERSION = 'nanail-v3';
+const VERSION = 'nanail-v4';
 
 const PRECACHE = [
   '/',
@@ -16,9 +16,7 @@ const PRECACHE = [
   '/assets/work-2.webp',
   '/assets/work-3.webp',
   '/assets/work-4.webp',
-  '/assets/work-5.webp',
   '/assets/work-6.webp',
-  '/assets/work-7.webp',
   '/assets/work-9.webp',
   '/assets/work-10.webp',
   '/assets/work-11.webp',
